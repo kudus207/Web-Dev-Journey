@@ -7,5 +7,8 @@ I am learning frontend development.
 - CSS
 - JavaScript
 - React
+- Python
+- Django
 
+Daily commits show my progress.
 Started: 02 March 2026
