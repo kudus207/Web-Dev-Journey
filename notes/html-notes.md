@@ -170,3 +170,177 @@ There is a fifth value, called _unfencedTop, which is currently used for the exp
 
 Selecting the right target value to control where your users end up is an important consideration when creating a website.
 
+#
+When Should You Use the Emphasis Element Over the Idiomatic Text Element?
+
+It is recommended to use <em> instead of <i>
+
+Even if it looks the same when the text was inside the idiomatic text element, the semantic emphasis element conveys its meaning and importance behind the scenes.
+
+It's important to know that these elements should not be used for presentational purposes only. If you need to display the text in italics, but the text doesn't have a special purpose, style, or meaning in the paragraph, you should use CSS instead.
+
+When Should You Use the Strong Element Over the Bring Attention To Element?
+
+The "bring attention to" element, b, is commonly used to highlight keywords in summaries, or product names in reviews. Usually, browsers display this text in boldface. Here's an example using the b element to highlight product names in this review:
+
+<p>
+  We tested several products, including the SuperSound 3000 for audio
+  quality, the QuickCharge Pro for fast charging, and the
+  EcoClean Vacuum for cleaning. The first two performed well, but the
+  EcoClean Vacuum did not meet expectations.
+</p>
+
+<p>
+  <strong>Warning:</strong> This product may cause allergic reactions.
+</p>
+
+The strong element communicates that sense of urgency.
+
+Visually both are very similar, because they are both rendered as bold by default. But their meanings are quite different. While the "bring attention to" element only draws attention to the text, without indicating the higher level of importance, the strong element does more than that. It conveys a sense of importance, or urgency. This is their main difference.
+
+To choose between them, consider the purpose of the text and its importance within the surrounding content.
+
+
+What Are Description Lists, and When Should You Use Them?
+
+Description lists are perfect for presenting terms and definitions in an organized and easy-to-read format, like in a glossary, or real dictionary, where you can find words with their corresponding definitions.
+
+<dl>
+  <dt>HTML</dt>
+  <dd>HyperText Markup Language</dd>
+  <dt>CSS</dt>
+  <dd>Cascading Style Sheets</dd>
+   <dt>JS</dt>
+  <dd>JavaScript</dd>
+</dl>
+
+In this case the terms are the acronyms HTML and CSS, and the details are their expansions. The details could also be definitions, or other information related to the terms.
+
+You will need three HTML elements to define a description list. First, the description list element, dl, which is the container for the entire list. You can see it wraps around all the other elements of the description list in the example.
+
+Then, one description term element, dt, for each term. In this case the description list has two terms, HTML and CSS, so it has two of these elements.
+
+And finally, after each term you will find a description details element, dd, for the description, or details associated with that term. In this example, they are Hypertext Markup Language and Cascading Style Sheets.
+
+In the browser, you would see each term followed by its corresponding description. By default, the descriptions are slightly more indented towards the right to distinguish them visually.
+
+But description lists are not limited to only terms and definitions. They are much more versatile than that.
+
+Other use cases for description lists include product specifications, frequently asked questions, contact information, and metadata. Essentially, when you have two related pieces of information in a key-value pair format, where one acts as a label, the key, and the other acts as additional related information, the value, you can use a description list.
+
+
+How Do Block and Inline Quotes Work in HTML?
+
+In HTML, quoted elements are used to distinguish quoted text from the surrounding content. This gives the quoted text a format that is easy to identify.
+
+You should use the block quotation element for representing a section quoted from another source. It's mainly used for extended quotations. If the source of the quote has an address, you can cite it with the cite attribute. The value of this attribute should be a valid URL. This is an example of a quote within a block quotation element:
+
+<blockquote cite="https://www.freecodecamp.org/news/learn-to-code-book/">
+  "Can you imagine what it would be like to be a successful developer? To have built software systems that people rely upon?"
+</blockquote>
+
+You should use block quotes like these for long quotations from other sources. But sometimes you will only need to quote a few words within a larger paragraph.
+
+That's exactly what the inline quotation element is for. It's for short inline quotations from other sources. Most modern browsers will add quotation marks around the inline quote automatically when you use this element. This is an example:
+
+<p>
+  As Quincy Larson said,
+  <q cite="https://www.freecodecamp.org/news/learn-to-code-book/">
+    Momentum is everything.
+  </q>
+</p>
+
+What's the difference between block quotes and inline quotes? You should use block quotes for extended quotations from other sources and inline quotes for short quotations from other sources that should be part of existing paragraphs.
+
+How Do You Display Abbreviations in HTML?
+
+An abbreviation is a shortened form of a word or phrase. For example, "Dr" followed by a period, is an abbreviation for the word "doctor".
+
+There are two common forms of abbreviations: acronyms and initialisms.
+
+An acronym is a word formed from the initial letters of a phrase, with each letter representing the first letter of a word in that phrase.
+
+GUI is an example of an acronym. It stands for Graphical User Interface. By taking the first letters of each word G, U, and I, you get the acronym GUI.
+
+An initialism is formed from the initial letters of a phrase, with each letter representing the first letter of a word in that phrase.
+
+For example, HTML is an initialism; it stands for HyperText Markup Language and is pronounced by spelling out each letter H, T, M, L.
+
+Both acronyms and initialisms are types of abbreviations. The distinction is acronyms are pronounced as words and initialisms are pronounced as individual letters.
+
+They are very helpful for writing more concise text, especially when they are well-known and easy to understand in a given context.
+
+If you need to display abbreviations such as acronyms or initialisms in HTML, the abbreviation element is exactly what you're looking for. You should always explain their full meaning when you use them for the first time. Then you can use the abbreviation element to highlight them and provide more details.
+
+<p><abbr>HTML</abbr> is the foundation of the web.</p>
+
+If you want to help users understand what this initialism means, you can show its full form with the title attribute.
+
+The title attribute is optional, but if you decide to include it, it must be a human readable description of the abbreviation, acronym, or initialism.
+
+
+<p><abbr title="HyperText Markup Language">HTML</abbr> is the foundation of the web.</p>
+
+
+While you don't necessarily need to use the abbreviation element for every abbreviation on your web page, it's recommended for those that might be unclear and those that might need additional context.
+
+You should use your best judgment to find the right balance between information and presentation to avoid cluttering the text while being clear and concise.
+
+
+How Do You Display Addresses in HTML?
+
+The contact address element is used to represent contact information for a section on a web page. The address element is versatile and can be used for business pages, author pages, personal sites, and more.
+
+When it comes to building out your website's contact sections, you should use the semantic address element over a generic element like a div.
+
+Here is an example of using the address element for a company contact page:
+
+<address>
+  <h2>Company Name</h2>
+  <p>
+    1234 Elm Street
+
+    Springfield, IL 62701
+
+    United States
+  </p>
+  <p>Phone: <a href="tel:+15555555555">+1 (555) 555-5555</a></p>
+  <p>Email: <a href="mailto:contact@company.com">contact@company.com</a></p>
+</address>
+
+In this example, there is the company name, physical address, phone, and email information. For the physical address, the line break element, br, is used to show the division between the street name, city, and country.
+
+For the phone number, we have an anchor element with the href value set for telephone numbers. The tel:+ value inside the href attribute creates a clickable link to initiate a phone call on certain devices that support that.
+
+For the email address, another anchor element is used with the href value set to a mailto link. mailto links are used in HTML documents to allow users to open a new email within their preferred email client.
+
+One of the downsides of using a mailto link is that users often perceive it as spam. Unfortunately, a lot of spammers will use this option to send emails to users. So just keep that in mind when you're using it.
+
+
+How Do You Display Times and Dates in HTML?
+
+The time element is used to represent a specific moment in time.
+
+Here is an example using the time element to represent twenty hundred hours, or eight PM in the evening.
+
+<p>The reservations are for <time datetime="20:00">20:00 </time></p>
+
+The datetime attribute is used to translate dates and times into a machine-readable format.
+
+This is important, because it helps with search engine results and helps the browser process date and time information more effectively.
+
+The value for the datetime attribute must be either a valid year, valid month, valid time, local date, global date, or valid duration string.
+
+Here is another example of using the time element to represent a particular date:
+
+<p>
+  The graduation will be on <time datetime="2024-06-15T15:00">June 15</time>
+</p>
+
+The value for the datetime attribute is in the ISO 8601 format. ISO 8601 is an international standard to represent dates and times.
+
+The first part of that value is the year, month and day. The capital T in the value is a separator between the date and time.
+
+The fifteen hundred hours would be three PM in the afternoon.
+
+Whenever you need to represent events, publication dates, or appointments, it is best to use the time element.
