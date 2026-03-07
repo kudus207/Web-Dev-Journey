@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Form</title>
+</head>
+<body>
+    <h1 id="title">Farewell Party Survey Form</h1>
+    <p id="description">Thank you for taking the time to answer this Survey
+    </p>
+    <form action="POST" method="post" id="survey-form">
+        <label for="name" id="name-label">Name</label>
+        <input type="text" name="name" id="name" placeholder="Enter your name" required><br>
+        <label for="email" id="email-label">Email</label>
+        <input type="email" name="email" id="email" placeholder="Enter your email" required><br>
+        <label for="number" id="number-label">Age</label>
+        <input type="number" name="number" id="number" min="1" max="100" placeholder="Age"><br>
+        <p></p>
+        <label for="role">Which option best describes you?</label>
+        <select name="dropdown" id="dropdown">
+            <option value="" disabled selected>Select current role</option>
+            <option value="">Student</option>
+            <option value="">Worker</option>
+            <option value="">Teacher</option>
+            <option value="">Prefer not to say</option>
+            <option value="">Other</option>
+        </select><br><p></p>
+        <label for="">Will you attend the party?</label>
+
+        <input type="radio" name="attendance" id="attendance" value="attendance">
+        <label for="yes">Yes</label>
+        <input type="radio" name="attendance" id="attendance" value="attendance">
+        <label for="no">No</label>
+        <p>What do you like abouthe program?</p>
+        <input type="checkbox" name="training" id="training" value="training">
+        <label for="training">Training</label><br>
+
+        <input type="checkbox" name="Industry-exp" id="Industry-exp" value="Industry-exp">
+        <label for="Industry-exp">The Learning Sessions from Industry Experts</label><br>
+
+        <input type="checkbox" name="meetups" id="meetups" value="meetups">
+        <label for="meetups">Community Meetups</label><br>
+        <input type="checkbox" name="sessions" id="sessions" value="sessions">
+        <label for="sessions">Brown Bag Sessions</label><br>
+        <input type="checkbox" name="mode" id="mode" value="mode">
+        <label for="mode">Switching to Hybrid Mode</label><br>
+        <input type="checkbox" name="office" id="office" value="office">
+        <label for="office">Food, Office etc.</label><br>
+        <p></p>
+        <label for="comments">Any comments or suggestion</label><br>
+        <p></p>
+        <textarea name="comments" id="comments" rows="2" cols="20" placeholder="Enter your comment here..."></textarea><br>
+        <button type="submit" id="submit">Submit</button>
+    </form>
+</body>
+</html>
