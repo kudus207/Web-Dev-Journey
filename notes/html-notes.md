@@ -500,5 +500,4 @@ colspan	Merge columns
 rowspan	Merge rows
 
 Example:
-
 <td colspan="2">Total</td>
