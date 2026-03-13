@@ -97,6 +97,7 @@ The inline-block property is a hybrid of these two behaviors. Like inline elemen
 
 However, unlike inline elements, you can adjust the width and height of an inline-block element, just as you would with block-level elements.
 
+Browsers treat spaces and line breaks in HTML as actual spacing when elements are displayed inline or inline-block.
 
 Margin
 
@@ -164,5 +165,3 @@ Example:
 p {
   padding: 10px 20px 30px 40px;
 }
-
-

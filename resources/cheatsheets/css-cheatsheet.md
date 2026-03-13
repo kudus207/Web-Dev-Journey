@@ -4,3 +4,20 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+<!-- a element properties -->
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: black;
+}
+
+a:hover {
+  color: brown;
+}
+
+a:active {
+  color: brown;
+}
