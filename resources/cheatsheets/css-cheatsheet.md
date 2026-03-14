@@ -21,3 +21,7 @@ a:hover {
 a:active {
   color: brown;
 }
+
+a:focus {
+  outline: 2px solid blue;
+} 

@@ -1,0 +1,65 @@
+body {
+    background-color: aliceblue;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 30px;
+}
+
+.container {
+    background-color: rgba(241, 241, 241, 0.918);
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px;
+    margin-top: 70px;
+    border-radius: 10px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.todo-list {
+    margin-left: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.list-item1, .list-item2, .list-item3, .list-item4 {
+    background-color: rgb(221, 238, 232);
+    padding-top: 20px;
+    padding-bottom: 50px;
+    padding-left: 10px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+.link-list {
+    margin-top: 15px;
+    list-style: square;
+}
+
+a:link {
+  color: blue;
+}
+
+.sub-item-link {
+    color: blue;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+a:visited {
+  color: purple;
+}
+
+a:hover {
+  color: green;
+}
+
+a:active {
+  color: brown;
+}
+
+a:focus {
+  outline: 2px solid blue;
+} 
