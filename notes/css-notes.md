@@ -434,3 +434,6 @@ The closest-side keyword makes the gradient's ending shape fit the closest side 
 Understanding how to work with CSS gradients can significantly enhance your designs by providing visually appealing backgrounds without the need for images.
 
 With options like linear gradients for smooth transitions and radial gradients for circular effects, they offer both flexibility and creativity in web design.
+
+
+Importance of design
