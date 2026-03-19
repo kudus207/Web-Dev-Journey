@@ -435,5 +435,121 @@ Understanding how to work with CSS gradients can significantly enhance your desi
 
 With options like linear gradients for smooth transitions and radial gradients for circular effects, they offer both flexibility and creativity in web design.
 
+Absolute Units in CSS
 
-Importance of design
+	•	CSS uses length units to define sizes like width, height, margin, and padding.
+	•	There are two types of units:
+	•	Absolute units
+	•	Relative units
+
+Absolute Units
+
+Absolute units have a fixed size and do not change based on screen size or parent elements.
+
+Pixels (px)
+
+The most common absolute unit is pixels (px).
+	•	1px = 1/96 of an inch
+	•	Pixels give precise control over element sizes.
+
+Example:
+
+.box {
+  width: 100px;
+  height: 100px;
+}
+
+This box will always remain 100px wide and high on any screen.
+
+Common Uses of Pixels
+
+Pixels are often used for:
+	•	width
+	•	height
+	•	margin
+	•	padding
+	•	borders
+
+Other Absolute Units
+
+Other absolute units include:
+	•	in (inches)
+	•	cm (centimeters)
+	•	mm (millimeters)
+	•	q (quarter-millimeters)
+	•	pc (picas)
+	•	pt (points)
+
+These are mostly used for printing, not web screens.
+
+
+em and rem in CSS 
+
+em
+
+em is a relative unit based on the font size of the element (or its parent).
+
+Example:
+	•	If font-size = 20px
+	•	margin-bottom: 1.5em
+	•	Then 1.5em = 30px
+
+Use em when building components like buttons, cards, or modules so their spacing and sizes scale with the text.
+
+⸻
+
+rem
+
+rem is a relative unit based on the root element (html) font size.
+	•	Default root size = 16px
+	•	1.2rem = 1.2 × 16px = 19.2px
+
+Use rem for font sizes and layout spacing because it scales with the user’s browser settings, making websites more accessible.
+
+⸻
+
+✅ Simple difference
+	•	em → relative to parent element font size
+	•	rem → relative to root (html) font size
+
+
+vh and vw in CSS 
+
+vh (Viewport Height)
+
+vh is a unit based on the height of the browser window.
+	•	1vh = 1% of the viewport height
+
+Example:
+	•	height: 100vh → element fills the entire screen height.
+
+⸻
+
+vw (Viewport Width)
+
+vw is a unit based on the width of the browser window.
+	•	1vw = 1% of the viewport width
+
+Example:
+h1 {
+  font-size: 5vw;
+}
+
+This makes the text size scale with the screen width.
+
+⸻
+
+When to Use vh and vw
+
+Use them for:
+	•	Full-screen sections (like hero sections)
+	•	Responsive layouts
+	•	Text that scales with screen size
+
+⸻
+
+✅ Summary
+	•	vh → relative to viewport height
+	•	vw → relative to viewport width
+	•	Useful for responsive design and full-screen layouts.
+
