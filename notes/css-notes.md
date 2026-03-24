@@ -553,3 +553,45 @@ Use them for:
 	•	vw → relative to viewport width
 	•	Useful for responsive design and full-screen layouts.
 
+CSS Pseudo-classes
+
+	•	Pseudo-classes are special CSS keywords used to style elements based on their state, interaction, or position in the HTML.
+	•	They are written using a colon : after a selector.
+
+Syntax
+
+selector:pseudo-class {
+  property: value;
+}
+
+Common Examples
+	•	:hover – when the mouse is over an element
+	•	:active – when an element is being clicked
+	•	:visited – for links the user has visited
+	•	:first-child – selects the first child of a parent
+	•	:last-child – selects the last child of a parent
+	•	:disabled – styles disabled form elements
+
+Summary:
+Pseudo-classes allow CSS to react to user actions and element positions, making webpages more interactive and dynamic.
+
+Apart from the pseudo-classes already mentioned, there are others like:
+* :focus
+* :first-of-type
+* :last-of-type
+* :nth-of-type
+* :modal
+* :enabled
+* :checked
+* :required, and more.
+
+Hex code CSS color
+
+A hex code is a six-digit combination of numbers and letters used in HTML and CSS to represent colors. It starts with a # followed by three pairs:
+
+The first two digits represent red
+The next two represent green
+The last two represent blue
+For example, #ffffff is pure white because it has the maximum value for red, green, and blue.
+
+You can also add two extra digits at the end to control opacity (called the alpha channel). In #ffffff1a, the 1a makes the white color semi-transparent. The lower the alpha value, the more transparent the color appears.
