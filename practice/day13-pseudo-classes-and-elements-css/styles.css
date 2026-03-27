@@ -1,81 +1,10 @@
-/* 
 
-input:focus, select:focus, textarea:focus {
-    border: 2px solid brown;
-}
-
-input:invalid, select:invalid, textarea:invalid {
-    border: 2px solid red;
-}
-
-input:valid, select:valid, textarea:valid {
-    border: 2px solid green;
-}
-
-
-.radio-group input[type="radio"]::before {
-    content: "";
-    width: 10px;
-    height: 10px;
-    background-color: green;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    transition: transform 0.2s ease;
-}
-
-
-.radio-group input[type="radio"]:checked {
-    border-color: green;
-    background-color: #e6ffe6;
-    box-shadow: 0 0 8px rgba(0, 128, 0, 0.5);
-}
-
-/
-.radio-group input[type="radio"]:checked::before {
-    transform: translate(-50%, -50%) scale(1);
-}
-
-
-.radio-group label {
-    margin-right: 15px;
-    cursor: pointer;
-}
-
-
-.radio-group input[type="radio"]:checked + label {
-    color: lightgreen;
-    font-weight: bold;
-}
-
-input:first-of-type {
-    border-radius: 15px;
-}  */
-
-
-
-/* body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: darkslateblue;
-    color: whitesmoke;
-} */
 body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: darkslateblue;
     color: whitesmoke;
 }
 
-/*.container {
-    width: 80%;
-    max-width: 600px;
-    background-color:rgb(94, 79, 174);
-    margin: 50px auto;
-    padding: 20px;
-    border: 1px solid gray;
-    border-radius: 10px;
-} */
 .container {
     width: 80%;
     max-width: 600px;
@@ -86,31 +15,16 @@ body {
     border-radius: 10px;
 }
 
-/* h1 {
-    text-align: center;
-} */
 h1 {
     text-align: center;
 }
 
-/* .personal-info {
-    display: block;
-    font-weight: bold;
-    margin: 5px 0;
-} */
 .personal-info {
     display: block;
     font-weight: bold;
     margin: 10px 0 5px;
 }
 
-/* .info {
-    width: 95.5%;
-    height: 1.8rem;
-    border-radius: 6px;
-    padding-top: 4px;
-    padding-left: 8px;
-} */
 input, select, textarea {
     width: 100%;
     box-sizing: border-box;
@@ -120,61 +34,23 @@ input, select, textarea {
     margin-bottom: 10px;
 }
 
-/* input, select, textarea {
-    border: 2px solid transparent;
-}
-
-select {
-    width: 97%;
-    height: 2rem;
-    border-radius: 6px;
-    padding-top: 2px;
-    padding-left: 6px;
-}
-
-legend {
-    font-weight: bold;
-}
-
-textarea {
-    width: 95%;
-    height: 5rem;
-    border-radius: 6px;
-    padding-top: 10px;
-    padding-left: 10px;
-} */
-
-/* Textarea height */
 textarea {
     height: 5rem;
 }
 
-/* Focus */
 input:focus, select:focus, textarea:focus {
     border-color: brown;
     outline: none;
 }
 
-/* Valid */
 input:valid, select:valid, textarea:valid {
     border-color: green;
 }
 
-/* Invalid */
 input:invalid, select:invalid, textarea:invalid {
     border-color: red;
 }
 
-/* .submit-btn {
-    width: 97%;
-    height: 40px;
-    margin-top: 10px;
-    background-color: rgb(23, 64, 139);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-weight: bold;
-} */
 button {
     width: 100%;
     height: 40px;
@@ -187,20 +63,17 @@ button {
     cursor: pointer;
 }
 
-/* button:hover {
-    background-color: rgb(6, 26, 59);
-} */
 button:hover {
     background-color: rgb(6, 26, 59);
 }
 
-/* Radio group */
 .radio-group {
     margin-top: 15px;
     margin-bottom: 10px;
     padding: 10px;
     border: 2px solid gray;
     border-radius: 6px;
+    vertical-align: top;
 }
 
 /* Radio inputs */
