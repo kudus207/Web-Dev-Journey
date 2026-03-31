@@ -107,3 +107,5 @@ transition: transform 0.3s, background-color 0.3s ease;
 <!-- box-sizzing -->
   box-sizing: Specifies the behavior of the 'width' and 'height' properties.
 
+<!-- WIDTH -->
+ width: unset; This will remove the earlier rule which set all the input elements to width: 100%.
