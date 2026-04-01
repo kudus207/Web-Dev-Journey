@@ -109,3 +109,7 @@ transition: transform 0.3s, background-color 0.3s ease;
 
 <!-- WIDTH -->
  width: unset; This will remove the earlier rule which set all the input elements to width: 100%.
+
+ <!-- Float -->
+ float: right; to move items like checkbox  
+               from left to right.

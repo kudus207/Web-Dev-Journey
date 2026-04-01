@@ -57,3 +57,54 @@ inset → inner shadow
 Key Idea
 
 CSS = Layout + Spacing + Styling + Responsiveness
+
+📌 Text Inputs (Best Practices)
+Use readable font (≥ 1rem) & good contrast
+Add padding, borders, border-radius
+Don’t rely on placeholders as labels
+Always show focus styles
+Use box-sizing: border-box
+Show clear error states
+Keep interactions smooth (transitions)
+📌 appearance: none
+Removes default browser styles
+Use for full custom design (checkbox, radio, search)
+⚠️ Must rebuild focus, accessibility, and states manually
+📌 Special Inputs (Issues)
+Inconsistent across browsers
+Hard to fully style
+Risk of breaking UI & accessibility
+👉 Keep styling simple
+📌 Overflow
+Controls extra content
+hidden (cut), scroll (always), auto (when needed)
+✅ Vertical scroll OK, ❌ avoid horizontal
+📌 Transform
+Changes appearance (move, rotate, scale)
+Doesn’t affect layout
+Don’t overuse (UX + readability)
+📌 Box Model
+Content → Padding → Border → Margin
+Total size = all combined
+📌 Margin Collapsing
+Vertical margins merge
+Bigger value wins
+Prevent with padding/border/overflow
+📌 box-sizing
+content-box: size grows
+border-box: fixed size (best)
+📌 CSS Reset
+Removes browser defaults
+Use simple reset or tools like Normalize
+📌 Filter
+Visual effects (blur, brightness, etc.)
+Don’t overuse (performance + readability)
+📌 Flexbox
+1D layout (row/column)
+Easy alignment & spacing
+
+Key:
+
+justify-content → main axis
+align-items → cross axis
+flex-wrap → wrapping
