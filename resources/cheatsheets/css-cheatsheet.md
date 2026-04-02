@@ -52,15 +52,50 @@ box-shadow: offsetX offsetY blurRadius spreadRadius color;
             Like blurRadius, spreadRadius defaults to 0 if it isn't included.
 
   <!-- transform -->
-transform: The transform property can transform the element look. For example, giving it a value of scale(0.9)        would make the element 10% smaller.
+📝 CSS transform (Quick Note)
 
-            Example Code
-            p {
-            transform: scale(0.9);
-            }
-<!-- transform skewX -->
-Another value that can be used for the transform property is skewX, this function skews the element             
-        horizontally.
+Definition:
+Used to move, rotate, scale, or skew an element.
+
+🔹 Common Transform Functions
+translate(x, y) → move element
+scale(x) → resize element
+rotate(deg) → rotate element
+skew(deg) → tilt element
+🔹 Examples
+Move
+transform: translate(50px, 20px);
+
+👉 Moves right 50px, down 20px
+
+Scale
+transform: scale(1.5);
+
+👉 Makes element 1.5× bigger
+
+Rotate
+transform: rotate(45deg);
+
+👉 Rotates element 45°
+
+Skew
+transform: skew(20deg);
+
+👉 Tilts the element
+
+🔹 Multiple Transforms
+transform: scale(1.2) rotate(10deg);
+
+👉 Combines effects
+
+🔥 Memory Tip
+
+transform = change shape or position (without affecting layout)
+
+💡 Important
+Doesn’t push other elements (no layout shift)
+Works great with transition for animations
+
 <!-- transition -->
 transition: transform 0.3s, background-color 0.3s ease;
             When the a elements are hovered, the color of the background makes a transition to a different color. You can regulate how that transition happens with the transition property:
@@ -113,3 +148,78 @@ transition: transform 0.3s, background-color 0.3s ease;
  <!-- Float -->
  float: right; to move items like checkbox  
                from left to right.
+
+<!-- Overflow -->
+📝 CSS overflow (Quick Note)
+
+Definition:
+Controls what happens when content is too big for its container.
+
+🔹 Common Values
+overflow: visible; (default)
+Content spills outside the box
+overflow: hidden;
+Extra content is cut off (not visible)
+overflow: scroll;
+Always shows scrollbars (even if not needed)
+overflow: auto;
+Adds scrollbars only when needed
+🔹 Direction-specific
+overflow-x → horizontal
+overflow-y → vertical
+
+Example:
+
+overflow-y: auto;
+🔹 Example
+.box {
+  width: 200px;
+  height: 100px;
+  overflow: auto;
+}
+
+👉 If content is bigger → scroll appears
+👉 If not → no scroll
+
+🔥 Memory Tip
+
+Overflow = “What should I do with extra content?”
+
+<!-- Filter -->
+📝 CSS filter (Quick Note)
+
+Definition:
+Applies visual effects to an element (like images or divs).
+
+🔹 Common Filter Functions
+blur(px) → makes it blurry
+brightness(%) → lighter or darker
+contrast(%) → increases difference
+grayscale(%) → removes color
+sepia(%) → brown vintage look
+invert(%) → reverses colors
+saturate(%) → boosts color intensity
+drop-shadow() → adds shadow
+🔹 Example
+img {
+  filter: grayscale(100%);
+}
+
+👉 Image becomes black and white
+
+🔹 Multiple Filters
+img {
+  filter: blur(2px) brightness(120%);
+}
+
+👉 Effects are applied together
+
+🔥 Memory Tip
+
+filter = “add visual effects like Photoshop”
+
+💡 Where it’s used
+Images
+Backgrounds
+Hover effects
+UI design polish
