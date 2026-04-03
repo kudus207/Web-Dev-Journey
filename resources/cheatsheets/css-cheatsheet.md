@@ -223,3 +223,58 @@ Images
 Backgrounds
 Hover effects
 UI design polish
+
+<!-- Text Transform -->
+text-transform: uppercase;
+
+<!-- Flexbox -->
+display: flex; Flexbox is a one-dimensional CSS layout that can control the way items 
+               are spaced out and aligned within a container.
+               This will make the element a flex container. Any direct children of a flex container are called flex items.
+
+flex-direction: Flexbox has a main and cross axis. The main axis is defined by the 
+                flex-direction property, which has four possible values:
+    row (default): horizontal axis with flex items from left to right.
+    row-reverse: horizontal axis with flex items from right to left.
+    column: vertical axis with flex items from top to bottom.
+    column-reverse: vertical axis with flex items from bottom to top.
+Note: The axes and directions will be different depending on the text direction. The 
+      values shown are for a left-to-right text direction.
+
+flex-wrap: The flex-wrap property determines how your flex items behave when the flex 
+           container is too small. 
+           Setting it to <!--wrap--> will allow the items to wrap to the next row or column. <!--nowrap (default)--> will prevent your items from wrapping and shrink them if needed.
+
+justify-content: The justify-content property determines how the items inside a flex 
+                 container are positioned along the main axis, affecting their position and the space around them.
+
+align-items: The align-items property positions the flex content along the cross axis.
+
+gap: 10px; The gap CSS shorthand property sets the gaps, also known as gutters, between 
+           rows and columns. <!-- The gap property and its row-gap and column-gap sub-properties provide this functionality for flex, grid, and multi-column layout. --> You apply the property to the container element.
+
+flex: 1 1 100px; The flex property controls the size and behavior of the items inside a 
+                 flexible container. It is composed by three properties: <!-- flex-grow, flex-shrink, and flex-basis. -->
+                 This will make each box start at 100px, allowing them to grow to fill available space, or shrink when needed.
+
+order: The order property specifies the order of a flex item relative to other flex 
+       items inside the same container. By default, all flex items have an order value of 0, meaning they appear in the order they're written in the HTML. Items with lower order values appear first, while items with higher values appear last.
+           
+<!-- ::after -->
+The ::after pseudo-element creates an element that is the last child of the selected 
+           element. You can use it to add an empty element after the last image. If you give it the same width as the images it will push the last image to the left when the gallery is in a two-column layout. Right now, it is in the center because you set justify-content: center on the flex container.
+           Example
+           .container::after {
+            content: "";
+            width: 860px;
+            }
+
+<!-- object fit -->
+object-fit: cover; used to determine how images should behave.
+
+<!-- border-radius -->
+border-radius: <!-- One value --> to apply to all four corners.
+               <!-- Two values -->, with the first value for top-left/bottom-right, and second for top-right/bottom-left.
+               <!-- Three values -->, corresponding to top-left, top-right/bottom-left, bottom-right.
+               <!-- Four values -->, which set the border radius clockwise starting from top-left corner.
+               
