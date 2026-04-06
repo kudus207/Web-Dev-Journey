@@ -1,0 +1,93 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1, h2, p {
+    text-align: center;
+}
+
+p {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: rgb(80, 80, 80);
+    margin-top: 1px;
+    margin-bottom: 0;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: #9b9090;
+    width: 90%;
+    margin: 0 auto 10px;
+}
+
+.pricing-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: 20px auto;
+    align-content: space-evenly;
+    /* border: 2px solid black; */
+}
+
+.pricing-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1 1 200px;
+    border: 2px solid black;
+    padding: 20px;
+    margin: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.pricing-card:hover {
+    transform: scale(1.1);
+    
+}
+
+.pricing-card:first-child, .pricing-card:last-child {
+    background-color: ghostwhite;
+}
+.pricing-card:nth-child(2) {
+    background-color: azure;
+}
+
+.basic-plan {
+    order: 1;
+}
+
+.pro-plan {
+    order: 2;
+}
+
+.premium-plan {
+    order: 3;
+}
+
+ul {
+    list-style: none;
+}
+
+.check {
+    color: #11943f;
+}
+
+.x {
+    color: red;
+}
+
+button {
+    background-color: #e3b407;
+    border: none;
+    height: 40px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #b4931e;
+}
+

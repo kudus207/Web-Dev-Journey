@@ -257,9 +257,20 @@ flex: 1 1 100px; The flex property controls the size and behavior of the items i
                  flexible container. It is composed by three properties: <!-- flex-grow, flex-shrink, and flex-basis. -->
                  This will make each box start at 100px, allowing them to grow to fill available space, or shrink when needed.
 
+align-content: This property controls the arrangement of items along the cross axis. 
+               While the default value of <!--align-content is stretch-->, the most relevant options you can use for align-content are: <!--space-between, start, center, end, space-around and space-evenly.-->
+
 order: The order property specifies the order of a flex item relative to other flex 
        items inside the same container. By default, all flex items have an order value of 0, meaning they appear in the order they're written in the HTML. Items with lower order values appear first, while items with higher values appear last.
-           
+
+flex: 1; is shorthand for:
+         flex-grow: 1;
+         flex-shrink: 1;
+         flex-basis: 0;
+         In simple terms:
+         👉 It tells the element:
+         “Take up all the available space inside the container.”
+                  
 <!-- ::after -->
 The ::after pseudo-element creates an element that is the last child of the selected 
            element. You can use it to add an empty element after the last image. If you give it the same width as the images it will push the last image to the left when the gallery is in a two-column layout. Right now, it is in the center because you set justify-content: center on the flex container.
