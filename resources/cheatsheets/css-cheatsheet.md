@@ -289,3 +289,6 @@ border-radius: <!-- One value --> to apply to all four corners.
                <!-- Three values -->, corresponding to top-left, top-right/bottom-left, bottom-right.
                <!-- Four values -->, which set the border radius clockwise starting from top-left corner.
                
+<!-- letter spacing -->
+letter-spacing: 0.15px; The letter-spacing property can be used to adjust the space 
+                        between each character of text in an element.

@@ -108,3 +108,35 @@ Key:
 justify-content → main axis
 align-items → cross axis
 flex-wrap → wrapping
+
+Text-shadow (CSS)
+
+Adds shadow to text.
+
+Syntax:
+
+text-shadow: x-offset y-offset blur color;
+
+Key Points:
+
+x-offset → left/right (required)
+y-offset → up/down (required)
+blur → softness (optional)
+color → shadow color (optional)
+
+Behavior:
+
+Positive → right & down
+Negative → left & up
+Default blur = 0 (sharp)
+
+Example:
+
+text-shadow: 3px 2px 3px #00ffc3;
+
+Multiple shadows:
+
+text-shadow: 2px 2px red, -2px -2px blue;
+
+Summary:
+Adds depth, glow, or layered effects to text.
