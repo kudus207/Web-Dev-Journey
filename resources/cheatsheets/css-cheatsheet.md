@@ -292,3 +292,47 @@ border-radius: <!-- One value --> to apply to all four corners.
 <!-- letter spacing -->
 letter-spacing: 0.15px; The letter-spacing property can be used to adjust the space 
                         between each character of text in an element.
+
+<!-- img max and min width -->
+max(250px, 25vw)
+
+👉 This means:
+“Use whichever value is bigger.”
+
+So CSS compares:
+
+250px (fixed size)
+25vw (25% of the viewport width)
+Example:
+If screen is 1000px wide → 25vw = 250px → same → result = 250px
+If screen is 600px wide → 25vw = 150px → smaller → result = 250px
+If screen is 1400px wide → 25vw = 350px → bigger → result = 350px
+
+✅ So this ensures:
+
+The width will never go below 250px, but can grow on bigger screens.
+<!-- min -->
+min(5vw, 1.2em)
+
+👉 This means:
+“Use whichever value is smaller.”
+
+So CSS compares:
+
+5vw (5% of screen width)
+1.2em (relative to font size)
+Example:
+If 5vw = 50px and 1.2em = 19px → result = 19px
+If 5vw = 15px and 1.2em = 19px → result = 15px
+
+✅ So this ensures:
+
+The value will never exceed 1.2em, but can shrink on smaller screens.
+
+<!-- aspect-ratio -->
+aspect-ratio: 35 / 4; The aspect ratio of 35 / 4 can be interpreted as a width-to-height 
+                      ratio. To calculate the aspect ratio, you can use the formula:
+                      Aspect Ratio = Width / Height.
+                      For an aspect ratio of 35 / 4, this means that for every 35 units of width, there are 4 units of height.
+                      Width = Height x 35 / 4.
+                      This ratio is often used in various media formats, such as video and image dimensions, to ensure proper scaling and display across different devices. 
