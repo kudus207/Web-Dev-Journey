@@ -140,3 +140,34 @@ text-shadow: 2px 2px red, -2px -2px blue;
 
 Summary:
 Adds depth, glow, or layered effects to text.
+
+🔹 Accessibility (Hiding Content)
+❌ display: none / visibility: hidden → hides from everyone (including screen readers)
+✅ Use .sr-only → hidden visually, still accessible
+✅ hidden attribute → hides from both UI & assistive tech
+⚠️ Hide only when necessary
+
+<!-- 🔹 Floats -->
+Used for text wrapping around images
+Removed from normal flow → parent may collapse
+Fix with clearfix (::after { clear: both; })
+
+<!-- 🔹 Positioning -->
+static → default (normal flow)
+relative → move without breaking flow
+absolute → removed, positioned relative to nearest parent
+fixed → sticks to viewport
+sticky → acts relative → then sticks on scroll
+
+<!-- 🔹 z-index -->
+Controls stacking order
+Works only on positioned elements
+Higher value = on top
+z-index is a property you can use to define the order of overlapping HTML elements. Any element with a higher z-index will always be positioned over an element with a lower z-index.
+
+<!-- 🔹 Attribute Selectors -->
+a[href] → elements with attribute
+a[href^="https"] → starts with
+a[href$=".com"] → ends with
+[attr~=value] → contains word
+Can target lang, data-*, type, etc.
