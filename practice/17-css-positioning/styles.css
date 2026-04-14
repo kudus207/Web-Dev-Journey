@@ -50,10 +50,25 @@ body {
     top: 0;
     width: 492px;
     height: 134px;
-    border-bottom: 5px solid #1539a7;
+    /* border-bottom: 2px solid #1539a7; */
+
+    background: repeating-linear-gradient(
+    to right,
+    transparent 0px,
+    transparent 20px,
+    #1539a7 20px,
+    #1539a7 25px
+  ),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 25px,
+      #1539a7 25px,
+      #1539a7 30px
+    );
 }
 
-#roof .horizontal1 {
+/* #roof .horizontal1 {
     position: absolute;
     top: 0;
     left: 20px;
@@ -240,7 +255,7 @@ body {
     width: 492px;
     height: 5px;
     background-color: #1539a7;
-}
+} */
 
 #window-1 {
     position: absolute;

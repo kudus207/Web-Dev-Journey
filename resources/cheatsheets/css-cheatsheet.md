@@ -336,3 +336,15 @@ aspect-ratio: 35 / 4; The aspect ratio of 35 / 4 can be interpreted as a width-t
                       For an aspect ratio of 35 / 4, this means that for every 35 units of width, there are 4 units of height.
                       Width = Height x 35 / 4.
                       This ratio is often used in various media formats, such as video and image dimensions, to ensure proper scaling and display across different devices. 
+
+<!-- calc -->
+The calc() function is a CSS function that allows you to calculate a value based on other values. For example, 
+           you can use it to calculate the width of the viewport minus the margin of an element:
+            Example Code
+            .example {
+              margin: 10px;
+              width: calc(100% - 20px);
+            }
+
+<!-- border collapse -->
+border-collapse: collapse;  allow cell borders to collapse into a single border.
