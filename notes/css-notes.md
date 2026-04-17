@@ -171,3 +171,80 @@ a[href^="https"] → starts with
 a[href$=".com"] → ends with
 [attr~=value] → contains word
 Can target lang, data-*, type, etc.
+
+Media Queries
+
+Apply CSS based on device conditions.
+
+@media (min-width: 768px) { ... }
+
+Types: all, screen, print
+Features: width, height, orientation, resolution, hover, prefers-color-scheme
+
+Breakpoints
+
+Points where layout changes.
+
+Mobile: ≤ 640px
+Tablet: 641–1024px
+Desktop: ≥ 1025px
+Mobile-First
+
+Design for mobile first, then scale up with min-width.
+
+CSS Custom Properties
+
+Reusable variables:
+
+--color: blue;
+color: var(--color, fallback);
+@property Rule
+
+Defines typed, animatable variables with defaults and fallbacks.
+
+CSS Grid vs Flexbox
+Grid: 2D (rows + columns)
+Flexbox: 1D (row or column)
+fr Unit
+
+Flexible space sharing in Grid:
+
+grid-template-columns: 1fr 1fr;
+Grid Gaps
+
+Spacing between rows/columns:
+
+gap: 20px;
+repeat()
+
+Shortcut for repeating tracks:
+
+repeat(3, 1fr);
+Implicit vs Explicit Grid
+Explicit: defined by you
+Implicit: auto-created by browser
+minmax()
+
+Sets flexible size range:
+
+minmax(150px, 300px);
+grid-template-areas
+
+Named layout structure:
+
+"header header"
+"main sidebar"
+grid-row & grid-column
+
+Control item placement:
+
+grid-column: 1 / 3;
+CSS Animations
+
+Animate styles over time:
+
+@keyframes move { ... }
+animation: move 2s;
+Summary
+
+These concepts work together to build responsive, flexible, and dynamic layouts using modern CSS.
