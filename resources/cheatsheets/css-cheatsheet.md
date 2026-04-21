@@ -329,6 +329,10 @@ If 5vw = 15px and 1.2em = 19px → result = 15px
 
 The value will never exceed 1.2em, but can shrink on smaller screens.
 
+<!-- img loading=lazy -->
+<img loading="lazy">; The loading attribute on an img element can be set to lazy to tell the browser not to 
+                      fetch the image resource until it is needed (as in, when the user scrolls the image into view). As an additional benefit, lazy loaded elements will not load until the non-lazy elements are loaded - this means users with slow internet connections can view the content of your page without having to wait for the images to load.
+
 <!-- aspect-ratio -->
 aspect-ratio: 35 / 4; The aspect ratio of 35 / 4 can be interpreted as a width-to-height 
                       ratio. To calculate the aspect ratio, you can use the formula:
