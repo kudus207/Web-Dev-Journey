@@ -1,0 +1,130 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 10px;
+}
+
+.newspaper-layout {
+    display: grid;
+    grid-template-areas:
+        'title title title'
+        'feature-article feature-article cover-image'
+        'secondary-article secondary-article cover-image'
+        'small-article1 small-article2 small-article3';
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 10px;
+}
+
+.title {
+    grid-area: title;
+    background-color: #05051f;
+    color: white;
+    text-align: center;
+    padding: 20px 10px;
+}
+
+h2,
+h3 {
+    padding-bottom: 10px;
+}
+
+.feature-article {
+    grid-area: feature-article;
+    background-color: #f7f5f5;
+}
+
+.cover-image {
+    grid-area: cover-image;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e6e6e6;
+}
+
+.secondary-article {
+    grid-area: secondary-article;
+    background-color: #f3f2f2;
+}
+
+.feature-article,
+.secondary-article,
+.cover-image {
+    padding: 80px 20px;
+}
+
+img {
+    max-width: 100%;
+    object-fit: cover;
+    height: 100%;
+}
+
+.small-article1 {
+    grid-area: small-article1;
+}
+
+.small-article2 {
+    grid-area: small-article2;
+}
+
+.small-article3 {
+    grid-area: small-article3;
+}
+
+.small-article1,
+.small-article2,
+.small-article3 {
+    padding: 30px 10px;
+    text-align: center;
+    background-color: #e6e6e6;
+}
+
+@media (max-width: 768px) {
+    .newspaper-layout {
+        grid-template-areas:
+            "title"
+            "feature-article"
+            "cover-image"
+            "secondary-article"
+            "small-article1"
+            "small-article2"
+            "small-article3";
+
+        grid-template-columns: 1fr;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .feature-article,
+    .secondary-article,
+    .cover-image {
+        padding: 20px;
+    }
+
+    .title {
+        padding: 15px 10px;
+    }
+}
+
+/* @media (max-width: 1024px) {
+    .newspaper-layout {
+        grid-template-areas:
+            "title title"
+            "feature-article cover-image"
+            "secondary-article cover-image"
+            "small-article1 small-article2"
+            "small-article3 small-article3";
+
+        grid-template-columns: 1fr 1fr;
+    }
+} */

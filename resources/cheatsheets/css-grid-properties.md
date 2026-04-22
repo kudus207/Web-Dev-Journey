@@ -93,3 +93,5 @@
 
 6. place-self
 (shorthand)
+
+grid-template-columns: minmax(2rem, 1fr) minmax(min-content, 94rem) minmax(2rem, 1fr);
