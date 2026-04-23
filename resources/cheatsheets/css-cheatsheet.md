@@ -387,3 +387,9 @@ gap: 10px; The gap property is a shorthand way to set the value of column-gap an
 <!-- place items -->
 place-items: center; The place-items property can be used to set the align-items and justify-items values at 
                      the same time. The place-items property takes one or two values. If one value is provided, it is used for both the align-items and justify-items properties. If two values are provided, the first value is used for the align-items property and the second value is used for the justify-items property.
+
+<!-- @keyframes -->
+The @keyframes at-rule is used to define the flow of a CSS animation. Within the @keyframes rule, you can 
+               create selectors for specific points in the animation sequence, such as 0% or 25%, or use from and to to define the start and end of the sequence.
+
+               @keyframes rules require a name to be assigned to them, which you use in other rules to reference. For example, the @keyframes freeCodeCamp { } rule would be named freeCodeCamp.
