@@ -96,6 +96,53 @@ transform = change shape or position (without affecting layout)
 Doesn’t push other elements (no layout shift)
 Works great with transition for animations
 
+<!-- transform-origin -->
+transform-origin in CSS controls where a transformation starts from—basically the “pivot point” for things like rotate, scale, or skew.
+By default, transformations happen from the center of an element. But with transform-origin, you can move that reference point anywhere.
+
+🔹 Basic idea
+Think of it like this:
+If you rotate something from the center → it spins in place
+If you rotate it from a corner → it swings around that corner
+
+🔹 Syntax
+element {  transform-origin: x-axis y-axis;}
+
+🔹 Common values
+1. Keywords
+transform-origin: center;        /* default */transform-origin: top left;transform-origin: bottom right;
+2. Percentages
+transform-origin: 50% 50%;  /* center */transform-origin: 0% 0%;    /* top-left */transform-origin: 100% 0%;  /* top-right */
+3. Length units
+transform-origin: 20px 40px;
+
+🔹 Example
+.box {  
+  width: 100px;
+  height: 100px;  
+  background: red; 
+  transform-origin: top left;  
+  transform: rotate(45deg);
+}
+👉 This rotates the box around its top-left corner, not the center.
+
+🔹 Visual intuition
+center → spins in place
+top left → swings like a door hinge
+bottom → rotates from the bottom edge
+
+🔹 3D transforms (extra)
+You can also add a third value for depth:
+transform-origin: 50% 50% 50px;
+This affects 3D transforms like rotateX() and rotateY().
+
+🔹 When to use it
+Use transform-origin when:
+
+You want realistic animations (e.g., doors, pendulums)
+You need precise control over rotation or scaling behavior
+You're working with CSS animations or transitions
+
 <!-- transition -->
 transition: transform 0.3s, background-color 0.3s ease;
             When the a elements are hovered, the color of the background makes a transition to a different color. You can regulate how that transition happens with the transition property:
