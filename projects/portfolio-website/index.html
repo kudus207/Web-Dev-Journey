@@ -1,32 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/projects/portfolio-website/css/styles.css">
     <title>My Portfolio</title>
 </head>
-<body>
-    <header>
-        <nav>
-            <a href="">Home</a>
-            <a href="">About</a>
-            <a href="">Skills</a>
-            <a href="">Projects</a>
-            <a href="">Contact</a>
-        </nav>
-        <h1>My Name is Olaniyi Kudus</h1>
-        <article>
-            <h3>I'm a Web Developer</h3>
-        </article>
-    </header>
-    <main>
-        <section>
 
+<body>
+    <header id="header">
+        <nav id="navbar">
+            <div class="logo">
+                <span>Kudus <span class="logo-color">Dev</span></span>
+            </div>
+            <div class="anchor">
+                <a href="#header">Home</a>
+                <a href="#about-me">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+                <div class="light-dark">
+                    <img src="/projects/portfolio-website/images/light.png" alt="Light Mode">
+                    <img src="/projects/portfolio-website/images/night-mode.png" alt="dark-mode">
+                </div>
+            </div>
+        </nav>
+        <div class="left-header">
+            <h1><span class="h1-intro">Hi, I'm </span><br>Olaniyi Kudus <br> <span class="h1-reduce">Fullstack <span class="h1-color">Developer</span></span></h1>
+            <p>I build responsive, accessible and beautiful web experiences using Frontend, Backend technologies and modern best practices.</p>
+            <button class="view-projexts-btn">&rarr; View Projects</button>
+            <button class="contact-me-btn">Contact Me &#9742;</button>
+            <div class="social">
+                <img src="/projects/portfolio-website/images/github.png" alt="Github">
+                <img src="/projects/portfolio-website/images/linkedin.png" alt="LinkedIn">
+                <img src="/projects/portfolio-website/images/twitter.png" alt="X">
+                <img src="/projects/portfolio-website/images/gmail.png" alt="Mail">
+            </div>
+        </div>
+        <div class="right-header">
+            <img src="/projects/portfolio-website/images/coding-image.jpeg" alt="coding image" class="header-img" width="500" height="500">
+        </div>
+    </header>
+    <main id="main">
+        <section id="about-me" class="about-section">
+            <div class="about-left-div">
+                <img src="/projects/portfolio-website/images/my-pic.jpeg" alt="my picture" class="about-img" width="300" height="300">
+            </div>
+            <div class="about-right-div">
+                <h2><span class="h2-span">About Me</span><br> Who I Am</h2>
+                <p>I'm a Fullstack developer passionate about building clean, modern, and user-friendly websites. I recently completed my learning journey with freeCodeCamp and I'm continously improving my skills by building real-world projects.</p>
+                <p>I love turning ideas into reality through code and creating experiences that make an impact.</p>
+                <button class="download-resume-btn">Download Resume &DownArrowBar;</button>
+            </div>
+        </section>
+        <section id="projects">
+            <div class="projects-top-div">
+                <h2><span class="h2-span">My Work</span><br> Featured Projects</h2>
+                <span>View all projects &xrarr;</span>
+            </div>
+            <div class="projects-bottom-div">
+                <a href="https://codepen.io/kudus207/pen/myOdNvb" target="_blank">
+                    <img src="/projects/portfolio-website/images/todo-list-img.png" alt="tod0 list app" width="300" height="300">
+                </a>
+                <a href="https://codepen.io/kudus207/pen/ogYgvNR" target="_blank">
+                    <img src="/projects/portfolio-website/images/weather-app-img.png" alt="Weather App" width="300" height="300">
+                </a>
+            </div>
         </section>
     </main>
     <footer>
 
     </footer>
 </body>
+
 </html>
