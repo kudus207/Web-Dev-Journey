@@ -9,6 +9,9 @@ Version control system.
 GitHub
 Stores code online.
 
+Codepen
+View and test code
+
 Chrome DevTools
 Used to inspect websites and debug code.
 

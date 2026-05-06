@@ -15,6 +15,8 @@ https://css-tricks.com/
 Frontend Practice
 https://www.frontendpractice.com/
 
+Codepen for code testing
+https://codepen.io/pen
 
 Later you will add more like:
 
