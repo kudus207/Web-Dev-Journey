@@ -130,3 +130,57 @@ const repeatedWord = word.repeat(3);
 
 console.log(repeatedWord);  // "Hello!Hello!Hello!"
 Since strings are immutable, this method will not modify the original string. It will return a new string with the repeated content.
+
+
+<!-- boolean function -->
+You can use the Boolean() function to check the truthiness of a value. For example, Boolean("Hello World!") will return true because "Hello World!" is truthy.
+
+<!-- math.random -->
+The formula to generate a random number between two values is the following:
+Example Code
+    const min = 1;
+    const max = 100;
+
+const randomNum2 = Math.random() * (max - min) + min;
+console.log(randomNum2); // 80.38001206977209
+
+<!-- math.floor -->
+ The Math.floor() method rounds the value down to the nearest whole integer.
+
+Example Code
+const price = 10.99;
+Math.floor(price); // 10
+
+The formula to generate a random integer between two values is the following:
+
+Example Code
+    const min = 1;
+    const max = 100;
+const randomInt = Math.floor(Math.random() * (max - min) + min);
+
+console.log(randomInt); // 32
+This will produce a result that is a integer between two values.
+
+<!-- math.ceil -->
+The Math.ceil() method rounds the value up to the nearest whole integer.
+
+Example Code
+const price = 10.01;
+Math.ceil(price); // 11
+
+<!-- math.round -->
+the Math.round() method rounds the value to the nearest whole integer.
+
+Here are some examples:
+
+Example Code
+Math.round(6.7); // 7
+Math.round(3.2); // 3
+This differs from the Math.floor() and Math.ceil() methods, which round down and up to the nearest whole integer, respectively.
+
+<!-- math min and max -->
+ math min and max is used to get the maximum and minimum values from a range of numbers like this:
+
+Example Code
+Math.max(1, 2, 3, 4, 5); // 5
+Math.min(1, 2, 3, 4, 5); // 1
