@@ -135,6 +135,29 @@ Since strings are immutable, this method will not modify the original string. It
 <!-- boolean function -->
 You can use the Boolean() function to check the truthiness of a value. For example, Boolean("Hello World!") will return true because "Hello World!" is truthy.
 
+<!-- Boolean Primitive vs Truthy/Falsy -->
+Boolean Primitive vs Truthy/Falsy
+
+Boolean primitive
+
+Only: true and false
+Real data type: boolean
+Checked with: typeof value === "boolean"
+Means: “Is it actually a boolean?”
+
+Truthy / Falsy
+
+How JavaScript treats values in conditions
+Used in if (value)
+Falsy values: false, 0, "", null, undefined, NaN
+Everything else is truthy
+Means: “Does it behave like true or false?”
+
+Simple rule
+
+Boolean primitive = actual true/false
+Truthy/falsy = how values behave in conditions
+
 <!-- math.random -->
 The formula to generate a random number between two values is the following:
 Example Code
@@ -184,3 +207,33 @@ This differs from the Math.floor() and Math.ceil() methods, which round down and
 Example Code
 Math.max(1, 2, 3, 4, 5); // 5
 Math.min(1, 2, 3, 4, 5); // 1
+
+<!-- math.pow -->
+ The square of a number is the number multiplied by itself.
+
+To calculate the square of a number in JavaScript, you can use the Math.pow() method. The Math.pow() method takes two arguments: the base number and the exponent.
+
+You can also use the exponentiation operator (**) to calculate the square of a number.
+
+Here is an example:
+
+Example Code
+// base number is 5 
+// the exponent is 2
+Math.pow(5, 2); // 25
+
+// using the exponentiation operator
+5 ** 2; // 25
+
+<!-- math.sqrt -->
+A square is a number multiplied by itself. So, the square root would be the number that when multiplied by itself gives the original number.
+
+For example, the square root of 9 is 3 because 3 * 3 = 9.
+
+To get the square root of a number in JavaScript, you can use the Math.sqrt() method.
+
+Here is an example:
+
+Example Code
+// result: 3
+Math.sqrt(9);

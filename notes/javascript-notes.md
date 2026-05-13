@@ -934,3 +934,116 @@ JavaScript often performs automatic type conversion, so:
 use strict operators
 write clear conditions
 avoid relying on coercion unless intentional
+
+📘 JavaScript Functions, Arrow Functions & Scope — Cheat Sheet
+🔹 1. FUNCTIONS
+What is a function?
+
+A reusable block of code that performs a task or returns a value.
+
+Declaring a function
+function greet() {
+  console.log("Hello!");
+}
+Calling a function
+greet();
+Parameters vs Arguments
+Parameters = placeholders in function definition
+Arguments = actual values passed in
+function greet(name) {
+  console.log("Hello " + name);
+}
+
+greet("Alice");
+Return value
+Functions return undefined by default
+Use return to output a value
+function add(a, b) {
+  return a + b;
+}
+
+let result = add(2, 3); // 5
+Anonymous function
+
+Function without a name
+
+const sum = function (a, b) {
+  return a + b;
+};
+Default parameters
+function greet(name = "Guest") {
+  console.log("Hello " + name);
+}
+
+greet(); // Guest
+🔹 2. ARROW FUNCTIONS (=>)
+Basic syntax
+
+Shorter way to write functions
+
+const greet = (name) => {
+  console.log("Hello " + name);
+};
+Rules
+One parameter (parentheses optional)
+const greet = name => console.log(name);
+No parameters (parentheses required)
+const hello = () => console.log("Hello");
+One-line function (implicit return)
+const add = (a, b) => a + b;
+Arrow function vs regular function
+Feature	Regular Function	Arrow Function
+Syntax length	Longer	Shorter
+function keyword	Yes	No
+return needed	Yes (usually)	Optional (implicit)
+🔹 3. SCOPE
+What is scope?
+
+Scope = where variables can be accessed in code.
+
+1. Global Scope 🌍
+
+Declared outside functions → accessible everywhere
+
+let globalVar = "I am global";
+
+function test() {
+  console.log(globalVar);
+}
+2. Local Scope (Function Scope) 🔒
+
+Declared inside a function → only usable inside it
+
+function test() {
+  let localVar = "I am local";
+  console.log(localVar);
+}
+
+❌ Outside access causes error:
+
+console.log(localVar); // error
+3. Block Scope { }
+
+Applies to let and const inside { }
+
+if (true) {
+  let blockVar = "inside block";
+  console.log(blockVar);
+}
+
+❌ Outside block:
+
+console.log(blockVar); // error
+Scope summary table
+Scope	Where it works
+Global	Anywhere
+Local (function)	Inside function only
+Block	Inside { } only
+🔹 KEY TAKEAWAYS
+Functions = reusable code blocks
+Parameters receive input, arguments provide it
+return sends output from a function
+Arrow functions = shorter function syntax
+Scope controls where variables can be accessed
+let and const follow block scope
+Global variables should be used carefully
