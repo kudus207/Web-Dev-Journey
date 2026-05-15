@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Number Masker</title>
+</head>
+
+<body>
+    <h1>Build a Phone Number Masker</h1>
+</body>
+
+<script>
+    function maskPhoneNumber(phone) {
+        let numberMask = phone;
+
+        let firstTwoNum = numberMask.slice(0, 2);
+        let lastTwoNum = numberMask.slice(-2);
+        let mask = "*".repeat(numberMask.length - 4);
+
+        return firstTwoNum + mask + lastTwoNum;
+    }
+
+    let phone = "08147197526";
+
+    console.log(maskPhoneNumber(phone));
+
+</script>
+
+</html>
