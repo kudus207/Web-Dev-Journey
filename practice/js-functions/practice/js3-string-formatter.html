@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Formatter</title>
+</head>
+
+<body>
+    <h1>Build a String Formatter</h1>
+</body>
+
+<script>
+    function formatUsername(username) {
+        // Creates a function named formatUsername
+        // The parameter "username" stores the value passed into the function
+
+
+        let usernameFormat = username;
+        // Stores the username parameter in another variable
+        // Example:
+        // usernameFormat = "free_code_camp"
+
+
+        let replace = usernameFormat.replaceAll("_", " ");
+        // Replaces every "_" with a space
+        // "free_code_camp" becomes "free code camp"
+
+
+        // ----- FIRST WORD CAPITALIZATION -----
+
+
+        let firstLetter = replace.charAt(0).toUpperCase();
+        // charAt(0) gets the first character: "f"
+        // toUpperCase() changes it to "F"
+
+
+        let restOfFirst = replace.slice(1);
+        // slice(1) starts from index 1 to the end
+        // "ree code camp"
+
+
+        let firstCapitalized = firstLetter + restOfFirst;
+        // Combines:
+        // "F" + "ree code camp"
+        // Result:
+        // "Free code camp"
+
+
+        // ----- FIND FIRST SPACE -----
+
+
+        let spaceIndex = firstCapitalized.indexOf(" ");
+        // Finds the position of the first space
+        // "Free code camp"
+        // space is at index 4
+
+
+        // ----- SECOND WORD CAPITALIZATION -----
+
+
+        let beforeSecondWord = firstCapitalized.slice(0, spaceIndex + 1);
+        // Cuts from index 0 up to and including the space
+        // Result:
+        // "Free "
+
+
+        let secondLetter = firstCapitalized
+            .charAt(spaceIndex + 1)
+            .toUpperCase();
+        // spaceIndex + 1 moves to the first letter after the space
+        // Gets "c"
+        // Changes it to "C"
+
+
+        let afterSecondLetter = firstCapitalized.slice(spaceIndex + 2);
+        // Starts after the lowercase "c"
+        // Gets:
+        // "ode camp"
+
+
+        let secondCapitalized =
+            beforeSecondWord + secondLetter + afterSecondLetter;
+        // Combines:
+        // "Free " + "C" + "ode camp"
+        // Result:
+        // "Free Code camp"
+
+
+        // ----- FIND SECOND SPACE -----
+
+
+        let secondSpace = secondCapitalized.indexOf(" ", spaceIndex + 1);
+        // Finds the next space
+        // Starts searching after the first space
+        // Finds the space before "camp"
+
+
+        let beforeThirdWord = secondCapitalized.slice(0, secondSpace + 1);
+        // Gets everything before the third word
+        // Result:
+        // "Free Code "
+
+
+        let thirdLetter = secondCapitalized
+            .charAt(secondSpace + 1)
+            .toUpperCase();
+        // Gets the first letter of the third word
+        // "c"
+        // Converts it to:
+        // "C"
+
+
+        let afterThirdLetter = secondCapitalized.slice(secondSpace + 2);
+        // Starts after the lowercase "c"
+        // Gets:
+        // "amp"
+
+
+        return beforeThirdWord + thirdLetter + afterThirdLetter;
+        // Combines:
+        // "Free Code " + "C" + "amp"
+        // Final result:
+        // "Free Code Camp"
+    }
+
+
+    let username = "free_code_camp";
+    // Creates the username variable
+
+
+    console.log(formatUsername(username));
+    // Calls the function and prints the result
+</script>
+
+</html>

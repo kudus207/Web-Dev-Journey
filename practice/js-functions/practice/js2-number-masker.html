@@ -14,17 +14,63 @@
 <script>
     function maskPhoneNumber(phone) {
         let numberMask = phone;
-
         let firstTwoNum = numberMask.slice(0, 2);
+        // Creates a function named maskPhoneNumber
+        
+        // The parameter "phone" stores the phone number passed in
+        // Stores the phone number in a new variable
+        // Example:
+        // numberMask = "08147197526"
+        // slice(0, 2) means:
+        // start at index 0 and stop BEFORE index 2
+        // Gets the first 2 digits
+
+        // Example:
+        // "08147197526"
+        // "08"
+
+
         let lastTwoNum = numberMask.slice(-2);
+        // slice(-2) means:
+        // start 2 characters from the end
+        // Gets the last 2 digits
+
+        // Example:
+        // "08147197526"
+        // "26"
+
+
         let mask = "*".repeat(numberMask.length - 4);
+        // numberMask.length gives total number of digits
+
+        // Example:
+        // "08147197526" has length 11
+
+        // We subtract 4 because:
+        // - 2 digits are kept at the start
+        // - 2 digits are kept at the end
+
+        // So middle digits = 11 - 4 = 7
+
+        // "*".repeat(7) becomes:
+        // "*******"
+
 
         return firstTwoNum + mask + lastTwoNum;
+        // Combines everything:
+        // "08" + "*******" + "26"
+
+        // Final result:
+        // "08*******26"
     }
 
+
     let phone = "08147197526";
+    // Stores the phone number we want to mask
+
 
     console.log(maskPhoneNumber(phone));
+    // Calls the function and prints the result
 
 </script>
 
