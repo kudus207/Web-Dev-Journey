@@ -12,68 +12,79 @@
 </body>
 
 <script>
+
     function booWho(value) {
-        // Creates a function named booWho
-        // The parameter "value" stores whatever is passed into the function
-
-
         if (value === Boolean(value)) {
-            // Checks if value is STRICTLY EQUAL to Boolean(value)
-
-            // Boolean(value) converts any value into either true or false
-
-            // Examples:
-            // Boolean(1) -> true
-            // Boolean(0) -> false
-            // Boolean("hello") -> true
-            // Boolean("") -> false
-            // Boolean(false) -> false
-
-
-            // STRICT EQUALITY (===) checks:
-            // 1. Same value
-            // 2. Same data type
-
-
-            // Example with false:
-            // value = false
-            // Boolean(false) = false
-            // false === false -> true
-
-
-            // Example with 0:
-            // value = 0
-            // Boolean(0) = false
-            // 0 === false -> false
-            // because:
-            // number !== boolean
-
-
-            // Example with "hello":
-            // value = "hello"
-            // Boolean("hello") = true
-            // "hello" === true -> false
-            // because:
-            // string !== boolean
-
-
             return true;
-            // Runs only if the condition is true
-            // Meaning:
-            // value is already a boolean primitive
-            // (true or false)
-
         } else {
-            // Runs if the condition is false
-
-
             return false;
-            // Returns false for every non-boolean value
         }
     }
 
-
     console.log(booWho(false));
+
+    // function booWho(value) {
+    // Creates a function named booWho
+    // The parameter "value" stores whatever is passed into the function
+
+
+    //  if (value === Boolean(value)) {
+    // Checks if value is STRICTLY EQUAL to Boolean(value)
+
+    // Boolean(value) converts any value into either true or false
+
+    // Examples:
+    // Boolean(1) -> true
+    // Boolean(0) -> false
+    // Boolean("hello") -> true
+    // Boolean("") -> false
+    // Boolean(false) -> false
+
+
+    // STRICT EQUALITY (===) checks:
+    // 1. Same value
+    // 2. Same data type
+
+
+    // Example with false:
+    // value = false
+    // Boolean(false) = false
+    // false === false -> true
+
+
+    // Example with 0:
+    // value = 0
+    // Boolean(0) = false
+    // 0 === false -> false
+    // because:
+    // number !== boolean
+
+
+    // Example with "hello":
+    // value = "hello"
+    // Boolean("hello") = true
+    // "hello" === true -> false
+    // because:
+    // string !== boolean
+
+
+    //    return true;
+    // Runs only if the condition is true
+    // Meaning:
+    // value is already a boolean primitive
+    // (true or false)
+
+    //  } else {
+    // Runs if the condition is false
+
+
+    //     return false;
+    // Returns false for every non-boolean value
+    //     }
+    //  }
+
+
+    //  console.log(booWho(false));
     // Calls the function with false
     // Output:
     // true

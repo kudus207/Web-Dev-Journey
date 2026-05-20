@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name Initial Generator</title>
+</head>
+
+<body>
+    <h1>Build a Name Initial Generator</h1>
+</body>
+
+<script>
+    function getInitials(fullName) {
+        let initials = fullName;
+
+        let firstCapitalized = initials.charAt(0).toUpperCase();
+        let space = initials.indexOf(" ");
+        let secondCapitalized = initials.charAt(space + 1).toUpperCase();
+        let joining = ".";
+
+        return firstCapitalized + joining + secondCapitalized;
+    }
+
+    let fullName = "olaniyi kudus";
+
+    console.log(getInitials(fullName));
+
+    // "john doe"
+    // "J.D"
+
+
+    //function getInitials(fullName) {
+        // Creates a function named getInitials
+        // The parameter "fullName" stores the value passed into the function
+
+        // Example:
+        // "olaniyi kudus"
+
+
+       // let initials = fullName;
+        // Stores the fullName value in another variable
+
+        // initials = "olaniyi kudus"
+
+
+       // let firstCapitalized = initials.charAt(0).toUpperCase();
+        // charAt(0) gets the first character of the string
+
+        // From:
+        // "olaniyi kudus"
+
+        // it gets:
+        // "o"
+
+        // toUpperCase() changes it to:
+        // "O"
+
+        // firstCapitalized = "O"
+
+
+        //let space = initials.indexOf(" ");
+        // indexOf(" ") finds the position of the space
+
+        // "olaniyi kudus"
+
+        // Positions:
+        // o l a n i y i   k u d u s
+        // 0 1 2 3 4 5 6 7 8 9 10...
+
+        // Space is at index 7
+
+        // space = 7
+
+
+        //let secondCapitalized = initials.charAt(space + 1).toUpperCase();
+        // space + 1 moves to the character after the space
+
+        // space = 7
+        // 7 + 1 = 8
+
+        // index 8 is:
+        // "k"
+
+        // toUpperCase() changes it to:
+        // "K"
+
+        // secondCapitalized = "K"
+
+
+       // let joining = ".";
+        // Stores a dot that will separate the initials
+
+        // joining = "."
+
+
+        //return firstCapitalized + joining + secondCapitalized;
+        // Combines all parts together
+
+        // "O" + "." + "K"
+
+        // Final result:
+        // "O.K"
+   // }
+
+
+    //let fullName = "olaniyi kudus";
+    // Creates the variable storing the full name
+
+
+    //console.log(getInitials(fullName));
+    // Calls the function and prints the result
+
+    // Output:
+    // "O.K"
+</script>
+
+</html>

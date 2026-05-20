@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Card Masker</title>
+</head>
+
+<body>
+    <h1>Build a Credit Card Masker</h1>
+</body>
+
+<script>
+    function maskCardNumber(cardNumber) {
+        let cardNumMask = cardNumber;
+
+        let firstTwoNum = cardNumMask.slice(0, 2);
+        let lastTwoNum = cardNumMask.slice(-2);
+        let masker = "*".repeat(cardNumMask.length - 4);
+
+        return firstTwoNum + masker + lastTwoNum;
+    }
+
+    let cardNumber = "1229887989873923";
+
+    console.log(maskCardNumber(cardNumber));
+
+
+    // function maskCardNumber(cardNumber) {
+    // Creates a function named maskCardNumber
+    // The parameter "cardNumber" stores the value passed into the function
+
+
+    //let cardNumMask = cardNumber;
+    // Stores the card number in another variable
+    // Example:
+    // "1229887989873923"
+
+
+   // let firstTwoNum = cardNumMask.slice(0, 2);
+    // slice(0, 2) means:
+    // start at index 0
+    // stop BEFORE index 2
+
+    // Gets the first 2 digits
+
+    // Example:
+    // "12"
+
+
+   // let lastTwoNum = cardNumMask.slice(-2);
+    // slice(-2) means:
+    // start 2 characters from the end
+    // and go to the end
+
+    // Gets the last 2 digits
+
+    // Example:
+    // "23"
+
+
+   // let masker = "*".repeat(cardNumMask.length - 4);
+    // cardNumMask.length gets the total number of characters
+
+    // Example:
+    // "1229887989873923"
+    // length = 16
+
+    // We subtract 4 because:
+    // - first 2 digits stay visible
+    // - last 2 digits stay visible
+
+    // So:
+    // 16 - 4 = 12
+
+    // "*".repeat(12)
+    // becomes:
+    // "************"
+
+
+   // return firstTwoNum + masker + lastTwoNum;
+  // Combines all parts together
+
+  // "12" + "************" + "23"
+
+  // Final result:
+  // "12************23"
+//}
+
+
+   // let cardNumber = "1229887989873923";
+    // Creates the variable storing the card number
+
+
+  //  console.log(maskCardNumber(cardNumber));
+    // Calls the function and prints the result
+
+
+    // Original:
+    // 1234798843223923
+
+    // Masked:
+    // 12************23
+</script>
+
+</html>
