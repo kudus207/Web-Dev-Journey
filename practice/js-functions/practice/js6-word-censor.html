@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Censor</title>
+</head>
+
+<body>
+    <h1>Build a Word Censor</h1>
+</body>
+
+<script>
+    function censorWord(word) {
+        let wordCensor = word;
+
+        let firstLetter = wordCensor.charAt(0).toUpperCase();
+        let lastLetter = wordCensor.slice(-1);
+        let censored = "*".repeat(wordCensor.length - 2);
+
+        return firstLetter + censored + lastLetter;
+    }
+
+    let word = "javascript";
+
+    console.log(censorWord(word));
+
+   // function censorWord(word) {
+        // Creates a function named censorWord
+        // The parameter "word" stores the value passed into the function
+
+        // Example:
+        // "javascript"
+
+
+       // let wordCensor = word;
+        // Stores the word parameter in another variable
+
+        // wordCensor = "javascript"
+
+
+       // let firstLetter = wordCensor.charAt(0).toUpperCase();
+        // charAt(0) gets the first character of the string
+
+        // From:
+        // "javascript"
+
+        // it gets:
+        // "j"
+
+        // toUpperCase() changes it to:
+        // "J"
+
+        // firstLetter = "J"
+
+
+       // let lastLetter = wordCensor.slice(-1);
+        // slice(-1) means:
+        // start 1 character from the end
+        // and go to the end
+
+        // Gets the last character
+
+        // From:
+        // "javascript"
+
+        // it gets:
+        // "t"
+
+        // lastLetter = "t"
+
+
+        //let censored = "*".repeat(wordCensor.length - 2);
+        // wordCensor.length gets the total number of characters
+
+        // "javascript"
+        // length = 10
+
+        // We subtract 2 because:
+        // - first letter stays visible
+        // - last letter stays visible
+
+        // So:
+        // 10 - 2 = 8
+
+        // "*".repeat(8)
+        // becomes:
+        // "********"
+
+        // censored = "********"
+
+
+       // return firstLetter + censored + lastLetter;
+        // Combines all parts together
+
+        // "J" + "********" + "t"
+
+        // Final result:
+        // "J********t"
+   // }
+
+
+   // let word = "javascript";
+    // Creates the variable storing the word
+
+
+   // console.log(censorWord(word));
+    // Calls the function and prints the result
+
+    // Output:
+    // "J********t"
+</script>
+
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Masker</title>
+</head>
+
+<body>
+    <h1>Build an Email Masker</h1>
+</body>
+
+<script>
+    function maskEmail(email) {
+        let emailAddress = email;
+
+        let atIndex = emailAddress.indexOf("@");
+
+        let username = emailAddress.slice(0, atIndex);
+
+        let domain = emailAddress.slice(atIndex);
+
+        let firstLetter = username.slice(0, 1);
+
+        let lastLetter = username.slice(-1);
+
+        let stars = "*".repeat(username.length - 2);
+
+        return firstLetter + stars + lastLetter + domain;
+    }
+
+    let email = "apple.pie@example.com";
+
+    console.log(maskEmail(email));
+
+    //function maskEmail(email) {
+        // Creates a function named maskEmail
+        // The parameter "email" stores the value passed into the function
+
+        // Example:
+        // "apple.pie@example.com"
+
+
+       // let emailAddress = email;
+        // Stores the email parameter in another variable
+
+        // emailAddress = "apple.pie@example.com"
+
+
+       // let atIndex = emailAddress.indexOf("@");
+        // indexOf("@") finds the position of "@"
+
+        // Positions:
+        // a p p l e . p i e @
+        // 0 1 2 3 4 5 6 7 8 9
+
+        // "@" is at index 9
+
+        // atIndex = 9
+
+
+        //let username = emailAddress.slice(0, atIndex);
+        // slice(0, atIndex) means:
+        // start at index 0
+        // stop BEFORE atIndex
+
+        // slice(0, 9)
+
+        // Gets:
+        // "apple.pie"
+
+        // username = "apple.pie"
+
+
+        //let domain = emailAddress.slice(atIndex);
+        // slice(atIndex) means:
+        // start at index 9
+        // continue to the end
+
+        // Gets:
+        // "@example.com"
+
+        // domain = "@example.com"
+
+
+        //let firstLetter = username.slice(0, 1);
+        // slice(0, 1) gets the first character
+
+        // From:
+        // "apple.pie"
+
+        // Gets:
+        // "a"
+
+        // firstLetter = "a"
+
+
+        //let lastLetter = username.slice(-1);
+        // slice(-1) means:
+        // start 1 character from the end
+
+        // Gets the last character
+
+        // From:
+        // "apple.pie"
+
+        // Gets:
+        // "e"
+
+        // lastLetter = "e"
+
+
+        //let stars = "*".repeat(username.length - 2);
+        // username.length gets the total number of characters
+
+        // "apple.pie"
+        // length = 9
+
+        // We subtract 2 because:
+        // - first letter stays visible
+        // - last letter stays visible
+
+        // So:
+        // 9 - 2 = 7
+
+        // "*".repeat(7)
+        // becomes:
+        // "*******"
+
+        // stars = "*******"
+
+
+       // return firstLetter + stars + lastLetter + domain;
+        // Combines all parts together
+
+        // "a" + "*******" + "e" + "@example.com"
+
+        // Final result:
+        // "a*******e@example.com"
+    //}
+
+
+    //let email = "apple.pie@example.com";
+    // Creates the variable storing the email address
+
+
+    //console.log(maskEmail(email));
+    // Calls the function and prints the result
+
+    // Output:
+    // "a*******e@example.com"
+</script>
+
+</html>
