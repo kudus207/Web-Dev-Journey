@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Warning System</title>
+</head>
+
+<body>
+    <h1>Build a Temperature Warning System</h1>
+</body>
+
+<script>
+    let temperatureScore = 0;
+
+    function weatherTracker(temp) {
+        if (temp < 15) {
+            temperatureScore++
+        } else if (temp >= 15 && temp <= 25) {
+
+        } else if (temp > 25) {
+            temperatureScore--
+        }
+
+        if (temperatureScore > 0) {
+            return temperatureScore + " Safe"
+        } else {
+            return temperatureScore + " Warning"
+        }
+    }
+
+    console.log(weatherTracker(30));
+    console.log(weatherTracker(12));
+    console.log(weatherTracker(9));
+
+    // Create a global variable named temperatureScore
+    // and start it at 0.
+    // This variable remembers its value between function calls.
+   // let temperatureScore = 0;
+
+
+    // Create a function named weatherTracker.
+    // It receives one parameter called temp.
+   // function weatherTracker(temp) {
+
+        // Check if the temperature is below 15.
+        // These temperatures are considered safe,
+        // so increase the score by 1.
+     //   if (temp < 15) {
+        //    temperatureScore++;
+
+            // Check if the temperature is between 15 and 25.
+            // These temperatures are neutral,
+            // so the score stays unchanged.
+      //  } else if (temp >= 15 && temp <= 25) {
+
+            // Check if the temperature is above 25.
+            // These temperatures are considered dangerous,
+            // so decrease the score by 1.
+     //   } else if (temp > 25) {
+       //     temperatureScore--;
+       // }
+
+
+        // After updating the score,
+        // check if the score is positive.
+       // if (temperatureScore > 0) {
+
+            // If the score is greater than 0,
+            // return the current score and the word "Safe".
+          //  return temperatureScore + " Safe";
+
+       // } else {
+
+            // If the score is 0 or negative,
+            // return the current score and the word "Warning".
+         //   return temperatureScore + " Warning";
+    //    }
+   // }
+
+
+    // Test 1
+    // 30 is above 25,
+    // so the score decreases by 1.
+    // temperatureScore becomes -1.
+    //console.log(weatherTracker(30));
+
+
+    // Test 2
+    // 12 is below 15,
+    // so the score increases by 1.
+    // temperatureScore becomes 0.
+   // console.log(weatherTracker(12));
+
+
+    // Test 3
+    // 9 is below 15,
+    // so the score increases by 1.
+    // temperatureScore becomes 1.
+    //console.log(weatherTracker(9));
+</script>
+
+</html>
