@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipping & Discount Calculator</title>
+</head>
+
+<body>
+    <h1>Build a VIP Shipping & Discount Calculator</h1>
+</body>
+
+<script>
+    let orderAmount = 60;
+
+    function calculateTotal(price) {
+        // 1. Set up your default values
+        let shipping = 10;
+        let discount = 0;
+
+        // 2. Use the if/else statements ONLY to adjust those values
+        if (price > 100) {
+            shipping = 0;
+            discount = price * 0.10; // 10% of the price
+        } else if (price > 50) {
+            shipping = 0;
+            // discount stays 0
+        }
+
+        // 3. Do the math and return the result ONCE at the bottom
+        let finalPrice = price + shipping - discount;
+        return "The final total is $" + finalPrice;
+    }
+
+    let finalReceipt = calculateTotal(orderAmount);
+    console.log(finalReceipt);
+</script>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Interstellar Fuel Calculator</title>
+</head>
+
+<body>
+    <h1>Build The Interstellar Fuel Calculator</h1>
+    <h2>Question</h2>
+    <p>You are a flight software engineer for SpaceX in the year 2026. You need to write a program that calculates how
+        many kilograms (kg) of rocket fuel a spacecraft needs based on its cargo weight.
+
+        The Rules:
+        Every launch has a base fuel cost of 5,000 kg just to break through Earth's atmosphere, even if the ship is
+        empty.
+
+        If the cargo weight is over 1,000 kg, you must add an extra 2 kg of fuel for every 1 kg of cargo.
+
+        Unless the cargo weight is over 5,000 kg (Heavy Payload). At this point, the ship becomes so heavy that
+        efficiency drops: you must add 3 kg of fuel for every 1 kg of cargo instead.</p>
+</body>
+
+<script>
+    let cargoWeight = 5000;
+
+    function calculateFuel(weight) {
+        let baseFuelCost = 5000;
+        let extraFuel = 0;
+
+        if (weight > 5000) {
+            extraFuel = weight * 3;
+        } else if (weight > 1000) {
+            extraFuel = weight * 2;
+        }
+
+        return "Total fuel required is " + totalFuel + " kg.";
+    }
+
+    let fuelReceipt = calculateFuel(cargoWeight);
+    console.log(fuelReceipt);
+
+
+    // 1. Declare a global variable to hold the input data we want to test.
+    //let cargoWeight = 5000;
+
+    // 2. Define the function. The parameter is named 'weight' to avoid clashing with the global 'cargoWeight'.
+   // function calculateFuel(weight) {
+
+        // 3. Create a local variable for the base cost. It only lives inside this function.
+       // let baseFuelCost = 5000;
+
+        // 4. Create a local variable for extra fuel, starting at 0 as a safe baseline.
+     //   let extraFuel = 0;
+
+        // 5. Check the highest threshold first. If the weight is strictly greater than 5000...
+      //  if (weight > 5000) {
+
+            // 6. ...triple the weight to calculate the extra fuel required.
+        //    extraFuel = weight * 3;
+
+            // 7. If it wasn't over 5000, check if it's over 1000 (meaning it's between 1001 and 5000).
+      //  } else if (weight > 1000) {
+
+            // 8. ...double the weight to calculate the extra fuel required.
+        //    extraFuel = weight * 2;
+      //  }
+        // NOTE: If the weight is 1000 or less, both 'if' conditions skip, and 'extraFuel' stays 0.
+
+        // 9. Add the fixed base fuel cost and the newly calculated extra fuel together.
+     //   let totalFuel = baseFuelCost + extraFuel;
+
+        // 10. Construct and return the exact text string, carefully adding spaces and the period.
+     //   return "Total fuel required is " + totalFuel + " kg.";
+   // }
+
+    // 11. Call the function, pass the global 'cargoWeight' into it, and save the returned string.
+   // let fuelReceipt = calculateFuel(cargoWeight);
+
+    // 12. Print the final saved string directly to the console for the user to see.
+    //console.log(fuelReceipt);
+</script>
+
+</html>

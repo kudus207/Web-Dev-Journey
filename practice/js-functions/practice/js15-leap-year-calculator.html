@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leap Year Calculator</title>
+</head>
+
+<body>
+    <h1>Build a Leap Year Calculator</h1>
+</body>
+
+<script>
+    let year = 2024;
+
+    function isLeapYear(leapYear) {
+
+        if (
+            (leapYear % 4 === 0 && leapYear % 100 !== 0) ||
+            (leapYear % 400 === 0)
+        ) {
+            return `${leapYear} is a leap year.`;
+        } else {
+            return `${leapYear} is not a leap year.`;
+        }
+
+    }
+
+    let result = isLeapYear(year);
+
+    console.log(result);
+
+
+   // let year = 2024;
+
+   // function isLeapYear(leapYear) {
+
+     //   if (
+      //      (leapYear % 4 === 0 && leapYear % 100 !== 0) ||
+      //      (leapYear % 400 === 0)
+     //   ) {
+      //      return `${leapYear} is a leap year.`;
+      //  } else {
+      //      return `${leapYear} is not a leap year.`;
+      //  }
+
+   // }
+
+   // let result = isLeapYear(year);
+
+   // console.log(result);
+</script>
+
+</html>

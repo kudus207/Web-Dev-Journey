@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Theater Entry Checker</title>
+</head>
+
+<body>
+    <h1>Build a Movie Theater Entry Checker</h1>
+</body>
+
+<script>
+    function canEnterTheater(age, withParent, isBanned) {
+        if ((age >= 18 || withParent) && (!isBanned)) {
+            return "Access granted."
+        } else {
+            return "Access denied."
+        }
+    }
+
+    let age = 24;
+    let withParent = false;
+    let isBanned = true;
+
+    let result = canEnterTheater(age, withParent, isBanned);
+
+    console.log(result);
+
+
+    // Function that checks whether a person can enter the theater
+   // function canEnterTheater(age, withParent, isBanned) {
+
+        // Check if:
+        // the person is 18 or older OR is with a parent
+        // AND
+        // the person is NOT banned
+     //   if ((age >= 18 || withParent) && !isBanned) {
+
+            // If the condition above is true, allow entry
+       //     return "Access granted.";
+
+     //   } else {
+
+            // If the condition above is false, deny entry
+      //      return "Access denied.";
+      //  }
+   // }
+
+    // Store the person's age
+   // let age = 24;
+
+    // Store whether the person is with a parent
+    // true = yes, false = no
+   // let withParent = false;
+
+    // Store whether the person is banned
+    // true = banned, false = not banned
+   // let isBanned = true;
+
+    // Call the function and store the returned value
+   // let result = canEnterTheater(
+   //     age,
+    //    withParent,
+    //    isBanned
+   // );
+
+    // Display the result in the console
+   // console.log(result);
+</script>
+
+</html>
