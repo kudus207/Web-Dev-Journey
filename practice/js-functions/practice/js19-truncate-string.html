@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Implement the Truncate a String Algorithm</title>
+</head>
+
+<body>
+    <h1>Implement the Truncate a String Algorithm</h1>
+</body>
+
+<script>
+    // Create a function named truncateString
+    // It accepts two arguments:
+    // str = the string to work with
+    // num = the maximum allowed length
+    function truncateString(str, num) {
+
+        // Check if the string is longer than the allowed length
+        if (str.length > num) {
+
+            // Take only the first 'num' characters from the string
+            let newString = str.slice(0, num);
+
+            // Add "..." to the end of the shortened string
+            // and return the result
+            return newString + "...";
+
+        } else {
+
+            // If the string is already short enough,
+            // return it unchanged
+            return str;
+        }
+    }
+
+    // Call the function with:
+    // 1. The string to check
+    // 2. A length equal to the string's length plus 2
+    console.log(
+        truncateString(
+            "A-tisket a-tasket A green and yellow basket",
+            "A-tisket a-tasket A green and yellow basket".length + 2
+        )
+    );
+</script>
+
+</html>

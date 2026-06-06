@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Airline Baggage Fee Calculator</title>
+</head>
+
+<body>
+    <h1>The Airline Baggage Fee Calculator</h1>
+</body>
+
+<script>
+    let baggageWeight = 58;
+
+    function calculateBaggageFee(weight) {
+        let baseFee = 25;
+        let extraFee = 0;
+
+        if (weight > 70) {
+            extraFee = 150;
+        } else if (weight > 50) {
+            extraFee = (weight - 50) * 5;
+        } else {
+            extraFee = 0;
+        }
+
+        let totalFee = baseFee + extraFee;
+
+        return "Your total baggage fee is $" + totalFee + ".";
+    }
+
+    let baggageReceipt = calculateBaggageFee(baggageWeight);
+
+    console.log(baggageReceipt);
+</script>
+
+</html>

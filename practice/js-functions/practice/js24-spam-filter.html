@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room Spam Filter Objective</title>
+</head>
+
+<body>
+    <h1>Chat Room Spam Filter Objective</h1>
+</body>
+
+<script>
+    // 1. Declare a global variable to hold the raw input message from the user
+    let userMessage = "Hey check out this new crypto coin!";
+
+    // 2. Define the moderateMessage function that accepts one parameter called 'text'
+    function moderateMessage(text) {
+        // 3. Create a tracking variable 'safeText' and initialize it with the original text
+        let safeText = text;
+
+        // 4. Use the .includes() method to check if the forbidden word "crypto" exists in the text
+        if (text.includes("crypto")) {
+
+            // 5. If "crypto" is found, replace it with "[REDACTED]" and update our tracking variable
+            safeText = safeText.replace("crypto", "[REDACTED]");
+
+            // 6. Return the newly modified, safe version of the text back to where the function was called
+            return safeText;
+
+        } else {
+            // 7. If the forbidden word is NOT found, return the tracking variable completely unchanged
+            return safeText;
+        }
+    }
+
+    // 8. Call the function, pass the global 'userMessage' into it, and save the result in 'moderatedOutput'
+    let moderatedOutput = moderateMessage(userMessage);
+
+    // 9. Print the processed, clean message to the console
+    console.log(moderatedOutput);
+    // Output on screen: "Hey check out this new [REDACTED] coin!"
+</script>
+
+</html>

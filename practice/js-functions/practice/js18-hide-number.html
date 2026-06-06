@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hide a Phone Number</title>
+</head>
+
+<body>
+    <h1>Hide a Phone Number</h1>
+</body>
+
+<script>
+    // Store the phone number we want to hide
+    let phoneNumber = "08147197427";
+
+    // Create a function that accepts a phone number string
+    function hidePhoneNumber(num) {
+
+        // Get the last 4 characters of the phone number
+        // slice(-4) starts 4 characters from the end and returns everything to the end
+        let visibleNumber = num.slice(-4);
+
+        // Calculate how many characters need to be hidden
+        // num.length - 4 gives the number of characters before the last 4
+        // repeat() creates that many "*" characters
+        let repeatNumber = "*".repeat(num.length - 4);
+
+        // Combine the hidden part (stars) with the visible last 4 digits
+        return repeatNumber + visibleNumber;
+    }
+
+    // Call the function and store the returned value
+    let newNumber = hidePhoneNumber(phoneNumber);
+
+    // Print the masked phone number to the console
+    console.log(newNumber);
+</script>
+
+</html>

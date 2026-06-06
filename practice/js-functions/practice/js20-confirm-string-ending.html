@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm the String Ending</title>
+</head>
+
+<body>
+    <h1>Confirm the String Ending</h1>
+</body>
+
+<script>
+    // 1. Global Variables (Our "Input Deck")
+    const currentString = "Kudus";
+    const currentTarget = "s";
+
+    // 2. The Function Architecture
+    function confirmEnding(str, target) {
+        // Determine how many characters we need to chop off the end
+        let targetLength = target.length;
+
+        // Use negative slicing to grab exactly that many characters from the back
+        let extractedEnding = str.slice(-targetLength);
+
+        // 3. The Comparison Gate
+        if (extractedEnding === target) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // 4. Executing the Code
+    const matchResult = confirmEnding(currentString, currentTarget);
+
+    // Output the result
+    console.log(matchResult); // This will log: true
+</script>
+
+</html>

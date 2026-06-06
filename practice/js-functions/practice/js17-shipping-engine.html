@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The E-Commerce Shipping Engine</title>
+</head>
+
+<body>
+    <h1>The E-Commerce Shipping Engine</h1>
+</body>
+
+<script>
+    let orderAmount = 120;
+
+    function calculateShipping(total) {
+        let shippingFee = 0;
+        let baseHandlingFee = 5;
+
+        // 1. Changed to >= so exactly $100 gets free shipping
+        if (total >= 100) {
+            shippingFee = 0;
+            // 2. Changed to >= so exactly $50 gets the $5 rate
+        } else if (total >= 50) {
+            shippingFee = 5;
+            // 3. Changed to a clean 'else' to catch everything under $50
+        } else {
+            shippingFee = 10;
+        }
+
+        let finalCost = baseHandlingFee + shippingFee;
+
+        return "Your total delivery cost is $" + finalCost + ".";
+    }
+
+    let shippingReceipt = calculateShipping(orderAmount);
+
+    console.log(shippingReceipt); // Outputs: "Your total delivery cost is $5."
+</script>
+
+</html>

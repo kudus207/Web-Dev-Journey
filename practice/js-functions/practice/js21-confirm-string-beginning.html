@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm the Beginning</title>
+</head>
+
+<body>
+    <h1>Confirm the Beginning</h1>
+</body>
+
+<script>
+    // Store the string we want to check
+    let fullString = "javascript";
+
+    // Store the string that should appear at the beginning
+    let startWith = "jav";
+
+    // Create a function that checks whether a string starts with a target string
+    function confirmBeginning(str, target) {
+
+        // Get the length of the target string
+        // Example: "jav" has a length of 3
+        let targetLength = target.length;
+
+        // Extract the first 'targetLength' characters from the main string
+        // Example: "javascript".slice(0, 3) returns "jav"
+        let stringStart = str.slice(0, targetLength);
+
+        // Compare the extracted beginning with the target string
+        if (stringStart === target) {
+
+            // If they match, return true
+            return true;
+
+        } else {
+
+            // If they do not match, return false
+            return false;
+        }
+    }
+
+    // Call the function and store the returned result
+    let matchResult = confirmBeginning(fullString, startWith);
+
+    // Print the result to the console
+    console.log(matchResult);
+</script>
+
+</html>

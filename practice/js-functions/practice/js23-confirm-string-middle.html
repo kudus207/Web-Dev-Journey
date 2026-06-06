@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm the Middle</title>
+</head>
+
+<body>
+    <h1>Confirm the Middle</h1>
+</body>
+
+<script>
+    // Store the string we want to search
+    let fullString = "javascript";
+
+    // Store the text we are looking for
+    let targetString = "script";
+
+    // Create a function that checks if the target exists in the string
+    function confirmMiddle(str, target) {
+
+        // Search for the target inside the string
+        // indexOf() returns the position if found, or -1 if not found
+        let foundPosition = str.indexOf(target);
+
+        // Check if the target was found
+        if (foundPosition !== -1) {
+
+            // Target exists in the string
+            return true;
+
+        } else {
+
+            // Target does not exist in the string
+            return false;
+        }
+    }
+
+    // Call the function and store the result
+    let matchResult = confirmMiddle(fullString, targetString);
+
+    // Print the result
+    console.log(matchResult);
+</script>
+
+</html>
