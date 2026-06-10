@@ -1047,3 +1047,431 @@ Arrow functions = shorter function syntax
 Scope controls where variables can be accessed
 let and const follow block scope
 Global variables should be used carefully
+
+
+
+JavaScript Arrays 
+
+A compact study sheet covering array basics, indexing, updates, push/pop/shift/unshift, 1D vs 2D arrays, destructuring, reversing strings with arrays, indexOf, splice, includes, and shallow copies.
+
+1. What Is an Array?
+
+An array is an ordered collection of values stored in a single variable.
+
+Arrays can contain different data types: numbers, strings, booleans, objects, and even other arrays.
+
+2. Zero-Based Indexing & Accessing Elements
+
+Arrays start counting at 0.
+
+Index
+
+	
+
+Value
+
+
+
+
+0
+
+	
+
+apple
+
+
+
+
+1
+
+	
+
+banana
+
+
+
+
+2
+
+	
+
+orange
+
+Accessing a missing index returns undefined.
+
+3. Updating Elements & Adding by Index
+
+Avoid assigning far beyond the current length, or you create empty/undefined slots.
+
+4. Array length Property
+5. Adding/Removing at the Beginning & End
+
+Method
+
+	
+
+Where
+
+	
+
+Action
+
+	
+
+Returns
+
+
+push()	
+
+End
+
+	
+
+Add element(s)
+
+	
+
+New length
+
+
+pop()	
+
+End
+
+	
+
+Remove last element
+
+	
+
+Removed element
+
+
+unshift()	
+
+Beginning
+
+	
+
+Add element(s)
+
+	
+
+New length
+
+
+shift()	
+
+Beginning
+
+	
+
+Remove first element
+
+	
+
+Removed element
+
+const arrays can still be mutated (push/pop/etc.), but you cannot reassign the variable.
+
+6. One-Dimensional vs Two-Dimensional Arrays
+1D Array (single list)
+2D Array (array of arrays / grid)
+
+Use array[row][column] for 2D access.
+
+7. Array Destructuring
+Basic destructuring
+Skipping elements
+Default values
+Rest syntax (...rest)
+
+Rule: ...rest must be the last item in the pattern.
+
+8. Reversing a String with split() + reverse() + join()
+
+Strings are immutable, so convert to an array, reverse, then join.
+
+Remember: split → reverse → join.
+
+9. Finding an Index with indexOf()
+
+indexOf(value, fromIndex) starts searching at fromIndex.
+
+Returns: first matching index, or -1 if not found.
+
+10. Adding/Removing in the Middle with splice()
+
+splice() mutates the original array and returns an array of removed items.
+
+Remove from the middle
+Insert into the middle
+Replace elements
+Remove by value using indexOf() + splice()
+Clear an array
+
+Cheat sheet:
+
+Action
+
+	
+
+Example
+
+
+
+
+Remove 1 item
+
+	splice(i, 1)
+
+
+Insert item
+
+	splice(i, 0, item)
+
+
+Replace item
+
+	splice(i, 1, item)
+
+
+Clear array
+
+	splice(0)
+11. Checking for Existence with includes()
+
+includes(value, fromIndex) starts searching at fromIndex.
+
+Important:
+
+Case-sensitive for strings.
+
+Uses strict equality (===), so 2 and "2" are different.
+
+Difference from indexOf:
+
+Method
+
+	
+
+Returns
+
+	
+
+Purpose
+
+
+includes()	true / false	
+
+Check existence
+
+
+indexOf()	
+
+Index or -1
+
+	
+
+Find position
+
+12. Shallow Copies of Arrays
+
+A shallow copy creates a new outer array, but nested arrays/objects are still shared references.
+
+Common shallow-copy methods
+
+All three create a new top-level array object.
+
+Memory trick: Shallow = surface only — the outer array is copied; nested structures are shared.
+
+13. Common Patterns to Memorize
+
+Task
+
+	
+
+Pattern
+
+
+
+
+Access element
+
+	arr[i]
+
+
+Update element
+
+	arr[i] = value
+
+
+Add to end
+
+	arr.push(value)
+
+
+Remove from end
+
+	arr.pop()
+
+
+Add to start
+
+	arr.unshift(value)
+
+
+Remove from start
+
+	arr.shift()
+
+
+Find index
+
+	arr.indexOf(value)
+
+
+Check existence
+
+	arr.includes(value)
+
+
+Insert/remove in middle
+
+	arr.splice(start, deleteCount, ...items)
+
+
+Shallow copy
+
+	
+
+[...arr] or arr.slice()
+
+
+
+
+Reverse a string
+
+	str.split("").reverse().join("")
+
+
+Destructure array
+
+	const [a, b, ...rest] = arr
+14. Mini Flashcards (Prompt → Answer)
+
+Prompt
+
+	
+
+Answer
+
+
+
+
+What index does the first array element have?
+
+	0
+
+
+What does arr[missingIndex] return?
+
+	undefined
+
+
+Which method adds to the end and returns the new length?
+
+	push()
+
+
+Which method removes the last element and returns it?
+
+	pop()
+
+
+Which method adds to the beginning and returns the new length?
+
+	unshift()
+
+
+Which method removes the first element and returns it?
+
+	shift()
+
+
+What does indexOf() return when a value is not found?
+
+	-1
+
+
+What does includes() return?
+
+	
+
+true or false
+
+
+
+
+Which method can insert, remove, or replace elements anywhere in an array?
+
+	splice()
+
+
+What is the reverse-string one-liner?
+
+	str.split("").reverse().join("")
+
+
+What does const [a, b] = arr do?
+
+	
+
+Array destructuring: assigns the first two elements to a and b.
+
+
+
+
+What is a shallow copy?
+
+	
+
+A new outer array with the same top-level elements; nested arrays/objects remain shared references.
+
+
+
+
+Give one shallow-copy method.
+
+	
+
+[...arr], arr.slice(), or [].concat(arr).
+
+
+
+
+What is the difference between 1D and 2D arrays?
+
+	
+
+1D uses one index (arr[i]); 2D uses row and column indices (arr[r][c]).
+
+
+
+
+Can a const array be mutated?
+
+	
+
+Yes (push/pop/splice/etc.); the variable cannot be reassigned.
+
+Final memory anchors
+
+Arrays start at 0.
+push/pop = end, unshift/shift = beginning.
+indexOf = position, includes = existence.
+splice = cut/insert/replace in the middle.
+Destructuring = unpack array values into variables.
+Reverse string = split → reverse → join.
+Shallow copy copies the outer array, not nested structures.
+2D arrays are arrays of arrays: use array[row][column].
