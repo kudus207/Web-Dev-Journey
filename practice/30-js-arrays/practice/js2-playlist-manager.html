@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist Manager</title>
+</head>
+
+<body>
+    <h1>Build a Playlist Manager</h1>
+</body>
+
+<script>
+    let playlist = [];
+
+    function addTracktToEnd(arr, trackName) {
+        arr.push(trackName);
+        console.log(trackName + " added to the end of the playlist.");
+        return arr;
+    }
+
+    function addTracktToStart(arr, trackName) {
+        arr.unshift(trackName);
+        console.log(trackName + " added to the start of the playlist.");
+        return arr;
+    }
+
+    function removeLastTrack(arr) {
+        let removed = arr.pop();
+        if (removed !== undefined) {
+            console.log(removed + " removed from the end of the playlist.");
+        } else {
+            console.log("No track to remove.");
+        }
+        return arr;
+    }
+
+    function getShuffleTrack(arr) {
+        if (arr.length !== 0) {
+            let randomTrack = Math.floor(Math.random() * arr.length);
+            console.log("Now playing random track: " + arr[randomTrack]);
+        } else {
+            console.log("Playlist is empty.");
+        }
+    }
+
+    function showPlaylist(arr) {
+        if (arr.length !== 0) {
+            console.log("Current Queue: " + arr.join(" -> "));
+        } else {
+            console.log("The playlist is empty.");
+        }
+    }
+
+    console.log(addTracktToEnd(playlist, "Bohemian Rhapsody"));
+
+    console.log(addTracktToStart(playlist, "Stayin' Alive"));
+
+    console.log(showPlaylist(playlist));
+
+    console.log(getShuffleTrack(playlist));
+
+
+
+    // Initialize an empty array to hold the playlist tracks
+    //let playlist = [];
+
+    // Adds a track to the very end of the array
+    //function addTrackToEnd(arr, trackName) {
+        // Push the new track name to the end of the array
+     //   arr.push(trackName);
+        // Log the confirmation message to the console
+     //   console.log(trackName + " added to the end of the playlist.");
+        // Return the updated array as required
+    //    return arr;
+   // }
+
+    // Adds a track to the very beginning of the array
+   // function addTrackToStart(arr, trackName) {
+        // Unshift inserts the new track name at index 0
+     //   arr.unshift(trackName);
+        // Log the confirmation message to the console
+     //   console.log(trackName + " added to the start of the playlist.");
+        // Return the updated array as required
+      //  return arr;
+   // }
+
+    // Removes the last track from the array
+    //function removeLastTrack(arr) {
+        // Pop the last element off the array and store it in 'removed'
+      //  let removed = arr.pop();
+        // If the array wasn't empty, 'removed' will contain the track name (not undefined)
+      //  if (removed !== undefined) {
+       //     console.log(removed + " removed from the end of the playlist.");
+       // } else {
+            // If the array was already empty, log the fallback message
+       //     console.log("No tracks to remove.");
+       // }
+        // Return the updated array after the removal attempt
+      //  return arr;
+   // }
+
+    // Selects and logs a random track from the array without modifying it
+    //function getShuffleTrack(arr) {
+        // Check if the array contains any items before trying to pick one
+     //   if (arr.length !== 0) {
+            // Generate a random valid index between 0 and arr.length - 1
+      //      let randomTrack = Math.floor(Math.random() * arr.length);
+            // Access and log the single track located at that random index
+       //     console.log("Now playing random track: " + arr[randomTrack]);
+      //  } else {
+            // Log the fallback message if the array has a length of 0
+       //     console.log("Playlist is empty.");
+      //  }
+   // }
+
+    // Displays all items currently inside the playlist array
+   // function showPlaylist(arr) {
+        // Verify that the playlist actually has tracks to show
+    //    if (arr.length !== 0) {
+            // Join all elements into a single string separated by an arrow with spaces " -> "
+     //       console.log("Current Queue: " + arr.join(" -> "));
+      //  } else {
+            // Log the fallback message if the array is empty
+       //     console.log("The playlist is empty.");
+      //  }
+   // }
+
+    // --- Test Case Execution ---
+
+    // Add "Bohemian Rhapsody" to the empty playlist and log the returned array
+  //  console.log(addTrackToEnd(playlist, "Bohemian Rhapsody"));
+
+    // Add "Stayin' Alive" to the front of the playlist and log the returned array
+   // console.log(addTrackToStart(playlist, "Stayin' Alive"));
+
+    // Print the current formatted queue layout
+  //  showPlaylist(playlist);
+
+    // Pick and display a random track from the current active queue
+   // getShuffleTrack(playlist);
+</script>
+
+</html>

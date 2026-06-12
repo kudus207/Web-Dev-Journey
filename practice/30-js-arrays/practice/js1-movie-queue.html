@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Queue Manager</title>
+</head>
+
+<body>
+    <h1>Build a Movie Queue Manager</h1>
+</body>
+
+<script>
+    let movies = [];
+
+    function addMovieToEnd(arr, movie) {
+        arr.push(movie);
+        console.log(movie + " added to the end of the watchlist.");
+        return arr;
+    }
+
+    function addMovieToStart(arr, movie) {
+        arr.unshift(movie);
+        console.log(movie + " added to the start of the watchlist.");
+        return arr;
+    }
+
+    function watchLastMovie(arr) {
+        let removed = arr.pop();
+
+        if (removed !== undefined) {
+            console.log(removed + " watched from the end of the watchlist.");
+        } else {
+            console.log("No movies to watch.");
+        }
+
+        return arr;
+    }
+
+    function watchFirstMovie(arr) {
+        let removed = arr.shift();
+
+        if (removed !== undefined) {
+            console.log(removed + " watched from the start of the watchlist.");
+        } else {
+            console.log("No movies to watch.");
+        }
+
+        return arr;
+    }
+
+    function pickRandomMovie(arr) {
+        if (arr.length !== 0) {
+            let randomMovie = Math.floor(Math.random() * arr.length);
+            console.log("Tonight's movie: " + arr[randomMovie]);
+        } else {
+            console.log("No movies available.");
+        }
+    }
+
+    function showWatchlist(arr) {
+        if (arr.length !== 0) {
+            console.log("Watchlist: " + arr.join(", "));
+        } else {
+            console.log("The watchlist is empty.");
+        }
+    }
+
+    console.log(addMovieToEnd(movies, "Avatar"));
+    console.log(addMovieToEnd(movies, "Inception"));
+
+    console.log(addMovieToStart(movies, "Interstellar"));
+
+    console.log(showWatchlist(movies));
+
+    console.log(pickRandomMovie(movies));
+
+    console.log(watchLastMovie(movies));
+
+    console.log(showWatchlist(movies));
+
+
+    // Create an empty array to store movie titles
+    //let movies = [];
+
+    // Function to add a movie to the end of the array
+   // function addMovieToEnd(arr, movie) {
+
+        // Add the movie to the end of the array
+     //   arr.push(movie);
+
+        // Display a message showing what was added
+     //   console.log(movie + " added to the end of the watchlist.");
+
+        // Return the updated array
+    //    return arr;
+   // }
+
+    // Function to add a movie to the beginning of the array
+   // function addMovieToStart(arr, movie) {
+
+        // Add the movie to the start of the array
+     //   arr.unshift(movie);
+
+        // Display a message showing what was added
+     //   console.log(movie + " added to the start of the watchlist.");
+
+        // Return the updated array
+     //   return arr;
+   // }
+
+    // Function to remove the last movie
+   // function watchLastMovie(arr) {
+
+        // Remove the last movie and store it
+     //   let removed = arr.pop();
+
+        // Check whether a movie was actually removed
+     //   if (removed !== undefined) {
+
+            // Display the removed movie
+     //       console.log(removed + " watched from the end of the watchlist.");
+
+    //    } else {
+
+            // The array was empty
+      //      console.log("No movies to watch.");
+     //   }
+
+        // Return the updated array
+    //    return arr;
+   // }
+
+    // Function to remove the first movie
+   // function watchFirstMovie(arr) {
+
+        // Remove the first movie and store it
+    //    let removed = arr.shift();
+
+        // Check whether a movie was actually removed
+     //   if (removed !== undefined) {
+
+            // Display the removed movie
+     //       console.log(removed + " watched from the start of the watchlist.");
+
+    //    } else {
+
+            // The array was empty
+     //       console.log("No movies to watch.");
+    //    }
+
+        // Return the updated array
+    //    return arr;
+   // }
+
+    // Function to pick a random movie
+   // function pickRandomMovie(arr) {
+
+        // Check that the array contains at least one movie
+    //    if (arr.length !== 0) {
+
+            // Generate a random index between 0 and arr.length - 1
+     //       let randomMovie = Math.floor(Math.random() * arr.length);
+
+            // Display the randomly selected movie
+    //        console.log("Tonight's movie: " + arr[randomMovie]);
+
+     //   } else {
+
+            // Array is empty
+    //        console.log("No movies available.");
+    //    }
+   // }
+
+    // Function to display the entire watchlist
+   // function showWatchlist(arr) {
+
+        // Check if the array contains movies
+     //   if (arr.length !== 0) {
+
+            // Convert the array into a comma-separated string
+     //       console.log("Watchlist: " + arr.join(", "));
+
+     //   } else {
+
+            // Array is empty
+      //      console.log("The watchlist is empty.");
+    //    }
+   // }
+</script>
+
+</html>
