@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Code Checker</title>
+</head>
+
+<body>
+    <h1>Build a Secret Code Checker</h1>
+</body>
+
+<script>
+    // Create an array containing the available secret codes
+    let codes = ["alpha", "beta", "gamma"];
+
+    // Function to add a new code to the end of the array
+    function addCode(arr, code) {
+
+        // Add the code to the end of the array
+        arr.push(code);
+
+        // Display a success message
+        console.log(code + " added successfully.");
+
+        // Return the updated array
+        return arr;
+    }
+
+    // Function to remove the last code from the array
+    function removeCode(arr) {
+
+        // Remove the last code and store it
+        let removed = arr.pop();
+
+        // Check if a code was actually removed
+        if (removed !== undefined) {
+
+            // Display the removed code
+            console.log(removed + " removed successfully.");
+
+        } else {
+
+            // The array was empty
+            console.log("No codes available.");
+        }
+
+        // Return the updated array
+        return arr;
+    }
+
+    // Function to check whether a code exists in the array
+    function checkCode(arr, code) {
+
+        // Check if the array contains the code
+        if (arr.includes(code)) {
+
+            // Return a success message
+            return "Access Granted";
+
+        } else {
+
+            // Return a failure message
+            return "Access Denied";
+        }
+    }
+
+    // Function to display a random code
+    function getRandomCode(arr) {
+
+        // Make sure the array contains at least one code
+        if (arr.length !== 0) {
+
+            // Generate a random index from 0 to arr.length - 1
+            let randomCode = Math.floor(Math.random() * arr.length);
+
+            // Display the code found at the random index
+            console.log("Random code: " + arr[randomCode]);
+
+        } else {
+
+            // The array is empty
+            console.log("No codes available.");
+        }
+    }
+
+    // Function to display all stored codes
+    function showCodes(arr) {
+
+        // Check if the array contains any codes
+        if (arr.length !== 0) {
+
+            // Convert the array into a comma-separated string
+            console.log("Available codes: " + arr.join(", "));
+
+        } else {
+
+            // Display a message if there are no codes
+            console.log("No codes stored.");
+        }
+    }
+
+    // Function to determine whether a code is strong or weak
+    function checkLength(code) {
+
+        // Check if the code has 5 or more characters
+        if (code.length >= 5) {
+
+            // Return the strong code message
+            return "Strong Code";
+
+        } else {
+
+            // Return the weak code message
+            return "Weak Code";
+        }
+    }
+
+    // Add a new code to the array
+    console.log(addCode(codes, "delta"));
+
+    // Remove the last code from the array
+    console.log(removeCode(codes));
+
+    // Check if "beta" exists in the array
+    console.log(checkCode(codes, "beta"));
+
+    // Check if "omega" exists in the array
+    console.log(checkCode(codes, "omega"));
+
+    // Display a random code
+    getRandomCode(codes);
+
+    // Display all codes
+    showCodes(codes);
+
+    // Check the strength of "alpha"
+    console.log(checkLength("alpha"));
+
+    // Check the strength of "cat"
+    console.log(checkLength("cat"));
+</script>
+
+</html>

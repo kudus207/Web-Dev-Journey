@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunch Picker Program</title>
+</head>
+
+<body>
+    <h1>Build a Lunch Picker Program</h1>
+</body>
+
+<script>
+    // Create an empty array to store lunch items
+    let lunches = [];
+
+    // Function to add a lunch item to the end of the array
+    function addLunchToEnd(arr, str) {
+
+        // Add the lunch item to the end of the array
+        arr.push(str);
+
+        // Display a message showing what was added
+        console.log(str + " added to the end of the lunch menu.");
+
+        // Return the updated array
+        return arr;
+    }
+
+    // Function to add a lunch item to the beginning of the array
+    function addLunchToStart(arr, str) {
+
+        // Add the lunch item to the start of the array
+        arr.unshift(str);
+
+        // Display a message showing what was added
+        console.log(str + " added to the start of the lunch menu.");
+
+        // Return the updated array
+        return arr;
+    }
+
+    // Function to remove the last lunch item
+    function removeLastLunch(arr) {
+
+        // Remove the last item and store it
+        let removed = arr.pop();
+
+        // Check whether an item was actually removed
+        if (removed !== undefined) {
+
+            // Display the removed item
+            console.log(removed + " removed from the end of the lunch menu.");
+
+        } else {
+
+            // The array was empty
+            console.log("No lunches to remove.");
+        }
+
+        // Return the updated array
+        return arr;
+    }
+
+    // Function to remove the first lunch item
+    function removeFirstLunch(arr) {
+
+        // Remove the first item and store it
+        let removed = arr.shift();
+
+        // Check whether an item was actually removed
+        if (removed !== undefined) {
+
+            // Display the removed item
+            console.log(removed + " removed from the start of the lunch menu.");
+
+        } else {
+
+            // The array was empty
+            console.log("No lunches to remove.");
+        }
+
+        // Return the updated array
+        return arr;
+    }
+
+    // Function to randomly select a lunch item
+    function getRandomLunch(arr) {
+
+        // Check if the array contains any lunch items
+        if (arr.length !== 0) {
+
+            // Generate a random index from 0 to arr.length - 1
+            let randomLunch = Math.floor(Math.random() * arr.length);
+
+            // Display the randomly selected lunch
+            console.log("Randomly selected lunch: " + arr[randomLunch]);
+
+        } else {
+
+            // Display a message if no lunches exist
+            console.log("No lunches available.");
+        }
+    }
+
+    // Function to display all lunch items
+    function showLunchMenu(arr) {
+
+        // Check if the menu contains any lunch items
+        if (arr.length !== 0) {
+
+            // Convert the array into a comma-separated string
+            console.log("Menu items: " + arr.join(", "));
+
+        } else {
+
+            // Display a message if the menu is empty
+            console.log("The menu is empty.");
+        }
+    }
+
+    // Add "Tacos" to the empty lunches array
+    console.log(addLunchToEnd(lunches, "Tacos"));
+
+    // Add "Burger" to the end of a new array
+    console.log(addLunchToEnd(["Pizza", "Tacos"], "Burger"));
+
+    // Add "Sushi" to the start of the lunches array
+    console.log(addLunchToStart(lunches, "Sushi"));
+
+    // Add "Pizza" to the start of a new array
+    console.log(addLunchToStart(["Burger", "Sushi"], "Pizza"));
+
+    // Attempt to remove from an empty array
+    console.log(removeLastLunch([]));
+
+    // Remove the last item ("Toast")
+    console.log(removeLastLunch(["Stew", "Soup", "Toast"]));
+
+    // Remove the last item ("Noodles")
+    console.log(removeLastLunch(["Sushi", "Pizza", "Noodles"]));
+
+    // Attempt to remove the first item from an empty array
+    console.log(removeFirstLunch([]));
+
+    // Remove the first item ("Salad")
+    console.log(removeFirstLunch(["Salad", "Eggs", "Cheese"]));
+
+    // Remove the first item ("Sushi")
+    console.log(removeFirstLunch(["Sushi", "Pizza", "Burger"]));
+
+    // Try selecting a random lunch from an empty array
+    console.log(getRandomLunch([]));
+
+    // Select a random lunch from the lunches array
+    console.log(getRandomLunch(lunches));
+
+    // Display an empty menu
+    console.log(showLunchMenu([]));
+
+    // Display a menu with three items
+    console.log(showLunchMenu(["Greens", "Corns", "Beans"]));
+
+    // Display a menu with four items
+    console.log(showLunchMenu(["Pizza", "Burger", "Fries", "Salad"]));
+</script>
+
+</html>
