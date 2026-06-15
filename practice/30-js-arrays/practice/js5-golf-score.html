@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golf Score Translator</title>
+</head>
+
+<body>
+    <h1>Build a Golf Score Translator</h1>
+</body>
+
+<script>
+    const names = ["Hole-in-one!", "Eagle", "Birdie", "Par", "Bogey", "Double Bogey", "Go Home!"];
+
+
+
+    function golfScore(par, strokes) {
+
+        let score = "";
+
+        if (strokes === 1) {
+
+            score = "Hole-in-one!";
+
+        } else if (strokes <= par - 2) {
+
+            score = "Eagle";
+
+        } else if (strokes === par - 1) {
+
+            score = "Birdie";
+
+        } else if (strokes === par) {
+
+            score = "Par";
+
+        } else if (strokes === par + 1) {
+
+            score = "Bogey";
+
+        } else if (strokes === par + 2) {
+
+            score = "Double Bogey";
+
+        } else if (strokes >= par + 3) {
+
+            score = "Go Home!";
+
+        }
+
+        return score;
+
+    }
+
+
+
+    console.log(golfScore(1, 1));
+
+    console.log(golfScore(3, 1));
+
+    console.log(golfScore(4, 1));
+
+    console.log(golfScore(5, 1));
+
+    console.log(golfScore(4, 2));
+
+    console.log(golfScore(5, 2));
+
+    console.log(golfScore(3, 2));
+
+    console.log(golfScore(4, 3));
+
+    console.log(golfScore(5, 4));
+
+    console.log(golfScore(3, 3));
+
+    console.log(golfScore(4, 4));
+
+    console.log(golfScore(5, 5));
+
+    console.log(golfScore(3, 4));
+
+    console.log(golfScore(4, 5));
+
+    console.log(golfScore(5, 6));
+
+    console.log(golfScore(3, 5));
+
+    console.log(golfScore(4, 6));
+
+    console.log(golfScore(5, 7));
+
+    console.log(golfScore(3, 7));
+
+    console.log(golfScore(4, 8));
+
+    console.log(golfScore(5, 9));
+
+
+    // Array containing all possible golf score names.
+    // The challenge provides this array, although your function
+    // currently returns the strings directly instead of using it.
+   // const names = [
+    //    "Hole-in-one!",
+     //   "Eagle",
+    //    "Birdie",
+    //    "Par",
+    //    "Bogey",
+    //    "Double Bogey",
+    //    "Go Home!"
+    //];
+
+    // Function that determines the golf score name
+    // based on the hole's par value and the player's strokes.
+   // function golfScore(par, strokes) {
+
+        // Variable to store the final score description.
+     //   let score = "";
+
+        // If the player gets the ball into the hole in 1 stroke,
+        // it's always a Hole-in-one!
+     //   if (strokes === 1) {
+
+     //       score = "Hole-in-one!";
+
+            // If the player uses 2 or more strokes fewer than par,
+            // it's called an Eagle.
+     //   } else if (strokes <= par - 2) {
+
+     //       score = "Eagle";
+
+            // If the player uses exactly 1 stroke fewer than par,
+            // it's called a Birdie.
+      //  } else if (strokes === par - 1) {
+
+      //      score = "Birdie";
+
+            // If the player matches par exactly,
+            // it's called a Par.
+    //    } else if (strokes === par) {
+
+       //     score = "Par";
+
+            // If the player uses 1 stroke more than par,
+            // it's called a Bogey.
+    //    } else if (strokes === par + 1) {
+//
+            score = "Bogey";
+
+            // If the player uses 2 strokes more than par,
+            // it's called a Double Bogey.
+     //   } else if (strokes === par + 2) {
+
+      //      score = "Double Bogey";
+
+            // If the player uses 3 or more strokes above par,
+            // it's called Go Home!
+     //   } else if (strokes >= par + 3) {
+
+     //       score = "Go Home!";
+
+     //   }
+
+        // Return the score description.
+    //    return score;
+   // }
+
+    // Test cases:
+
+    // Par 1, 1 stroke → Hole-in-one!
+   // console.log(golfScore(1, 1));
+
+    // Par 3, 1 stroke → Hole-in-one!
+   // console.log(golfScore(3, 1));
+
+    // Par 4, 1 stroke → Hole-in-one!
+  //  console.log(golfScore(4, 1));
+
+    // Par 5, 1 stroke → Hole-in-one!
+  //  console.log(golfScore(5, 1));
+
+    // Par 4, 2 strokes → Eagle
+  //  console.log(golfScore(4, 2));
+
+    // Par 5, 2 strokes → Eagle
+  //  console.log(golfScore(5, 2));
+
+    // Par 3, 2 strokes → Birdie
+  //  console.log(golfScore(3, 2));
+
+    // Par 4, 3 strokes → Birdie
+  //  console.log(golfScore(4, 3));
+
+    // Par 5, 4 strokes → Birdie
+   // console.log(golfScore(5, 4));
+
+    // Par 3, 3 strokes → Par
+   // console.log(golfScore(3, 3));
+
+    // Par 4, 4 strokes → Par
+  //  console.log(golfScore(4, 4));
+
+    // Par 5, 5 strokes → Par
+  //  console.log(golfScore(5, 5));
+
+    // Par 3, 4 strokes → Bogey
+   // console.log(golfScore(3, 4));
+
+    // Par 4, 5 strokes → Bogey
+  //  console.log(golfScore(4, 5));
+
+    // Par 5, 6 strokes → Bogey
+  //  console.log(golfScore(5, 6));
+
+    // Par 3, 5 strokes → Double Bogey
+  //  console.log(golfScore(3, 5));
+
+    // Par 4, 6 strokes → Double Bogey
+   // console.log(golfScore(4, 6));
+
+    // Par 5, 7 strokes → Double Bogey
+   // console.log(golfScore(5, 7));
+
+    // Par 3, 7 strokes → Go Home!
+   // console.log(golfScore(3, 7));
+
+    // Par 4, 8 strokes → Go Home!
+   // console.log(golfScore(4, 8));
+
+    // Par 5, 9 strokes → Go Home!
+  //  console.log(golfScore(5, 9));
+</script>
+</html>
