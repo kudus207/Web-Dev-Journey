@@ -1475,3 +1475,208 @@ Destructuring = unpack array values into variables.
 Reverse string = split → reverse → join.
 Shallow copy copies the outer array, not nested structures.
 2D arrays are arrays of arrays: use array[row][column].
+
+
+JavaScript Objects & JSON Summary Notes
+1. Objects
+An object stores related data as key-value pairs.
+Create an object using object literal syntax:
+const person = {
+  name: "Alice",
+  age: 30
+};
+2. Accessing Object Properties
+Dot Notation
+
+Use when the property name is a valid identifier.
+
+person.name
+Bracket Notation
+
+Use when:
+
+Property names contain spaces or special characters.
+Property names are stored in variables.
+person["name"]
+
+let key = "age";
+person[key];
+3. Adding, Updating & Removing Properties
+Add
+person.job = "Engineer";
+Update
+person.age = 31;
+Delete
+delete person.job;
+4. Checking if a Property Exists
+Object.hasOwn(person, "name");   // Recommended
+person.hasOwnProperty("name");
+"name" in person;
+person.name !== undefined; // Less reliable
+5. Nested Objects & Arrays
+
+Access nested properties by chaining.
+
+person.contact.phone.work
+
+Access arrays inside objects.
+
+person.addresses[1].city
+6. Primitive vs Non-Primitive Data Types
+Primitive Types
+Number
+BigInt
+String
+Boolean
+Null
+Undefined
+Symbol
+
+✔ Copied by value
+
+let a = 5;
+let b = a;
+a = 10;
+
+console.log(b); // 5
+Non-Primitive Types
+Objects
+Arrays
+Functions
+
+✔ Copied by reference
+
+const obj1 = { age: 20 };
+const obj2 = obj1;
+
+obj1.age = 21;
+
+console.log(obj2.age); // 21
+7. Functions vs Object Methods
+Function
+function greet(name) {
+  return "Hello " + name;
+}
+Method
+const person = {
+  name: "Bob",
+  sayHello() {
+    return "Hello " + this.name;
+  }
+};
+Functions are standalone.
+Methods belong to objects.
+Methods use this to access object properties.
+8. Object() Constructor
+
+Creates or converts values into objects.
+
+new Object();
+
+Object(42);
+
+Usually prefer object literals:
+
+const obj = {};
+9. JSON (JavaScript Object Notation)
+
+JSON is a text format for storing and exchanging data.
+
+{
+  "name": "Alice",
+  "age": 30
+}
+
+Rules:
+
+Keys must use double quotes.
+Supports strings, numbers, booleans, arrays, objects, and null.
+10. JSON Methods
+JSON.stringify()
+
+Converts an object into a JSON string.
+
+const json = JSON.stringify(person);
+JSON.parse()
+
+Converts a JSON string into an object.
+
+const obj = JSON.parse(json);
+11. Optional Chaining (?.)
+
+Safely accesses nested properties.
+
+user?.profile?.address?.street
+
+If any value is null or undefined, it returns undefined instead of throwing an error.
+
+Works with:
+
+Objects
+Arrays (arr?.[0])
+Functions (obj.method?.())
+12. Object Destructuring
+
+Extract object properties into variables.
+
+const { name, age } = person;
+
+Rename variables:
+
+const { name: personName } = person;
+
+Default values:
+
+const { country = "Unknown" } = person;
+
+Nested destructuring:
+
+const {
+  contact: { email }
+} = person;
+13. Object Shorthand
+
+When variable names match property names:
+
+let name = "Bob";
+let age = 25;
+
+const person = { name, age };
+
+Instead of:
+
+const person = {
+  name: name,
+  age: age
+};
+Quick Comparison Tables
+Dot vs Bracket Notation
+Dot (.)	Bracket ([])
+Easier to read	More flexible
+Valid identifiers only	Works with spaces & variables
+Primitive vs Non-Primitive
+Primitive	Non-Primitive
+Copied by value	Copied by reference
+Immutable	Mutable
+Independent copies	Shared references
+Function vs Method
+Function	Method
+Standalone	Inside an object
+Called directly	Called with object.method()
+No object context	Uses this
+JSON Methods
+Method	Purpose
+JSON.stringify()	Object → JSON string
+JSON.parse()	JSON string → Object
+Key Takeaways
+Objects store data as key-value pairs.
+Use dot notation for simple property names and bracket notation for dynamic or spaced keys.
+Use Object.hasOwn() to check if a property exists.
+Primitive values are copied by value; objects are copied by reference.
+Methods are functions that belong to objects and use this.
+Prefer object literals ({}) over new Object().
+JSON is used to exchange data between applications.
+JSON.stringify() converts objects to JSON strings; JSON.parse() converts JSON strings back to objects.
+Optional chaining (?.) safely accesses nested properties.
+Object destructuring makes extracting properties cleaner and more concise.
+Object shorthand simplifies object creation when variable and property names match.
