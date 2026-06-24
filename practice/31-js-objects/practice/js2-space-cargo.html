@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Cargo Manifest Validator</title>
+</head>
+
+<body>
+    <h1>Build a Space Cargo Manifest Validator</h1>
+</body>
+
+<script>
+    const cargoManifest = {
+        payloadId: 101,
+        launchPad: "Cape Canaveral, FL, USA",
+        velocity: 2500,
+        speedUnit: "mph",
+        pressurized: true
+    }
+
+    function normalizeVelocity(manifest) {
+        const manifestCopy = { ...manifest };
+
+        if (manifestCopy.speedUnit === "mph") {
+            manifestCopy.velocity *= 0.44;
+            manifestCopy.speedUnit = "mps"
+        }
+
+        return manifestCopy;
+    }
+
+    function validateSpaceManifest(manifest) {
+        const errors = {};
+
+        if (manifest.payloadId === undefined) {
+            errors.payloadId = "Missing";
+        } else if (typeof manifest.payloadId !== "number" || Number.isNaN(manifest.payloadId) || !Number.isInteger(manifest.payloadId) || manifest.payloadId <= 0) {
+            errors.payloadId = "Invalid";
+        }
+
+        if (manifest.launchPad === undefined) {
+            errors.launchPad = "Missing";
+        } else if (typeof manifest.launchPad !== "string" || manifest.launchPad.trim().length === 0) {
+            errors.launchPad = "Invalid";
+        }
+
+        if (manifest.velocity === undefined) {
+            errors.velocity = "Missing";
+        } else if (typeof manifest.velocity !== "number" || Number.isNaN(manifest.velocity) || manifest.velocity <= 0) {
+            errors.velocity = "Invalid";
+        }
+
+        if (manifest.speedUnit === undefined) {
+            errors.speedUnit = "Missing";
+        } else if (manifest.speedUnit !== "mps" && manifest.speedUnit !== "mph") {
+            errors.speedUnit = "Invalid";
+        }
+
+        if (manifest.pressurized === undefined) {
+            errors.pressurized = "Missing";
+        } else if (typeof manifest.pressurized !== "boolean") {
+            errors.pressurized = "Invalid";
+        }
+
+        return errors;
+    }
+
+    function processSpaceManifest(manifest) {
+        const validationErrors = validateSpaceManifest(manifest);
+
+        if (Object.keys(validationErrors).length === 0) {
+            const normalVelocity = normalizeVelocity(manifest);
+
+            console.log(`Validation success: ${manifest.payloadId}`);
+            console.log(`Total velocity ${normalVelocity.velocity} mps`);
+        } else {
+            console.log(`Validation error: ${manifest.payloadId}`);
+            console.log(validationErrors);
+        }
+    }
+
+    console.log(normalizeVelocity({ payloadId: 45, launchPad: "Baikonur", velocity: 100, speedUnit: "mph", pressurized: false }));
+
+    console.log(validateSpaceManifest({}));
+    console.log(validateSpaceManifest({ payloadId: 12.5, launchPad: "   ", velocity: -10, speedUnit: "kmh", pressurized: "yes" }));
+    console.log(validateSpaceManifest({ payloadId: null, velocity: NaN }));
+    console.log(validateSpaceManifest({
+        payloadId: 101,
+        launchPad: "Cape Canaveral, FL, USA",
+        velocity: 2500,
+        speedUnit: "mph",
+        pressurized: true
+    }));
+
+    processSpaceManifest({ payloadId: 88, launchPad: "Vandenberg", velocity: 500, speedUnit: "mph", pressurized: true });
+
+    processSpaceManifest({ launchPad: "Kennedy Space Center", pressurized: false });
+
+
+    // Sample valid manifest object used for testing
+   // const cargoManifest = {
+    //    payloadId: 101,
+    //    launchPad: "Cape Canaveral, FL, USA",
+     //   velocity: 2500,
+     //   speedUnit: "mph",
+     //   pressurized: true
+   // };
+
+    /**
+     * Normalizes velocity to meters per second (mps) without mutating the original object.
+     * @param {Object} manifest - The original space cargo manifest.
+     * @returns {Object} A brand-new normalized manifest copy.
+     */
+    //function normalizeVelocity(manifest) {
+        // 1. Defensively clone the object using the spread operator to preserve immutability
+       // const manifestCopy = { ...manifest };
+
+        // 2. Convert only if the speed is currently tracked in miles per hour
+      //  if (manifestCopy.speedUnit === "mph") {
+       //     manifestCopy.velocity *= 0.44; // Short for: velocity = velocity * 0.44
+        //    manifestCopy.speedUnit = "mps"; // Explicitly update unit indicator string
+       // }
+
+        // 3. Return the modified copy, leaving the original input untouched in memory
+      //  return manifestCopy;
+    //}
+
+    /**
+     * Validates the safety and structural integrity of a manifest object.
+     * @param {Object} manifest - The manifest to inspect.
+     * @returns {Object} An error object containing caught issues, or an empty object {} if valid.
+     */
+    //function validateSpaceManifest(manifest) {
+       // const errors = {};
+
+        // --- 1. Payload ID Validation ---
+       // if (manifest.payloadId === undefined) {
+       //     errors.payloadId = "Missing"; // Property doesn't exist
+       // } else if (
+         //   typeof manifest.payloadId !== "number" ||   // Must be a number type
+         //   Number.isNaN(manifest.payloadId) ||         // Must not be a corrupt NaN /value
+          //  !Number.isInteger(manifest.payloadId) ||    // Must be a clean whole number (no decimals like 3.5)
+          //  manifest.payloadId <= 0                     // Must be strictly greater than zero
+       // ) {
+        //    errors.payloadId = "Invalid";
+       // }
+
+        // --- 2. Launch Pad Validation ---
+       // if (manifest.launchPad === undefined) {
+        //    errors.launchPad = "Missing";
+       // } else if (
+        //    typeof manifest.launchPad !== "string" ||    // Must be textual data
+        //    manifest.launchPad.trim().length === 0       // Must not be empty or purely empty whitespace ("   ")
+       // ) {
+         //   errors.launchPad = "Invalid";
+       // }
+
+        // --- 3. Velocity Validation ---
+       // if (manifest.velocity === undefined) {
+        //    errors.velocity = "Missing";
+       // } else if (
+         //   typeof manifest.velocity !== "number" ||     // Must be a number type
+         //   Number.isNaN(manifest.velocity) ||           // Must not be NaN
+         //   manifest.velocity <= 0                       // FIXED: Must be a positive velocity speed value
+       // ) {
+        //    errors.velocity = "Invalid";
+       // }
+
+        // --- 4. Speed Unit Validation ---
+       // if (manifest.speedUnit === undefined) {
+        //    errors.speedUnit = "Missing";
+       // } else if (
+        //    manifest.speedUnit !== "mps" &&              // Logical AND: Flags an error if the string
+        //    manifest.speedUnit !== "mph"                 // is neither "mps" AND nor "mph" at the same time
+       // ) {
+        //    errors.speedUnit = "Invalid";
+       // }
+
+        // --- 5. Pressurized Atmosphere Validation ---
+       // if (manifest.pressurized === undefined) {
+       //     errors.pressurized = "Missing";
+       // } else if (typeof manifest.pressurized !== "boolean") { // Explicitly rejects truthy/falsy strings like "yes"/"no"
+       //     errors.pressurized = "Invalid";
+       // }
+
+        // Returns empty object {} if all checks passed, otherwise contains entries like { velocity: "Invalid" }
+      //  return errors;
+   // }
+
+    /**
+     * Orchestrates the validation and logging pipeline for space flight records.
+     * @param {Object} manifest - The flight cargo sheet object.
+     */
+    //function processSpaceManifest(manifest) {
+        // Capture errors by executing the validator function
+      //  const validationErrors = validateSpaceManifest(manifest);
+
+        // Check if the validation error tracking object has exactly 0 keys
+      //  if (Object.keys(validationErrors).length === 0) {
+            // SUCCESS PATH: Clean data is safely normalized
+       //     const normalVelocity = normalizeVelocity(manifest);
+
+         //   console.log(`Validation success: ${manifest.payloadId}`);
+         //   console.log(`Total velocity ${normalVelocity.velocity} mps`);
+      //  } else {
+            // ERROR PATH: Faulty data is intercepted and logged along with the error log object
+        //    console.log(`Validation error: ${manifest.payloadId}`);
+         //   console.log(validationErrors);
+       // }
+   // }
+
+    // ==========================================
+    // TEST EXECUTIONS
+    // ==========================================
+
+   // console.log("--- Normalization Test ---");
+   // console.log(normalizeVelocity({ payloadId: 45, launchPad: "Baikonur", velocity: 100, //speedUnit: "mph", pressurized: false }));
+
+   // console.log("\n--- Structural Validation Tests ---");
+   // console.log(validateSpaceManifest({})); // Expected: All fields "Missing"
+   // console.log(validateSpaceManifest({ payloadId: 12.5, launchPad: "   ", velocity: -10, //speedUnit: "kmh", pressurized: "yes" })); // Expected: All fields "Invalid"
+   // console.log(validateSpaceManifest({ payloadId: null, velocity: NaN })); // Expected: Mixed Missing & Invalid entries
+   // console.log(validateSpaceManifest(cargoManifest)); // Expected: Empty Object {} (Valid)
+
+   // console.log("\n--- Orchestration Runner Process Tests ---");
+    // Valid Run Output
+  //  processSpaceManifest({ payloadId: 88, launchPad: "Vandenberg", velocity: 500, //speedUnit: "mph", pressurized: true });
+
+    // Faulty/Missing ID Run Output
+  //  processSpaceManifest({ launchPad: "Kennedy Space Center", pressurized: false });
+</script>
+
+</html>

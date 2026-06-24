@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Record Validator</title>
+</head>
+
+<body>
+    <h1>Build a Student Record Validator</h1>
+</body>
+
+<script>
+    const studentRecord = {
+        studentId: 101,
+        name: "Olaniyi Kudus",
+        age: 25,
+        grade: 92,
+        graduated: false
+    }
+
+    function normalizeGrade(student) {
+        const studentRecordCopy = { ...student }
+
+        if (studentRecordCopy.grade > 100) {
+            studentRecordCopy.grade = 100;
+        } else if (studentRecordCopy.grade < 0) {
+            studentRecordCopy.grade = 0;
+        }
+        return studentRecordCopy;
+    }
+
+    function validateStudent(student) {
+        const errors = {};
+
+        if (student.studentId === undefined) {
+            errors.studentId = "Missing";
+        } else if (typeof student.studentId !== "number" || Number.isNaN(student.studentId) || !Number.isInteger(student.studentId) || student.studentId <= 0) {
+            errors.studentId = "Invalid";
+        }
+
+        if (student.name === undefined) {
+            errors.name = "Missing";
+        } else if (typeof student.name !== "string" || student.name.trim().length === 0) {
+            errors.name = "Invalid";
+        }
+
+        if (student.age === undefined) {
+            errors.age = "Missing";
+        } else if (typeof student.age !== "number" || Number.isNaN(student.age) || !Number.isInteger(student.age) || student.age <= 0) {
+            errors.age = "Invalid";
+        }
+
+        if (student.grade === undefined) {
+            errors.grade = "Missing";
+        } else if (typeof student.grade !== "number" || Number.isNaN(student.grade)) {
+            errors.grade = "Invalid";
+        }
+
+        if (student.graduated === undefined) {
+            errors.graduated = "Missing";
+        } else if (typeof student.graduated !== "boolean") {
+            errors.graduated = "Invalid";
+        }
+
+        return errors;
+    }
+
+    function processStudent(student) {
+        const validationResult = validateStudent(student);
+
+        if (Object.keys(validationResult).length === 0) {
+            const normalizedStudent = normalizeGrade(student);
+
+            console.log(`Validate success: ${student.studentId}`);
+            console.log(`Total grade: ${normalizedStudent.grade}`);
+        } else {
+            console.log(`Validate error: ${student.studentId}`);
+            console.log(validationResult);
+        }
+    }
+
+    // console.log(normalizeGrade({
+    //   studentId: 4,
+    //   name: "Alice",
+    //   age: 17,
+    //   grade: 120,
+    //   graduated: false
+    // }));
+
+    // console.log(Number.isNaN(NaN));
+    // console.log(!Number.isInteger(10));
+
+    // console.log(validateStudent({
+    //     studentId: 2,
+    //     name: "olaniyi",
+    //     age: 24,
+    //     grade: 92,
+    //     graduated: false
+    // }));
+
+    processStudent({
+        studentId: 15,
+        name: "Mary",
+        age: 20,
+        grade: 107,
+        graduated: false
+    });
+
+    processStudent({
+        studentId: -2,
+        name: "Mary",
+        age: 20,
+        grade: 85
+    });
+
+
+    // // ===============================
+// // Student Object
+// // ===============================
+
+// // This is a JavaScript object that stores information about a student.
+// // Objects store data as key-value pairs.
+
+// const studentRecord = {
+//   studentId: 101,
+//   name: "Olaniyi Kudus",
+//   age: 25,
+//   grade: 92,
+//   graduated: false
+// };
+
+// // ====================================================
+// // normalizeGrade(student)
+// // ====================================================
+
+// // Purpose:
+// // Returns a NEW copy of the student object.
+// // If the student's grade is above 100, set it to 100.
+// // If the grade is below 0, set it to 0.
+// // The original object should NEVER be modified.
+
+// function normalizeGrade(student) {
+
+//   // Create a shallow copy of the object.
+//   // The spread operator (...) copies all properties into a new object.
+//   //
+//   // Syntax:
+//   // const copy = { ...originalObject };
+//   //
+//   // Why?
+//   // We don't want to change the original object.
+//   const studentRecordCopy = { ...student };
+
+//   // Check if the grade is greater than 100.
+//   if (studentRecordCopy.grade > 100) {
+
+//     // If true, replace the grade with 100.
+//     studentRecordCopy.grade = 100;
+
+//   // Otherwise, check if the grade is less than 0.
+//   } else if (studentRecordCopy.grade < 0) {
+
+//     // If true, replace the grade with 0.
+//     studentRecordCopy.grade = 0;
+//   }
+
+//   // Return the copied object.
+//   // The original object remains unchanged.
+//   return studentRecordCopy;
+// }
+
+// // ====================================================
+// // validateStudent(student)
+// // ====================================================
+
+// // Purpose:
+// // Validate every property of the student object.
+// //
+// // If everything is valid:
+// // Return {}
+// //
+// // If something is wrong:
+// // Return an object describing the errors.
+// //
+// // Example:
+// //
+// // {
+// //     age: "Invalid",
+// //     graduated: "Missing"
+// // }
+
+// function validateStudent(student) {
+
+//   // Create an empty object.
+//   // Every validation error will be stored here.
+//   const errors = {};
+
+//   // ====================================================
+//   // Validate studentId
+//   // ====================================================
+
+//   // Check whether the property exists.
+//   if (student.studentId === undefined) {
+
+//     // Property doesn't exist.
+//     errors.studentId = "Missing";
+
+//   } else if (
+
+//     // Property exists.
+//     // Now check whether it is valid.
+
+//     typeof student.studentId !== "number" ||      // Must be a number.
+//     Number.isNaN(student.studentId) ||            // Cannot be NaN.
+//     !Number.isInteger(student.studentId) ||       // Must be an integer.
+//     student.studentId <= 0                        // Must be greater than zero.
+
+//   ) {
+
+//     errors.studentId = "Invalid";
+//   }
+
+//   // ====================================================
+//   // Validate name
+//   // ====================================================
+
+//   if (student.name === undefined) {
+
+//     errors.name = "Missing";
+
+//   } else if (
+
+//     typeof student.name !== "string" ||
+
+//     // trim() removes spaces from the beginning and end.
+//     // "    ".trim() becomes ""
+//     student.name.trim().length === 0
+
+//   ) {
+
+//     errors.name = "Invalid";
+//   }
+
+//   // ====================================================
+//   // Validate age
+//   // ====================================================
+
+//   if (student.age === undefined) {
+
+//     errors.age = "Missing";
+
+//   } else if (
+
+//     typeof student.age !== "number" ||
+//     Number.isNaN(student.age) ||
+//     !Number.isInteger(student.age) ||
+//     student.age <= 0
+
+//   ) {
+
+//     errors.age = "Invalid";
+//   }
+
+//   // ====================================================
+//   // Validate grade
+//   // ====================================================
+
+//   if (student.grade === undefined) {
+
+//     errors.grade = "Missing";
+
+//   } else if (
+
+//     typeof student.grade !== "number" ||
+//     Number.isNaN(student.grade)
+
+//   ) {
+
+//     errors.grade = "Invalid";
+//   }
+
+//   // ====================================================
+//   // Validate graduated
+//   // ====================================================
+
+//   if (student.graduated === undefined) {
+
+//     errors.graduated = "Missing";
+
+//   } else if (
+
+//     // Boolean means only:
+//     // true
+//     // false
+//     typeof student.graduated !== "boolean"
+
+//   ) {
+
+//     errors.graduated = "Invalid";
+//   }
+
+//   // Return every error found.
+//   // If there are no errors, this returns {}.
+//   return errors;
+// }
+
+// // ====================================================
+// // processStudent(student)
+// // ====================================================
+
+// // Purpose:
+// //
+// // This function is the "manager."
+// //
+// // It doesn't validate the student itself.
+// // It doesn't normalize the grade itself.
+// //
+// // Instead, it CALLS the other functions.
+// //
+// // Flow:
+// //
+// // student
+// //    │
+// //    ▼
+// // validateStudent()
+// //    │
+// //    ▼
+// // Any errors?
+// //   │
+// // ┌─┴─────┐
+// // │       │
+// // Yes     No
+// // │       │
+// // ▼       ▼
+// // Print   normalizeGrade()
+// // Errors       │
+// //              ▼
+// //         Print Grade
+
+// function processStudent(student) {
+
+//   // Call the validation function.
+//   // Save the returned object.
+//   const validate = validateStudent(student);
+
+//   // Object.keys(object)
+//   //
+//   // Returns an array containing all property names.
+//   //
+//   // Example:
+//   //
+//   // {
+//   //   age: "Invalid"
+//   // }
+//   //
+//   // becomes
+//   //
+//   // ["age"]
+//   //
+//   // If length is zero,
+//   // there are no errors.
+
+//   if (Object.keys(validate).length === 0) {
+
+//     // Student is valid.
+
+//     // Normalize the student's grade.
+//     // This returns a NEW object.
+//     const normalize = normalizeGrade(student);
+
+//     // Print success message.
+//     console.log(`Validate success: ${student.studentId}`);
+
+//     // Print the normalized grade.
+//     console.log(`Total grade: ${normalize.grade}`);
+
+//   } else {
+
+//     // Student is invalid.
+
+//     // Print error message.
+//     console.log(`Validate error: ${student.studentId}`);
+
+//     // Print the validation object.
+//     console.log(validate);
+//   }
+// }
+
+// ====================================================
+// Test normalizeGrade()
+// ====================================================
+
+// console.log(normalizeGrade({
+//   studentId: 4,
+//   name: "Alice",
+//   age: 17,
+//   grade: 120,
+//   graduated: false
+// }));
+
+// Expected:
+//
+// {
+//   studentId: 4,
+//   name: "Alice",
+//   age: 17,
+//   grade: 100,
+//   graduated: false
+// }
+
+// ====================================================
+// Test JavaScript Number Methods
+// ====================================================
+
+// Number.isNaN(NaN)
+// Returns true only if the value is NaN.
+
+// console.log(Number.isNaN(NaN));
+
+// Number.isInteger(number)
+// Returns true only if the number is an integer.
+
+// console.log(!Number.isInteger(10));
+
+// ====================================================
+// Test validateStudent()
+// ====================================================
+
+// console.log(validateStudent({
+//     studentId: 2,
+//     name: "olaniyi",
+//     age: 24,
+//     grade: 92,
+//     graduated: false
+// }));
+
+// Expected:
+//
+// {}
+
+// ====================================================
+// Test processStudent()
+// ====================================================
+
+// Valid student.
+// Grade is normalized from 107 to 100.
+
+// processStudent({
+//     studentId: 15,
+//     name: "Mary",
+//     age: 20,
+//     grade: 107,
+//     graduated: false
+// });
+
+// Expected:
+//
+// Validate success: 15
+// Total grade: 100
+
+// ----------------------------------------------------
+
+// Invalid student.
+//
+// studentId is invalid because it's negative.
+// graduated is missing.
+
+// processStudent({
+//     studentId: -2,
+//     name: "Mary",
+//     age: 20,
+//     grade: 85
+// });
+
+// Expected:
+//
+// Validate error: -2
+//
+// {
+//   studentId: "Invalid",
+//   graduated: "Missing"
+// }
+</script>
+
+</html>
