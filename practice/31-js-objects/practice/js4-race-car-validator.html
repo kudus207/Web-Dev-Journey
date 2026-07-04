@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Race Car Performance Validator</title>
+</head>
+
+<body>
+    <h1>Build a Race Car Performance Validator</h1>
+</body>
+
+<script>
+    const carInfo = {
+        carNumber: 44,
+        driverCode: "HAM",
+        topSpeed: 200.5,
+        speedUnit: "mph",
+        drsActive: true
+    };
+
+    function normalizeTelemetry(telemetry) {
+        const carInfoCopy = { ...telemetry };
+
+        if (carInfoCopy.speedUnit === "mph") {
+            const speedCalC = carInfoCopy.topSpeed * 1.60934;
+            const rounded = Math.round(speedCalC);
+            carInfoCopy.topSpeed = rounded;
+            carInfoCopy.speedUnit = "kph";
+        }
+        return carInfoCopy;
+    }
+
+    function validateTelemetry(telemetry) {
+        const errors = {};
+
+        if (telemetry.carNumber === undefined) {
+            errors.carNumber = "Missing";
+        } else if (typeof (telemetry.carNumber) !== "number" || Number.isNaN(telemetry.carNumber) || !Number.isInteger(telemetry.carNumber) || telemetry.carNumber <= 0) {
+            errors.carNumber = "Invalid";
+        }
+
+        if (telemetry.driverCode === undefined) {
+            errors.driverCode = "Missing";
+        } else if (typeof (telemetry.driverCode) !== "string" || telemetry.driverCode.trim().length !== 3 || telemetry.driverCode !== telemetry.driverCode.toUpperCase()) {
+            errors.driverCode = "Invalid";
+        }
+
+        if (telemetry.topSpeed === undefined) {
+            errors.topSpeed = "Missing";
+        } else if (typeof (telemetry.topSpeed) !== "number" || Number.isNaN(telemetry.topSpeed) || telemetry.topSpeed <= 0) {
+            errors.topSpeed = "Invalid";
+        }
+
+        if (telemetry.speedUnit === undefined) {
+            errors.speedUnit = "Missing";
+        } else if (telemetry.speedUnit !== "kph" && telemetry.speedUnit !== "mph") {
+            errors.speedUnit = "Invalid";
+        }
+
+        if (telemetry.drsActive === undefined) {
+            errors.drsActive = "Missing";
+        } else if (typeof (telemetry.drsActive) !== "boolean") {
+            errors.drsActive = "Invalid";
+        }
+
+        return errors;
+    }
+
+    function processTelemetry(telemetry) {
+        const errors = validateTelemetry(telemetry);
+
+        if (Object.keys(errors).length === 0) {
+            const normalizedSpeed = normalizeTelemetry(telemetry);
+
+            console.log(`Validation success: Car ${telemetry.carNumber}`);
+            console.log(`Top Speed: ${normalizedSpeed.topSpeed} kph`);
+        } else {
+            console.log(`Validation error: Car ${telemetry.carNumber}`);
+            console.log(errors);
+        }
+    }
+
+    console.log(normalizeTelemetry({
+        carNumber: 44,
+        driverCode: "HAM",
+        topSpeed: 200.5,
+        speedUnit: "mph",
+        drsActive: true
+    }));
+
+    console.log(validateTelemetry({
+        carNumber: 24,
+        driverCode: "LEC",
+        topSpeed: 200.5,
+        speedUnit: "mph",
+        drsActive: true
+    }));
+
+    processTelemetry({
+        carNumber: 24,
+        driverCode: "LEC",
+        topSpeed: 400.5,
+        speedUnit: "mph",
+        drsActive: true
+    });
+
+    processTelemetry({
+        carNumber: -24,
+        driverCode: "EC",
+        topSpeed: 200.5,
+        speedUnit: "mph",
+        drsActive: true
+    });
+</script>
+
+</html>

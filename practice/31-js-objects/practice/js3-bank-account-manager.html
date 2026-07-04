@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Account Manager</title>
+</head>
+
+<body>
+    <h1>Build a Bank Account Manager</h1>
+</body>
+
+<script>
+    const accountInfo = {
+        accountNumber: 1001,
+        owner: "Olaniyi Kudus",
+        balance: 3500,
+        accountType: "Savings",
+        isActive: true
+    }
+
+    function normalizeBalance(account) {
+        const accountCopy = { ...account };
+
+        if (accountCopy.balance < 0) {
+            accountCopy.balance = 0;
+        }
+
+        return accountCopy;
+    }
+
+    function validateAccount(account) {
+        const errors = {};
+
+        if (account.accountNumber === undefined) {
+            errors.accountNumber = "Missing";
+        } else if (typeof (account.accountNumber) !== "number" || Number.isNaN(account.accountNumber) || !Number.isInteger(account.accountNumber) || account.accountNumber <= 0) {
+            errors.accountNumber = "Invalid";
+        }
+
+        if (account.owner === undefined) {
+            errors.owner = "Missing";
+        } else if (typeof (account.owner) !== "string" || account.owner.trim().length === 0) {
+            errors.owner = "Invalid";
+        }
+
+        if (account.balance === undefined) {
+            errors.balance = "Missing";
+        } else if (typeof (account.balance) !== "number" || Number.isNaN(account.balance)) {
+            errors.balance = "Invalid";
+        }
+
+        if (account.accountType === undefined) {
+            errors.accountType = "Missing";
+        } else if (account.accountType !== "Savings" && account.accountType !== "Current") {
+            errors.accountType = "Invalid";
+        }
+
+        if (account.isActive === undefined) {
+            errors.isActive = "Missing";
+        } else if (typeof (account.isActive) !== "boolean") {
+            errors.isActive = "Invalid";
+        }
+
+        return errors;
+    }
+
+    function canWithdraw(account, amount) {
+        const errors = validateAccount(account);
+
+        // if (Object.keys(errors).length > 0) {
+        //   return false;
+        // }
+
+        // if (!account.isActive) {
+        //   return false;
+        // }
+
+        // if (amount <= 0) {
+        //   return false;
+        // }
+
+        // if (account.balance < amount) {
+        //   return false;
+        // }
+
+        // return true;
+
+        return (
+            Object.keys(errors).length === 0 && account.isActive && amount > 0 && account.balance >= amount
+        )
+    }
+
+    function processAccount(account, amount) {
+        const errors = validateAccount(account);
+
+        if (Object.keys(errors).length > 0) {
+            console.log(`Validation error: ${account.accountNumber}`);
+            console.log(errors);
+        } else {
+            console.log(`Validation success: ${account.accountNumber}`);
+
+            const normalizeAccount = normalizeBalance(account);
+
+            if (canWithdraw(normalizeAccount, amount)) {
+                console.log("Withdrawal approved.");
+
+                const remainingBalance = normalizeAccount.balance - amount;
+
+                console.log(`Remaining Balance: ${remainingBalance}`);
+            } else {
+                console.log("Withdrawal denied.");
+                console.log(`Current Balance: ${normalizeAccount.balance}`);
+            }
+        }
+    }
+
+    console.log(normalizeBalance({
+        accountNumber: 1001,
+        owner: "Olaniyi Kudus",
+        balance: -3500,
+        accountType: "Savings",
+        isActive: true
+    }));
+
+    console.log(validateAccount({
+        accountNumber: 1001,
+        owner: "Olaniyi Kudus",
+        balance: 3500,
+        accountType: "Savings",
+        isActive: true
+    }));
+
+    processAccount(
+        {
+            accountNumber: 1001,
+            owner: "Sarah",
+            balance: 5000,
+            accountType: "Savings",
+            isActive: true
+        },
+        2000
+    );
+
+    console.log(
+        canWithdraw(
+            {
+                accountNumber: 1001,
+                owner: "Sarah",
+                balance: 5000,
+                accountType: "Savings",
+                isActive: true
+            },
+            2000
+        )
+    );
+
+    console.log(
+        canWithdraw(
+            {
+                accountNumber: 1001,
+                owner: "Sarah",
+                balance: 700,
+                accountType: "Savings",
+                isActive: true
+            },
+            1500
+        )
+    );
+
+    console.log(
+        canWithdraw(
+            {
+                accountNumber: 1001,
+                owner: "Sarah",
+                balance: 5000,
+                accountType: "Savings",
+                isActive: false
+            },
+            1000
+        )
+    );
+
+    console.log(
+        canWithdraw(
+            {
+                accountNumber: 1001,
+                owner: "Sarah",
+                balance: 5000,
+                accountType: "Savings",
+                isActive: true
+            },
+            -500
+        )
+    );
+
+    console.log(
+        canWithdraw(
+            {
+                accountNumber: -5,
+                owner: "Sarah",
+                balance: 5000,
+                accountType: "Savings",
+                isActive: true
+            },
+            1000
+        )
+    );
+
+    console.log(
+        canWithdraw(
+            {
+                accountNumber: 1001,
+                owner: "Sarah",
+                balance: 1000,
+                accountType: "Current",
+                isActive: true
+            },
+            1000
+        )
+    );
+
+    processAccount(
+        {
+            accountNumber: 1001,
+            owner: "Sarah",
+            balance: 5000,
+            accountType: "Savings",
+            isActive: true
+        },
+        2000
+    );
+
+    processAccount(
+        {
+            accountNumber: 1001,
+            owner: "Sarah",
+            balance: 700,
+            accountType: "Savings",
+            isActive: true
+        },
+        1500
+    );
+
+    processAccount(
+        {
+            accountNumber: 1001,
+            owner: "Sarah",
+            balance: -500,
+            accountType: "Savings",
+            isActive: true
+        },
+        100
+    );
+
+    processAccount(
+        {
+            accountNumber: 1001,
+            owner: "Sarah",
+            balance: 2000,
+            accountType: "Checking",
+            isActive: true
+        },
+        100
+    );
+
+</script>
+
+</html>

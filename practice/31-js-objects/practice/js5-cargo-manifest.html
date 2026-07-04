@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargo Manifest Validator</title>
+</head>
+
+<body>
+    <h1>Build a Cargo Manifest Validator</h1>
+</body>
+
+<script>
+    // ==============================
+    // Cargo Manifest Object
+    // ==============================
+
+    const manifest = {
+        containerId: 1,
+        destination: "Kubwa, Abuja, Nigeria",
+        weight: 831,
+        unit: "lb",
+        hazmat: false
+    };
+
+    // ==============================
+    // Normalize Weight to Kilograms
+    // ==============================
+
+    function normalizeUnits(manifest) {
+
+        // Create a copy of the manifest.
+        const manifestCopy = { ...manifest };
+
+        // Convert pounds to kilograms.
+        if (manifestCopy.unit === "lb") {
+            manifestCopy.weight *= 0.45;
+            manifestCopy.unit = "kg";
+        } else {
+            // Leave kilograms unchanged.
+            manifestCopy.weight;
+            manifestCopy.unit;
+        }
+
+        // Return the normalized copy.
+        return manifestCopy;
+    }
+
+    // ==============================
+    // Validate Manifest
+    // ==============================
+
+    function validateManifest(manifest) {
+
+        // Create a copy of the manifest.
+        const manifestCopy = { ...manifest };
+
+        // Store validation errors.
+        const errors = {};
+
+        // Validate containerId.
+        if (manifestCopy.containerId === undefined) {
+            errors.containerId = "Missing";
+        } else if (
+            typeof manifestCopy.containerId !== "number" ||
+            Number.isNaN(manifestCopy.containerId) ||
+            !Number.isInteger(manifestCopy.containerId) ||
+            manifestCopy.containerId <= 0
+        ) {
+            errors.containerId = "Invalid";
+        }
+
+        // Validate destination.
+        if (manifestCopy.destination === undefined) {
+            errors.destination = "Missing";
+        } else if (
+            typeof manifestCopy.destination !== "string" ||
+            manifestCopy.destination.trim().length === 0
+        ) {
+            errors.destination = "Invalid";
+        }
+
+        // Validate weight.
+        if (manifestCopy.weight === undefined) {
+            errors.weight = "Missing";
+        } else if (
+            typeof manifestCopy.weight !== "number" ||
+            Number.isNaN(manifestCopy.weight) ||
+            manifestCopy.weight <= 0
+        ) {
+            errors.weight = "Invalid";
+        }
+
+        // Validate unit.
+        if (manifestCopy.unit === undefined) {
+            errors.unit = "Missing";
+        } else if (
+            manifestCopy.unit !== "kg" &&
+            manifestCopy.unit !== "lb"
+        ) {
+            errors.unit = "Invalid";
+        }
+
+        // Validate hazmat status.
+        if (manifestCopy.hazmat === undefined) {
+            errors.hazmat = "Missing";
+        } else if (typeof manifestCopy.hazmat !== "boolean") {
+            errors.hazmat = "Invalid";
+        }
+
+        // Return validation results.
+        return errors;
+    }
+
+    // ==============================
+    // Process Manifest
+    // ==============================
+
+    function processManifest(manifest) {
+
+        // Validate the manifest.
+        const errors = validateManifest(manifest);
+
+        // Check if validation passed.
+        if (Object.keys(errors).length === 0) {
+
+            // Normalize the weight.
+            const normalized = normalizeUnits(manifest);
+
+            // Display success message.
+            console.log(`Validation success: ${manifest.containerId}`);
+            console.log(`Total weight: ${normalized.weight} kg`);
+
+        } else {
+
+            // Display validation errors.
+            console.log(`Validation error: ${manifest.containerId}`);
+            console.log(errors);
+        }
+    }
+
+    // ==============================
+    // Test normalizeUnits()
+    // ==============================
+
+    // console.log(
+    //   normalizeUnits({
+    //     containerId: 68,
+    //     destination: "Salinas",
+    //     weight: 101,
+    //     unit: "lb",
+    //     hazmat: true
+    //   })
+    // );
+
+    // ==============================
+    // Test validateManifest()
+    // ==============================
+
+    // console.log(
+    //   validateManifest({
+    //     containerId: 1,
+    //     destination: "Santa Cruz",
+    //     weight: 304,
+    //     unit: "kg",
+    //     hazmat: false
+    //   })
+    // );
+
+    // console.log(validateManifest({}));
+
+    // console.log(
+    //   validateManifest({
+    //     containerId: null,
+    //     destination: "Santa Cruz",
+    //     weight: 304,
+    //     unit: "kg",
+    //     hazmat: false
+    //   })
+    // );
+
+    // ==============================
+    // Test processManifest()
+    // ==============================
+
+    processManifest({
+        containerId: 55,
+        destination: "Carmel",
+        weight: 400,
+        unit: "lb",
+        hazmat: false
+    });
+
+</script>
+
+</html>
