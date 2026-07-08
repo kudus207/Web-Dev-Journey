@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Match Simulator</title>
+</head>
+
+<body>
+    <h1>Build a Football Match Simulator</h1>
+</body>
+
+<script>
+    // 1. Create a container array called 'fixtures' to store our football match data
+    const fixtures = [
+        // First item in the array: a match object for El Clásico
+        {
+            match: "Real Madrid vs Barcelona",          // Key holding the description of the match
+            outcomes: ["Home Win", "Draw", "Away Win"], // Key holding an array of all possible outcomes
+            prediction: "Home Win"                      // Key holding our explicit expected result
+        },
+        // Second item in the array: a match object for the English rivalry
+        {
+            match: "Arsenal vs Man United",
+            outcomes: ["Home Win", "Draw", "Away Win"],
+            prediction: "Away Win"
+        },
+        // Third item in the array: a match object for a title-deciding clash
+        {
+            match: "Man City vs Liverpool",
+            outcomes: ["Home Win", "Draw", "Away Win"],
+            prediction: "Draw"
+        }
+    ];
+
+    // 2. Define a function that accepts an array of match fixtures as a parameter
+    function getRandomMatch(fixtures) {
+        // Generate a random decimal between 0 and 1, multiply by array length, and round down to get a valid index (0, 1, or 2)
+        const randomIndex = Math.floor(Math.random() * fixtures.length);
+        // Return the single match object located at that randomly calculated index position
+        return fixtures[randomIndex];
+    }
+
+    // 3. Define a function that accepts a single array of outcome strings as a parameter
+    function getComputerPrediction(outcomes) {
+        // Generate a random index (0, 1, or 2) based specifically on the length of the outcomes array passed in
+        const randomIndex = Math.floor(Math.random() * outcomes.length);
+        // Return the individual string (e.g., "Draw") found at that random index
+        return outcomes[randomIndex];
+    }
+
+    // 4. Define a function that accepts one match object and one computer choice string to compare them
+    function checkSimulation(match, computerPrediction) {
+        // Check if the prediction property inside the match object strictly equals the string chosen by the computer
+        if (match.prediction === computerPrediction) {
+            // If they match perfectly, return a success message string
+            return "The simulation matches your prediction!";
+        } else {
+            // If they do not match, return a failure message injection string containing our original prediction property
+            return `The simulation variance failed. Your prediction was: ${match.prediction}`;
+        }
+    }
+
+    // 5. EXECUTION BLOCK: Run the functions and pass data between them
+
+    // Call getRandomMatch, pass the full fixtures array, and save the returned random object to 'randomMatch'
+    const randomMatch = getRandomMatch(fixtures);
+
+    // Call getComputerPrediction, pass ONLY the outcomes array from our selected match object, and save the returned string
+    const computerPrediction = getComputerPrediction(randomMatch.outcomes);
+
+    // Call checkSimulation, pass the entire selected match object AND the computer's guess string, and save the result string
+    const simulation = checkSimulation(randomMatch, computerPrediction);
+
+    // 6. OUTPUT: Log all results to the console to view the final output of the script
+    console.log(randomMatch);        // Displays the entire randomly selected match object
+    console.log(computerPrediction); // Displays the single string chosen randomly by the computer
+    console.log(simulation);         // Displays whether the computer guessed right or wrong based on your logic
+</script>
+
+</html>
