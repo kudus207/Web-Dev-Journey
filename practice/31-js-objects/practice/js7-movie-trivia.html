@@ -1,13 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Trivia Game</title>
 </head>
+
 <body>
     <h1>Build a Movie Trivia Game</h1>
 </body>
 
-<script></script>
+<script>
+    const movies = [
+        {
+            "genre": "Action",
+            "title": "Mad Max: Fury Road",
+            "choices": ["George Miller", "Zack Snyder", "Michael Bay"],
+            "director": "George Miller"
+        },
+        {
+            "genre": "Thriller",
+            "title": "Gone Girl",
+            "choices": ["David Fincher", "Christopher Nolan", "Martin Scorsese"],
+            "director": "David Fincher"
+        },
+        {
+            "genre": "Horror",
+            "title": "Get Out",
+            "choices": ["Jordan Peele", "Ari Aster", "James Wan"],
+            "director": "Jordan Peele"
+        },
+        {
+            "genre": "Drama",
+            "title": "The Wolf of Wall Street",
+            "choices": ["Martin Scorsese", "Quentin Tarantino", "David O. Russell"],
+            "director": "Martin Scorsese"
+        },
+        {
+            "genre": "Comedy",
+            "title": "The Grand Budapest Hotel",
+            "choices": ["Wes Anderson", "Taika Waititi", "Coen Brothers"],
+            "director": "Wes Anderson"
+        }
+    ];
+
+    function getRandomMovie(movies) {
+        const randomIndex = Math.floor(Math.random() * movies.length);
+
+        return movies[randomIndex];
+    }
+
+    function getRandomDirectorChoice(choices) {
+        const randomIndex = Math.floor(Math.random() * choices.length);
+
+        return choices[randomIndex];
+    }
+
+    function checkDirector(movie, randomDirectorChoice) {
+        if (movie.director === randomDirectorChoice) {
+            return "Correct! The computer guessed the director.";
+        } else {
+            return `Incorrect! The director of ${movie.title} is ${movie.director}`;
+        }
+    }
+
+    function playGame() {
+        const randomMovie = getRandomMovie(movies);
+        const randomDirectorChoice = getRandomDirectorChoice(randomMovie.choices);
+        console.log(randomMovie);
+        console.log(randomDirectorChoice);
+        console.log(checkDirector(randomMovie, randomDirectorChoice));
+    }
+
+    playGame();
+
+</script>
+
 </html>
