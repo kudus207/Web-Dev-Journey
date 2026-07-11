@@ -1680,3 +1680,253 @@ JSON.stringify() converts objects to JSON strings; JSON.parse() converts JSON st
 Optional chaining (?.) safely accesses nested properties.
 Object destructuring makes extracting properties cleaner and more concise.
 Object shorthand simplifies object creation when variable and property names match.
+
+
+JavaScript Loops Cheat Sheet
+What Is a Loop?
+
+A loop repeats a block of code until a condition becomes false.
+
+Common Uses
+Process arrays or objects
+Repeat a task
+Count up or down
+Search for values
+Move game objects
+1. for Loop
+
+Use when you know how many times the loop should run.
+
+for (initialization; condition; increment/decrement) {
+  // code
+}
+
+Example:
+
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+
+Output:
+
+0
+1
+2
+3
+4
+
+Structure
+
+Initialization → Runs once.
+Condition → Checked before each iteration.
+Increment/Decrement → Runs after each iteration.
+2. for...of Loop
+
+Use to loop through the values of an iterable (arrays, strings, maps, sets).
+
+for (const value of iterable) {
+  // code
+}
+
+Array Example:
+
+const fruits = ["Apple", "Banana", "Orange"];
+
+for (const fruit of fruits) {
+  console.log(fruit);
+}
+
+Output:
+
+Apple
+Banana
+Orange
+
+String Example:
+
+for (const char of "Hello") {
+  console.log(char);
+}
+
+Output:
+
+H
+e
+l
+l
+o
+
+Use:
+
+const → Default choice (don't reassign the variable).
+let → If you need to reassign the loop variable.
+3. for...in Loop
+
+Use to loop through an object's properties (keys).
+
+for (const key in object) {
+  console.log(object[key]);
+}
+
+Example:
+
+const person = {
+  name: "John",
+  age: 30
+};
+
+for (const key in person) {
+  console.log(key, person[key]);
+}
+
+Output:
+
+name John
+age 30
+
+Don't use for...in for arrays. Use for...of instead.
+
+4. while Loop
+
+Use when you don't know how many times the loop should run.
+
+while (condition) {
+  // code
+}
+
+Example:
+
+let count = 0;
+
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+
+Output:
+
+0
+1
+2
+3
+4
+
+The condition is checked before each iteration.
+
+5. do...while Loop
+
+Runs the code at least once, then checks the condition.
+
+do {
+  // code
+} while (condition);
+
+Example:
+
+let count = 0;
+
+do {
+  console.log(count);
+  count++;
+} while (count < 5);
+
+Output:
+
+0
+1
+2
+3
+4
+
+Difference:
+
+while (...)      // Checks first
+do...while (...) // Runs first, checks later
+6. break
+
+Stops a loop immediately.
+
+for (let i = 0; i < 10; i++) {
+  if (i === 5) break;
+  console.log(i);
+}
+
+Output:
+
+0
+1
+2
+3
+4
+
+Use when you want to:
+
+Stop searching after finding something.
+Exit a loop early.
+7. continue
+
+Skips the current iteration and continues with the next one.
+
+for (let i = 0; i < 10; i++) {
+  if (i === 5) continue;
+  console.log(i);
+}
+
+Output:
+
+0
+1
+2
+3
+4
+6
+7
+8
+9
+
+Use when you want to ignore specific values but continue looping.
+
+Labels (Rarely Used)
+
+Labels allow break or continue to control an outer loop in nested loops.
+
+outerLoop:
+for (...) {
+  for (...) {
+    break outerLoop;
+  }
+}
+
+Use only when necessary.
+
+Choosing the Right Loop
+Loop	Best Used For
+for	Known number of iterations
+for...of	Arrays, strings, and other iterable values
+for...in	Object properties (keys)
+while	Unknown number of iterations
+do...while	Code must run at least once
+break vs continue
+Statement	Action
+break	Stops the loop completely
+continue	Skips the current iteration and continues
+for vs for...of vs for...in
+Loop	Returns	Best For
+for	Index (using a counter)	Counting or when you need the index
+for...of	Values	Arrays, strings, maps, sets
+for...in	Keys (property names)	Objects
+Loop Tips
+An iteration is one complete execution of a loop.
+Always update the loop variable (i++, i--, etc.) to avoid infinite loops.
+Use const in for...of unless you need to reassign the loop variable.
+Access object values in for...in with object[key].
+Avoid using for...in for arrays.
+Quick Summary
+for → Repeat a known number of times.
+for...of → Loop through values.
+for...in → Loop through object keys.
+while → Repeat while a condition is true.
+do...while → Run once before checking the condition.
+break → Exit the loop.
+continue → Skip one iteration.
+Labels → Control outer loops in nested loops (rarely needed).
