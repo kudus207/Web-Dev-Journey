@@ -12,28 +12,37 @@
 </body>
 
 <script>
+    // 1. INITIAL SETUP & BASE DATA
+    // Initialize an empty array that will store our complete crew roster.
     const squad = [];
 
+    // Define the first crew member as a standalone astronaut object.
     const firstAstronaut = {
         id: 1,
         name: "Andy",
         role: "Commander",
-        isEVAEligible: true,
+        isEVAEligible: true, // Eligible for Extravehicular Activity (spacewalks)
         priority: 3
     };
 
+    // 2. CREW MANAGEMENT FUNCTIONS
+    // Adds a new astronaut to the crew array only if their ID doesn't already exist.
     function addCrewMember(crew, astronaut) {
+        // Loop through the existing crew to look for matching IDs
         for (let i = 0; i < crew.length; i++) {
             if (crew[i].id === astronaut.id) {
                 console.log("Duplicate ID: " + astronaut.id);
-                return;
+                return; // Exit the function immediately if a duplicate is found
             }
         }
+        // If no duplicate is found after checking the whole array, add the astronaut
         crew.push(astronaut);
     }
 
+    // Add our first astronaut to the main 'squad' array
     addCrewMember(squad, firstAstronaut);
 
+    // An array of additional astronaut objects waiting to be added to the squad
     const remainingCrew = [
         { id: 2, name: "Bart", role: "Pilot", isEVAEligible: false, priority: 8 },
         { id: 3, name: "Caroline", role: "Engineer", isEVAEligible: true, priority: 4 },
@@ -46,11 +55,15 @@
         { id: 10, name: "Joan", role: "Technician", isEVAEligible: false, priority: 1 },
     ];
 
+    // Loop through the remaining crew list and add each one to the main squad
     for (let i = 0; i < remainingCrew.length; i++) {
         addCrewMember(squad, remainingCrew[i]);
     }
 
+    // 3. ROSTER MANIPULATION
+    // Swaps the position of two crew members in the roster without mutating the original array.
     function swapCrewMembers(crew, fromIndex, toIndex) {
+        // Safety check: Make sure indices are inside the bounds of the array
         if (
             fromIndex < 0 ||
             toIndex < 0 ||
@@ -61,17 +74,30 @@
             return;
         }
 
+        // Create a shallow copy of the crew array to avoid modifying the original data
         const updatedCrew = crew.slice();
+
+        // One-liner swap trick using splice:
+        // 1. updatedCrew.splice(toIndex, 1, updatedCrew[fromIndex]) removes the item at 'toIndex', 
+        //    replaces it with the item from 'fromIndex', and returns the removed item in an array.
+        // 2. The [0] extracts that removed item.
+        // 3. updatedCrew[fromIndex] = ... places that extracted item back into the 'fromIndex' slot.
         updatedCrew[fromIndex] = updatedCrew.splice(toIndex, 1, updatedCrew[fromIndex])[0];
 
-        return updatedCrew;
+        return updatedCrew; // Returns the new roster with the swapped positions
     }
 
+    // Swap the astronauts at index 2 (Caroline) and index 5 (Felix)
     const updatedSquad = swapCrewMembers(squad, 2, 5);
 
+    // 4. SORTING & FILTRATION
+    // Sorts a crew array in place using a standard Bubble Sort algorithm based on priority (highest to lowest).
     function sortByPriorityDescending(crew) {
+        // Outer loop controls how many passes we make through the array
         for (let i = 0; i < crew.length - 1; i++) {
+            // Inner loop steps through the array comparing adjacent elements
             for (let j = 0; j < crew.length - 1 - i; j++) {
+                // If the current element has a lower priority than the next one, swap them
                 if (crew[j].priority < crew[j + 1].priority) {
                     const temp = crew[j];
                     crew[j] = crew[j + 1];
@@ -81,17 +107,24 @@
         }
     }
 
+    // Filters out astronauts who cannot perform spacewalks, then sorts the remaining ones by priority.
     function getEVAReadyCrew(crew) {
         const eligible = [];
+        // Collect everyone who has isEVAEligible set to true
         for (const astronaut of crew) {
             if (astronaut.isEVAEligible) eligible.push(astronaut);
         }
+        // Sort the filtered list from highest to lowest priority
         sortByPriorityDescending(eligible);
 
         return eligible;
     }
 
+    // Get the sorted list of all spacewalk-eligible astronauts
     const EVAReadySquad = getEVAReadyCrew(updatedSquad);
+
+    // 5. MISSION PLANNING & REPORTING
+    // Breaks down an array of crew members into smaller team batches (chunks) of a specific size.
     function chunkCrew(crew, size) {
         if (size < 1) {
             console.log("Chunk size must be >= 1");
@@ -99,23 +132,31 @@
         }
 
         const chunks = [];
+        // Loop through the array, skipping forward by the chunk size on each iteration
         for (let i = 0; i < crew.length; i += size) {
+            // Slice a segment of the requested size and push it into our chunks container
             chunks.push(crew.slice(i, i + size));
         }
 
         return chunks;
     }
 
+    // Divide the EVA-ready astronauts into small teams of 3
     const EVAChunks = chunkCrew(EVAReadySquad, 3);
 
+    // Sorts the crew by priority without ruining the original array order, then logs their names.
     function printCrewSummary(crew) {
+        // Create a copy so the sorting doesn't change the layout of the primary roster
         const sorted = crew.slice();
         sortByPriorityDescending(sorted);
+
+        // Print each astronaut's name to the console in order of descending priority
         for (const astronaut of sorted) {
             console.log(astronaut.name);
         }
     }
 
+    // Print the entire updated squad roster ordered by mission priority
     printCrewSummary(updatedSquad);
 </script>
 

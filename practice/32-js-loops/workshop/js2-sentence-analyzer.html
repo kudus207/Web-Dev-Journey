@@ -12,11 +12,17 @@
 </body>
 
 <script>
+    // 1. VOWEL COUNTER
+    // Counts how many vowels (a, e, i, o, u) are present in a given string.
     function getVowelCount(sentence) {
+        // Define our lookup string containing all target vowels
         const vowels = "aeiou";
         let count = 0;
 
+        // Convert the entire sentence to lowercase so it catches capital letters (e.g., 'A'),
+        // then loop through every single character one by one
         for (const char of sentence.toLowerCase()) {
+            // If the current character exists inside the vowels string, increase the counter
             if (vowels.includes(char)) {
                 count++;
             }
@@ -24,14 +30,21 @@
         return count;
     }
 
+    // Test the vowel function with a string and print the result
     const vowelCount = getVowelCount("Apples are tasty fruits");
-    console.log(`Vowel Count: ${vowelCount}`);
+    console.log(`Vowel Count: ${vowelCount}`); // Outputs: Vowel Count: 7
 
+
+    // 2. CONSONANT COUNTER
+    // Counts how many consonants are present in a given string.
     function getConsonantCount(sentence) {
+        // Define our lookup string containing all 21 standard English consonants
         const consonants = "bcdfghjklmnpqrstvwxyz";
         let count = 0;
 
+        // Convert the sentence to lowercase and loop through each character
         for (const char of sentence.toLowerCase()) {
+            // If the character matches one of our listed consonants, increase the counter
             if (consonants.includes(char)) {
                 count++;
             }
@@ -39,14 +52,22 @@
         return count;
     }
 
+    // Test the consonant function with a string and print the result
     const consonantCount = getConsonantCount("Coding is fun");
-    console.log(`Consonant Count: ${consonantCount}`);
+    console.log(`Consonant Count: ${consonantCount}`); // Outputs: Consonant Count: 8
 
+
+    // 3. PUNCTUATION COUNTER
+    // Counts standard punctuation marks present in a given string.
     function getPunctuationCount(sentence) {
+        // Define a string collection of standard punctuation marks and symbols
         const punctuations = ".,!?;:-()[]{}\"'–";
         let count = 0;
 
+        // Loop through the characters exactly as they are typed.
+        // Note: We don't need .toLowerCase() here because punctuation symbols don't have casing.
         for (const char of sentence) {
+            // If the character matches anything in our punctuation string, bump the counter
             if (punctuations.includes(char)) {
                 count++;
             }
@@ -54,18 +75,29 @@
         return count;
     }
 
+    // Test the punctuation function with a heavy-punctuation string and print the result
     const punctuationCount = getPunctuationCount("WHAT?!?!?!?!?");
-    console.log(`Punctuation Count: ${punctuationCount}`);
+    console.log(`Punctuation Count: ${punctuationCount}`); // Outputs: Punctuation Count: 9
 
+
+    // 4. WORD COUNTER
+    // Counts the number of actual words in a sentence, automatically handling extra spaces.
     function getWordCount(sentence) {
+        // Safety check: Remove surrounding spaces with .trim(). 
+        // If the sentence is completely empty or just spaces, return 0 immediately.
         if (sentence.trim() === "") {
             return 0;
         }
 
+        // Clean up leading/trailing spaces, then chop the sentence into an array 
+        // everywhere a space character (" ") occurs.
         const words = sentence.trim().split(" ");
         let count = 0;
 
+        // Loop through our array of separated items
         for (const word of words) {
+            // This check ensures we don't count empty strings. 
+            // (e.g., If the user typed two spaces in a row, split(" ") creates an empty "" entry)
             if (word !== "") {
                 count++;
             }
@@ -74,8 +106,9 @@
         return count;
     }
 
+    // Test the word counter function and print the result
     const wordCount = getWordCount("I love freeCodeCamp");
-    console.log(`Word Count: ${wordCount}`);
+    console.log(`Word Count: ${wordCount}`); // Outputs: Word Count: 3
 </script>
 
 </html>

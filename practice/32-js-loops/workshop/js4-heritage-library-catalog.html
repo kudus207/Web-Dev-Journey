@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heritage Library Catalog</title>
+</head>
+
+<body>
+    <h1>Build a Heritage Library Catalog</h1>
+</body>
+
+<script>
+    // 1. RAW DATA DEFINITION
+    // An array of strings representing book records. Fields are separated by pipe symbols (|).
+    // Includes edge cases at the bottom with missing information.
+    const rawCatalogCards = [
+        "From a Buick 8 | King, Stephen | 2002 | Shelf K7",
+        "The Shining | King, Stephen | 1977 | Shelf K1",
+        "The Stand | King, Stephen | 1978 | Shelf K2",
+        "It | King, Stephen | 1986 | Shelf K3",
+        "Misery | King, Stephen | 1987 | Shelf K4",
+        "Do Androids Dream of Electric Sheep? | Dick, Philip K. | 1968 | Shelf D5",
+        "I, Robot | Asimov, Isaac | 1950 | Shelf A8",
+        "Foundation | Asimov, Isaac | 1951 | Shelf A9",
+        "Dune | Herbert, Frank | 1965 | Shelf H3",
+        "Neuromancer | Gibson, William | 1984 | Shelf G8",
+        "Snow Crash | Stephenson, Neal | 1992 | Shelf S6",
+        "The Martian | Weir, Andy | 2011 | Shelf W5",
+        "Ender's Game | Card, Orson Scott | 1985 | Shelf C2",
+        "The Hitchhiker's Guide to the Galaxy | Adams, Douglas | 1979 | Shelf A1",
+        "Ready Player One | Cline, Ernest | 2011 | Shelf C7",
+        "The Dark Tower: The Gunslinger | King, Stephen | 1982 | Shelf K5",
+        // Edge cases: missing data
+        "Unknown Title |  | 1975 | Shelf X1",
+        "Mysterious Manuscript | Unknown Author |  | Shelf Z9",
+        "Ancient Scroll | Anonymous | 850 | ",
+    ];
+
+    // 2. PARSING FUNCTIONS
+    // Converts a single raw pipe-separated string into a structured JavaScript object.
+    function parseCard(rawString) {
+        // Split the string into an array wherever a "|" occurs
+        const parts = rawString.split("|");
+        const trimmedParts = [];
+
+        // Clean up whitespace around each extracted piece of text
+        for (let i = 0; i < parts.length; i++) {
+            trimmedParts.push(parts[i].trim());
+        }
+
+        // Assign fields based on their position in the array
+        const title = trimmedParts[0];
+        const author = trimmedParts[1];
+        const year = trimmedParts[2];
+        const location = trimmedParts[3];
+
+        // Return a structured object. Use logical OR (||) to fall back to "Unknown" 
+        // if a text string is empty or falsy. Turn the year string into an actual integer.
+        return {
+            title: title || "Unknown",
+            author: author || "Unknown",
+            year: year ? parseInt(year) : "Unknown",
+            location: location || "Unknown"
+        };
+    }
+
+    // Iterates through the raw strings array and builds the final catalog array of objects.
+    function parseCatalog(rawCards) {
+        const catalog = [];
+        for (let i = 0; i < rawCards.length; i++) {
+            catalog.push(parseCard(rawCards[i]));
+        }
+        return catalog;
+    }
+
+    // Execute the parsing process
+    const catalog = parseCatalog(rawCatalogCards);
+
+    // 3. SEARCH & GROUPING UTILITIES
+    // Searches the catalog for books whose author matches or contains the search string.
+    function findByAuthor(catalog, author) {
+        const searchTerm = author.toLowerCase();
+        const results = [];
+
+        for (let i = 0; i < catalog.length; i++) {
+            // Convert to lowercase to perform a case-insensitive search
+            if (catalog[i].author.toLowerCase().includes(searchTerm)) {
+                results.push(catalog[i]);
+            }
+        }
+        return results;
+    }
+
+    // Groups the catalog books into categories based on their decade (e.g., "1970s").
+    function groupByDecade(catalog) {
+        const grouped = {};
+
+        for (let i = 0; i < catalog.length; i++) {
+            const book = catalog[i];
+
+            // If the year is unknown, put it in a specific "Unknown" bucket
+            if (book.year === "Unknown") {
+                if (!grouped["Unknown"]) {
+                    grouped["Unknown"] = [];
+                }
+                grouped["Unknown"].push(book);
+                continue;
+            }
+
+            // Calculate the decade (e.g., Math.floor(1977 / 10) * 10 = 1970)
+            const decade = Math.floor(book.year / 10) * 10;
+            const decadeKey = `${decade}s`;
+
+            // If the bucket doesn't exist yet, initialize it as an empty array
+            if (!grouped[decadeKey]) {
+                grouped[decadeKey] = [];
+            }
+            // Add the book to its respective decade array
+            grouped[decadeKey].push(book);
+        }
+        return grouped;
+    }
+
+    // Execute the decade grouping function
+    const byDecade = groupByDecade(catalog);
+
+    // 4. FORMATTING & VALIDATION
+    // Creates a decorative, human-readable text block for a single book entry.
+    function renderEntry(entry) {
+        const title = entry.title || "Unknown";
+        const author = entry.author || "Unknown";
+        const year = entry.year || "Unknown";
+        const location = entry.location || "Unknown";
+
+        // Uses template literals to return a formatted string with dashed borders
+        return `${"-".repeat(25)}
+Title: ${title}
+Author: ${author}
+Year: ${year}
+Location: ${location}
+${"-".repeat(25)}`;
+    }
+
+    // Print out the formatted version of the very first book to test it
+    console.log(renderEntry(catalog[0]));
+
+    // Validates a book object to ensure it has all required fields and none are "Unknown"
+    function validateEntry(entry) {
+        let isValid = true;
+
+        // Check each property to see if it is missing or explicitly marked "Unknown"
+        if (!("title" in entry) || !entry.title || entry.title === "Unknown") {
+            isValid = false;
+        }
+        if (!("author" in entry) || !entry.author || entry.author === "Unknown") {
+            isValid = false;
+        }
+        if (!("year" in entry) || !entry.year || entry.year === "Unknown") {
+            isValid = false;
+        }
+        if (!("location" in entry) || !entry.location || entry.location === "Unknown") {
+            isValid = false;
+        }
+        return isValid;
+    }
+
+    // 5. EXPORT UTILITIES
+    // Converts the array of objects into a formatted JSON string with a 2-space indentation.
+    function exportToJSON(catalog) {
+        return JSON.stringify(catalog, null, 2);
+    }
+
+    // Converts the catalog data into a standard Comma-Separated Values (CSV) format text.
+    function exportToCSV(catalog) {
+        const header = "Title,Author,Year,Location";
+        const rows = [];
+
+        for (let i = 0; i < catalog.length; i++) {
+            const entry = catalog[i];
+            // Wrap text strings in double quotes to handle potential commas safely
+            rows.push(`"${entry.title}","${entry.author}",${entry.year},"${entry.location}"`);
+        }
+
+        // Combine the header and all rows using newline characters (\n)
+        let csv = header;
+        for (let i = 0; i < rows.length; i++) {
+            csv = csv + "\n" + rows[i];
+        }
+        return csv;
+    }
+
+    // console.log(exportToCSV(catalog));
+
+    // 6. METRICS & COUNTERS
+    console.log(catalog.length); // Prints total number of books processed (19)
+    console.log(Object.keys(byDecade).length); // Prints how many unique decade groups exist
+
+    // Initialize boundaries for finding extreme years
+    let oldestYear = Infinity; // Setting to Infinity ensures the first real year evaluated will be smaller
+    let newestYear = 0;        // Setting to 0 ensures the first real year evaluated will be larger
+
+    // Loop through the catalog to calculate the oldest and newest publishing dates
+    for (let i = 0; i < catalog.length; i++) {
+        const entry = catalog[i];
+
+        // Skip books that have an "Unknown" year
+        if (entry.year !== "Unknown") {
+            // If current book is older than our record holder, update oldestYear
+            if (entry.year < oldestYear) {
+                oldestYear = entry.year;
+            }
+
+            // If current book is newer than our record holder, update newestYear
+            if (entry.year > newestYear) {
+                newestYear = entry.year;
+            }
+        }
+    }
+
+    console.log(oldestYear); // Outputs: 850 (from the "Ancient Scroll")
+    console.log(newestYear); // Outputs: 2011 (from "The Martian" / "Ready Player One")
+</script>
+
+</html>

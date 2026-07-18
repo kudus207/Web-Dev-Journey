@@ -12,26 +12,43 @@
 </body>
 
 <script>
+    // 1. CHARACTER PRINTER
+    // Steps through a string character by character and logs each one onto its own line.
     function printCharacters(str) {
+        // A 'for...of' loop splits the string into individual characters automatically
         for (const char of str) {
-            console.log(char);
+            console.log(char); // Prints each letter ('h', 'e', 'l', 'l', 'o') consecutively
         }
     }
+
+    // Execute the character printing test
     printCharacters("hello");
 
+
+    // 2. MATCHED WORD COUNTER
+    // Counts how many times a specific target word appears inside a provided list of words.
     function getMatchedWordCount(sentence, match) {
         let count = 0;
 
+        // Note: The variable name 'sentence' here actually expects an array of strings (words).
+        // The 'for...of' loop extracts one string element at a time from that array.
         for (const word of sentence) {
+            // Check if the current word matches the target word exactly (case-sensitive)
             if (word === match) {
-                count++;
+                count++; // Increment the counter if a perfect match is found
             }
+
+            // Log a real-time debugging statement showing the comparison progress
             console.log(`Checking "${word}" against "${match}" | Running count: ${count}`);
         }
 
+        // Return the final calculated sum of matching words
         return count;
     }
 
+    // 3. EXECUTION LOGS & TESTING
+    // Test Case 1: Searching for "really" inside a 7-word array. 
+    // It will match 3 times and return 3.
     console.log(
         getMatchedWordCount(
             ["I", "really", "really", "really", "like", "to", "code"],
@@ -39,6 +56,8 @@
         )
     );
 
+    // Test Case 2: Searching for "dandy" inside a 6-word array. 
+    // It will match 1 time and return 1.
     console.log(
         getMatchedWordCount(
             ["Do", "not", "fear", "the", "dandy", "lion"],
