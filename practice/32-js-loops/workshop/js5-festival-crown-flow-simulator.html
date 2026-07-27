@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festival Crowd Flow Simulator</title>
+</head>
+
+<body>
+    <h1>Build a Festival Crowd Flow Simulator</h1>
+</body>
+
+<script>
+    // An array containing all the gates for the morning simulation.
+    const morningGates = [
+
+        // First gate object.
+        {
+            id: "North",                 // Name/ID of the gate.
+            capacity: 5,                 // Maximum attendees this gate can process per tick.
+            queue: [3, 6, 2, 4]          // Number of attendees arriving at each tick.
+        },
+
+        // Second gate object.
+        {
+            id: "East",
+            capacity: 3,
+            queue: [2, 4, 3, 5]
+        },
+
+        // Third gate object.
+        {
+            id: "South",
+            capacity: 4,
+            queue: [1, 2, 3, 1]
+        },
+
+        // Fourth gate object.
+        {
+            id: "West",
+            capacity: 2,
+            queue: [4, 1, 2, 3]
+        },
+    ];
+
+    // An array containing all the gates for the night simulation.
+    const nightGates = [
+
+        {
+            id: "North",
+            capacity: 4,
+            queue: [6, 2, 5, 1]
+        },
+
+        {
+            id: "East",
+            capacity: 2,
+            queue: [3, 3, 4, 2]
+        },
+
+        {
+            id: "South",
+            capacity: 5,
+            queue: [2, 1, 2, 3]
+        },
+
+        {
+            id: "West",
+            capacity: 3,
+            queue: [5, 2, 1, 4]
+        },
+    ];
+
+    // Creates an object that will keep track of
+    // how many attendees each gate processes.
+    function initializeThroughput(gates) {
+
+        // Create an empty object.
+        const summary = {};
+
+        // Loop through every gate.
+        for (const gate of gates) {
+
+            // Add a property using the gate's id.
+            // Example:
+            // summary["North"] = 0
+            summary[gate.id] = 0;
+        }
+
+        // Return the completed summary object.
+        return summary;
+    }
+
+    // Processes one gate during one tick.
+    function processGateFlow(gate, tickIndex) {
+
+        // Number of attendees currently waiting.
+        let currentTickQueue = gate.queue[tickIndex];
+
+        // Number processed so far.
+        let processed = 0;
+
+        // Continue while:
+        // 1. There are attendees left.
+        // 2. The gate still has capacity.
+        while (currentTickQueue > 0 && processed < gate.capacity) {
+
+            // One attendee leaves the queue.
+            currentTickQueue--;
+
+            // Increase processed count.
+            processed++;
+        }
+
+        // Return both processed attendees
+        // and anyone left over.
+        return {
+
+            // Total processed.
+            processed: processed,
+
+            // Remaining attendees.
+            overflow: currentTickQueue
+        };
+    }
+
+    // Sends overflow attendees to the next gate.
+    function rerouteOverflow(gates, currentGate, tickIndex, overflowAmount) {
+
+        // Find the current gate's index.
+        const currentIndex = gates.indexOf(currentGate);
+
+        // Find the next gate.
+        // Wrap around to the first gate if needed.
+        const nextGateIndex = (currentIndex + 1) % gates.length;
+
+        // Add the overflow attendees
+        // to the next gate's queue.
+        gates[nextGateIndex].queue[tickIndex] += overflowAmount;
+
+        // Print a message.
+        console.log(
+
+            // Example:
+            // "2 attendees rerouted to East"
+            overflowAmount +
+            " attendees rerouted to " +
+            gates[nextGateIndex].id
+        );
+    }
+
+    // Handles everything that happens
+    // for one gate during one tick.
+    function handleGateAtTick(
+        gates,
+        gate,
+        tickIndex,
+        throughputSummary
+    ) {
+
+        // Print the gate being processed.
+        console.log("\nProcessing " + gate.id + "...");
+
+        // Show arriving attendees.
+        console.log(
+            gate.queue[tickIndex] +
+            " attendees arriving."
+        );
+
+        // Process the attendees.
+        const result = processGateFlow(
+            gate,
+            tickIndex
+        );
+
+        // Add processed attendees
+        // to the summary.
+        throughputSummary[gate.id] += result.processed;
+
+        // Check if attendees remain.
+        if (result.overflow > 0) {
+
+            // Print overflow message.
+            console.log(
+                "Overflow of " +
+                result.overflow +
+                " attendees. Rerouting..."
+            );
+
+            // Send them to another gate.
+            rerouteOverflow(
+                gates,
+                gate,
+                tickIndex,
+                result.overflow
+            );
+        }
+    }
+
+    // Displays the total attendees
+    // processed by each gate.
+    function printSummary(summary) {
+
+        // Print heading.
+        console.log("\nThroughput Summary");
+
+        // Loop through each property.
+        for (const gateId in summary) {
+
+            // Print gate name and total.
+            console.log(
+
+                gateId +
+                ": " +
+                summary[gateId] +
+                " attendees processed"
+            );
+        }
+    }
+
+    // Runs the complete simulation
+    // for either Morning or Night.
+    function simulateFestival(gates, timeBlock) {
+
+        // Print simulation heading.
+        console.log("\n" + timeBlock + " Simulation");
+
+        // Create throughput tracker.
+        const throughputSummary =
+            initializeThroughput(gates);
+
+        // Number of ticks.
+        const maxTicks =
+            gates[0].queue.length;
+
+        // Start at the first tick.
+        let tickIndex = 0;
+
+        // Repeat until every tick
+        // has been processed.
+        while (tickIndex < maxTicks) {
+
+            // Print tick number.
+            console.log(
+                "\nTick " + (tickIndex + 1)
+            );
+
+            // Process every gate.
+            for (const gate of gates) {
+
+                handleGateAtTick(
+                    gates,
+                    gate,
+                    tickIndex,
+                    throughputSummary
+                );
+            }
+
+            // Move to the next tick.
+            tickIndex++;
+        }
+
+        // Print the final totals.
+        printSummary(throughputSummary);
+    }
+
+    // Run the morning simulation.
+    simulateFestival(
+        morningGates,
+        "Morning"
+    );
+
+    // Run the night simulation.
+    simulateFestival(
+        nightGates,
+        "Night"
+    );
+</script>
+
+</html>
