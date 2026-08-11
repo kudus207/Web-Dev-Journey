@@ -368,3 +368,110 @@ for (let i = 5; i <= 25; i += 5) {
 Start → Condition → Action → Change → Repeat
 
 That's everything we've learned so far. You can use this as your Loop Module 1 reference note while we continue into arrays and loops.
+
+JavaScript Loops + Arrays — Lesson 2.2
+1. Loop Through an Array
+const fruits = ["apple", "banana", "orange"];
+
+for (let i = 0; i < fruits.length; i++) {
+    console.log(fruits[i]);
+}
+Remember:
+i = index
+fruits[i] = value at that index
+
+Example:
+
+i = 0 → fruits[0] → apple
+i = 1 → fruits[1] → banana
+i = 2 → fruits[2] → orange
+2. array.length
+
+.length gives the number of items.
+
+const fruits = ["apple", "banana", "orange"];
+
+console.log(fruits.length);
+
+Output:
+
+3
+
+Because there are 3 items.
+
+Important:
+length = 3
+last index = 2
+
+Therefore, when looping:
+
+i < fruits.length
+
+not:
+
+i <= fruits.length
+3. Do Something With Each Item
+
+You can perform an operation on each value.
+
+const numbers = [1, 2, 3];
+
+for (let i = 0; i < numbers.length; i++) {
+    console.log(numbers[i] * 2);
+}
+
+Output:
+
+2
+4
+6
+
+The loop gets each value and performs the calculation.
+
+4. Use an if Inside a Loop
+
+You can check each array item.
+
+const numbers = [2, 5, 8, 10];
+
+for (let i = 0; i < numbers.length; i++) {
+    if (numbers[i] > 5) {
+        console.log(numbers[i]);
+    }
+}
+
+Output:
+
+8
+10
+
+Think:
+
+Loop → get item → check item → do something
+
+5. The Main Pattern
+
+This is the pattern you should recognize:
+
+for (let i = 0; i < array.length; i++) {
+    // work with array[i]
+}
+
+Read it as:
+
+Start at index 0, visit every item, and use array[i] to access the current item.
+
+⭐ Most Important Things From Today
+i              → index/position
+array[i]       → current value
+array.length   → number of items
+i < length     → visit every valid index
+if             → make a decision about the current value
+Example:
+for (let i = 0; i < numbers.length; i++) {
+    if (numbers[i] > 5) {
+        console.log(numbers[i]);
+    }
+}
+
+Loop + Array + Condition = Powerful programming logic.
