@@ -475,3 +475,212 @@ for (let i = 0; i < numbers.length; i++) {
 }
 
 Loop + Array + Condition = Powerful programming logic.
+
+
+1. Counting With a Loop
+
+Use a counter when you want to know how many items meet a condition.
+
+let count = 0;
+
+for (let i = 0; i < array.length; i++) {
+    if (condition) {
+        count++;
+    }
+}
+
+console.log(count);
+Example
+const numbers = [2, 5, 8, 3, 10];
+
+let count = 0;
+
+for (let i = 0; i < numbers.length; i++) {
+    if (numbers[i] > 5) {
+        count++;
+    }
+}
+
+console.log(count); // 2
+
+Remember:
+
+count++ → add 1 to the counter
+2. Calculating a Total
+
+Use a total when you want to know how much altogether.
+
+let total = 0;
+
+for (let i = 0; i < array.length; i++) {
+    total += array[i];
+}
+
+console.log(total);
+Example
+const numbers = [10, 20, 30];
+
+let total = 0;
+
+for (let i = 0; i < numbers.length; i++) {
+    total += numbers[i];
+}
+
+console.log(total); // 60
+
+These mean the same thing:
+
+total = total + numbers[i];
+
+and
+
+total += numbers[i];
+
+Remember:
+
+count → HOW MANY?
+total → HOW MUCH?
+3. Total With a Condition
+
+You can combine total with if.
+
+let total = 0;
+
+for (let i = 0; i < array.length; i++) {
+    if (condition) {
+        total += array[i];
+    }
+}
+Example
+const numbers = [5, 15, 20, 8, 25];
+
+let total = 0;
+
+for (let i = 0; i < numbers.length; i++) {
+    if (numbers[i] > 10) {
+        total += numbers[i];
+    }
+}
+
+console.log(total); // 60
+
+Only:
+
+15 + 20 + 25
+
+are added.
+
+4. Searching With a Loop
+
+Use a boolean variable when you want to know:
+
+Does something exist?
+
+Start with:
+
+let found = false;
+
+Then change it to true when you find the item.
+
+let found = false;
+
+for (let i = 0; i < array.length; i++) {
+    if (condition) {
+        found = true;
+    }
+}
+Example
+const names = ["John", "Mary", "David"];
+
+let found = false;
+
+for (let i = 0; i < names.length; i++) {
+    if (names[i] === "David") {
+        found = true;
+    }
+}
+
+console.log(found); // true
+5. break
+
+break immediately stops the loop.
+
+It's useful when searching because once you've found what you're looking for, you don't need to continue.
+
+let found = false;
+
+for (let i = 0; i < numbers.length; i++) {
+    if (numbers[i] > 20) {
+        found = true;
+        break;
+    }
+}
+
+Think:
+
+Found it → I'm done → break.
+
+6. Count vs Search
+
+These look similar but answer different questions.
+
+Count
+
+How many?
+
+let count = 0;
+
+for (let i = 0; i < array.length; i++) {
+    if (condition) {
+        count++;
+    }
+}
+
+Example result:
+
+3
+Search
+
+Does it exist?
+
+let found = false;
+
+for (let i = 0; i < array.length; i++) {
+    if (condition) {
+        found = true;
+        break;
+    }
+}
+
+Example result:
+
+true
+7. Build a New Array
+
+From the previous lesson, remember:
+
+const result = [];
+
+for (let i = 0; i < array.length; i++) {
+    if (condition) {
+        result.push(array[i]);
+    }
+}
+
+push() adds an item to the new array.
+
+🧠 The 4 Patterns We've Learned
+Goal	Variable	What happens
+Count	count	count++
+Total	total	total += array[i]
+Search	found	found = true
+New array	result	result.push(...)
+Quick memory trick:
+COUNT  → How many?
+TOTAL  → How much?
+FOUND  → Does it exist?
+RESULT → What are the items?
+
+And:
+
+break → Stop the loop immediately
