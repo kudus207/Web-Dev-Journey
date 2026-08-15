@@ -684,3 +684,447 @@ RESULT → What are the items?
 And:
 
 break → Stop the loop immediately
+
+1. Find the Largest Number
+
+Use a variable that remembers the largest value so far.
+
+let largest = array[0];
+
+
+for (let i = 1; i < array.length; i++) {
+    if (array[i] > largest) {
+        largest = array[i];
+    }
+}
+
+
+console.log(largest);
+Example
+const numbers = [12, 7, 25, 3, 18];
+
+Output:
+
+25
+
+Remember:
+
+Start with array[0].
+
+Loop starts at 1.
+
+Replace largest when you find a bigger number.
+
+2. Find the Smallest Number
+
+This is the opposite of finding the largest.
+
+let smallest = array[0];
+
+
+for (let i = 1; i < array.length; i++) {
+    if (array[i] < smallest) {
+        smallest = array[i];
+    }
+}
+Example
+const numbers = [12, 7, 25, 3, 18];
+
+Output:
+
+3
+
+Memory trick:
+
+> → Bigger
+
+< → Smaller
+
+3. Find the Largest Value and Its Index
+
+Sometimes you need both the value and where it is.
+
+let largest = array[0];
+let index = 0;
+
+
+for (let i = 1; i < array.length; i++) {
+    if (array[i] > largest) {
+        largest = array[i];
+        index = i;
+    }
+}
+Example
+const scores = [55, 88, 91, 73, 99];
+
+Output:
+
+Largest: 99
+Index: 4
+Important
+
+When the largest changes:
+
+largest = array[i];
+index = i;
+
+Both variables change together.
+
+4. Find the Smallest Value and Its Index
+
+Same idea, but use <.
+
+let smallest = array[0];
+let index = 0;
+
+
+for (let i = 1; i < array.length; i++) {
+    if (array[i] < smallest) {
+        smallest = array[i];
+        index = i;
+    }
+}
+
+Example:
+
+const lapTimes = [82, 76, 79, 71, 85];
+
+Output:
+
+Fastest: 71
+Index: 3
+5. Reverse an Array (Without .reverse())
+
+Create a new array and read the original backwards.
+
+const result = [];
+
+
+for (let i = array.length - 1; i >= 0; i--) {
+    result.push(array[i]);
+}
+
+
+console.log(result);
+Example
+const numbers = [1, 2, 3, 4];
+
+Output:
+
+[4, 3, 2, 1]
+Why array.length - 1?
+
+Array
+length
+Last Index
+[1,2,3]
+
+3
+
+	
+
+2
+
+
+
+
+[10,20,30,40]
+
+	
+
+4
+
+	
+
+3
+
+
+
+
+["A","B"]
+
+	
+
+2
+
+	
+
+1
+
+The last index is always:
+
+array.length - 1
+6. Reading Loops Like a Programmer (Loop Detective)
+
+Instead of guessing, trace the variables.
+
+Example:
+
+let total = 0;
+
+
+for (let i = 1; i <= 4; i++) {
+    total += i;
+}
+
+Trace:
+
+i
+
+	
+
+total
+
+
+
+
+1
+
+	
+
+1
+
+
+
+
+2
+
+	
+
+3
+
+
+
+
+3
+
+	
+
+6
+
+
+
+
+4
+
+	
+
+10
+
+Final:
+
+10
+Detective Checklist
+
+Whenever you see a loop:
+
+What variables exist?
+
+What is the loop condition?
+
+What changes each iteration?
+
+Trace the values in a small table.
+
+7. Nested Loops
+
+A nested loop is a loop inside another loop.
+
+for (let i = 1; i <= 3; i++) {
+    let row = "";
+
+
+    for (let j = 1; j <= i; j++) {
+        row += "*";
+    }
+
+
+    console.log(row);
+}
+
+Output:
+
+*
+**
+***
+The Golden Rule
+
+Outer Loop (i)
+
+	
+
+Inner Loop (j)
+
+
+
+
+Creates each row
+
+	
+
+Fills the row
+
+Think:
+
+i changes slowly, j changes quickly.
+
+🧠 Your Complete Loop Toolbox
+
+Goal
+
+	
+
+Variable/Pattern
+
+
+
+
+Print every item
+
+	
+
+console.log(array[i])
+
+
+
+
+Modify values
+
+	
+
+array[i] = ...
+
+
+
+
+Build a new array
+
+	
+
+result.push(...)
+
+
+
+
+Count
+
+	
+
+count++
+
+
+
+
+Total
+
+	
+
+total += value
+
+
+
+
+Search
+
+	
+
+found = true
+
+
+
+
+Find index
+
+	
+
+index = i
+
+
+
+
+Largest
+
+	
+
+largest = array[0]
+
+
+
+
+Smallest
+
+	
+
+smallest = array[0]
+
+
+
+
+Largest + Index
+
+	
+
+largest + index
+
+
+
+
+Smallest + Index
+
+	
+
+smallest + index
+
+
+
+
+Reverse array
+
+	
+
+for (i = length - 1; i >= 0; i--)
+
+
+
+
+Stop early
+
+	
+
+break
+
+
+
+
+Nested loops
+
+	
+
+i = rows, j = inside the row
+
+
+
+
+Debug loops
+
+	
+
+Trace variables in a table
+
+Quick Memory Tricks
+
+count++ → How many?
+
+total += value → How much?
+
+found = true → Does it exist?
+
+index = i → Where is it?
+
+largest → Biggest so far
+
+smallest → Smallest so far
+
+array.length - 1 → Last index
+
+break → Stop the loop immediately
