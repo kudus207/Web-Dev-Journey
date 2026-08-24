@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Light Sequencer</title>
+</head>
+
+<body>
+    <h1>Build a Traffic Light Sequencer</h1>
+</body>
+
+<script>
+    // Configuration 1
+    // fault: false means there is no fault.
+    // phases contains the traffic light phases.
+    const config1 = {
+        fault: false,
+        phases: [
+            { color: "green", duration: 5 },
+            { color: "yellow", duration: 2 },
+            { color: "red", duration: 4 }
+        ]
+    };
+
+
+    // Configuration 2
+    // This configuration contains an invalid phase
+    // because yellow has a duration of -2.
+    const config2 = {
+        fault: false,
+        phases: [
+            { color: "red", duration: 3 },
+            { color: "yellow", duration: -2 },
+            { color: "green", duration: 6 }
+        ]
+    };
+
+
+    // Configuration 3
+    // fault: true means the simulation should stop immediately
+    // when runSequence() is called.
+    const config3 = {
+        fault: true,
+        phases: [
+            { color: "green", duration: 5 },
+            { color: "yellow", duration: 2 },
+            { color: "red", duration: 6 }
+        ]
+    };
+
+
+    // Configuration 4
+    // The phases array is empty, so there are no phases to run.
+    const config4 = {
+        fault: false,
+        phases: []
+    };
+
+
+    // --------------------------------------------------
+    // runSequence()
+    // Simulates the traffic light sequence.
+    // config = the configuration object
+    // cycles = how many times to repeat the sequence
+    // --------------------------------------------------
+
+    function runSequence(config, cycles) {
+
+        // Check if the phases array is empty.
+        // If it is empty, log a message and stop the function.
+        if (config.phases.length === 0) {
+            console.log("No phases found");
+            return;
+        }
+
+
+        // Check if the configuration has a fault.
+        // If fault is true, log a message and stop the function.
+        if (config.fault) {
+            console.log("Faulted phase!");
+            return;
+        }
+
+
+        // OUTER LOOP
+        // Controls how many times the entire traffic light sequence runs.
+        //
+        // Example:
+        // cycles = 2
+        // means the green → yellow → red sequence runs twice.
+        for (let cycle = 0; cycle < cycles; cycle++) {
+
+
+            // INNER LOOP
+            // Goes through each phase inside the phases array.
+            //
+            // i = 0 → first phase
+            // i = 1 → second phase
+            // i = 2 → third phase
+            for (let i = 0; i < config.phases.length; i++) {
+
+
+                // Get the current phase object from the array.
+                //
+                // config.phases[i] gives us an object such as:
+                // { color: "green", duration: 5 }
+                const phase = config.phases[i];
+
+
+                // Check whether the phase has an invalid duration.
+                // A duration of 0 or less is invalid.
+                if (phase.duration <= 0) {
+
+                    console.log("Invalid phase detected");
+
+                } else {
+
+                    // The duration is valid, so display the
+                    // color and duration of the current phase.
+                    console.log(
+                        `Switching to ${phase.color} for ${phase.duration} s`
+                    );
+                }
+            }
+        }
+    }
+
+
+    // --------------------------------------------------
+    // generateTimeline()
+    // Calculates the cumulative time after each phase.
+    //
+    // config = the configuration object
+    // cycles = how many times to repeat the sequence
+    // --------------------------------------------------
+
+    function generateTimeline(config, cycles) {
+
+        // Empty array where we will store
+        // the cumulative timestamps.
+        const timeline = [];
+
+
+        // Keeps track of the total elapsed time.
+        // It starts at 0.
+        let elapsed = 0;
+
+
+        // OUTER LOOP
+        // Controls how many times we repeat all the phases.
+        for (let cycle = 0; cycle < cycles; cycle++) {
+
+
+            // INNER LOOP
+            // Goes through every phase in the phases array.
+            for (let i = 0; i < config.phases.length; i++) {
+
+
+                // Get the duration of the current phase
+                // and add it to the running total.
+                //
+                // config.phases[i] → gets the current object
+                // .duration      → gets its duration
+                elapsed += config.phases[i].duration;
+
+
+                // Store the current cumulative time
+                // inside the timeline array.
+                timeline.push(elapsed);
+            }
+        }
+
+
+        // Return the completed timeline array.
+        return timeline;
+    }
+</script>
+
+</html>
