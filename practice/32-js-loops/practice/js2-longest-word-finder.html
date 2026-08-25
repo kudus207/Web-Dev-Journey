@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Longest Word Finder App</title>
+</head>
+
+<body>
+    <h1>Build a Longest Word Finder App</h1>
+</body>
+
+<script>
+    function findLongestWordLength(sentence) {
+        const words = sentence.split(" ");
+        let longestWord = "";
+
+        for (let i = 0; i < words.length; i++) {
+            if (words[i].length > longestWord.length) {
+                longestWord = words[i];
+            }
+        }
+        return longestWord.length;
+    }
+
+    console.log(findLongestWordLength("The quick brown fox jumped over the lazy dog"));
+    console.log(findLongestWordLength("May the force be with you"));
+    console.log(findLongestWordLength("What if we try a super-long word such as otorhinolaryngology"));
+</script>
+
+</html>
