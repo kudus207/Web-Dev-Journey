@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Common Letters</title>
+</head>
+
+<body>
+    <h1>Find Common Letters</h1>
+</body>
+
+<script>
+    // first option
+    function findCommonLetters(word1, word2) {
+        const firstWord = word1.toLowerCase();
+        const secondWord = word2.toLowerCase();
+        const commonLetters = [];
+
+        for (let i = 0; i < firstWord.length; i++) {
+            if (
+                secondWord.includes(firstWord[i]) &&
+                !commonLetters.includes(firstWord[i])
+            ) {
+                commonLetters.push(firstWord[i]);
+            }
+        }
+
+        return commonLetters;
+    }
+
+    console.log(findCommonLetters("hello", "world"));
+    console.log(findCommonLetters("Alien", "line"));
+    console.log(findCommonLetters("JavaScript", "Python"));
+    
+
+    // second option
+    function findCommonLetters(word1, word2) {
+        const firstWord = word1.toLowerCase();
+        const secondWord = word2.toLowerCase();
+        const commonLetters = [];
+
+        for (let i = 0; i < firstWord.length; i++) {
+            for (let j = 0; j < secondWord.length; j++) {
+                if (firstWord[i] === secondWord[j] && !commonLetters.includes(firstWord[i])) {
+                    commonLetters.push(firstWord[i]);
+                    break;
+                }
+            }
+        }
+        return commonLetters;
+    }
+
+    console.log(findCommonLetters("hello", "world"));
+    console.log(findCommonLetters("Alien", "line"));
+    console.log(findCommonLetters("JavaScript", "Python"));
+</script>
+
+</html>
