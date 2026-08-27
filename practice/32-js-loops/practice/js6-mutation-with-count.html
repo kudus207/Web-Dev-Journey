@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutation With Count</title>
+</head>
+
+<body>
+    <h1>Mutation With Count</h1>
+</body>
+
+<script>
+    // option 1
+    function mutationWithCounts(arr) {
+        // Convert the target string (first element) to lowercase for case-insensitivity
+        const target = arr[0].toLowerCase();
+
+        // Convert the test string (second element) to lowercase for case-insensitivity
+        const test = arr[1].toLowerCase();
+
+        // Initialize an empty object to store character counts (our inventory map)
+        const counts = {};
+
+        // Loop through every character in the target string
+        for (let char of target) {
+            // If the letter exists in counts, add 1 to it; if not, initialize it to 0 + 1
+            counts[char] = (counts[char] || 0) + 1;
+        }
+
+        // Loop through every character in the test string to check against inventory
+        for (let char of test) {
+            // If character isn't in counts OR its available count is 0, we can't fulfill it
+            if (!counts[char] || counts[char] === 0) {
+                // Missing letter or out of supply: return false immediately
+                return false;
+            }
+
+            // Decrement the letter count by 1 to mark it as used/consumed
+            counts[char]--;
+        }
+
+        // If we checked every letter in test without failing, all counts were sufficient
+        return true;
+    }
+
+    // option 2
+    function mutationWithCounts(arr) {
+        // Convert target to lowercase and store in a mutable variable so we can modify it
+        let target = arr[0].toLowerCase();
+
+        // Convert test string to lowercase for case-insensitivity
+        const test = arr[1].toLowerCase();
+
+        // Loop through every character in the test string
+        for (let char of test) {
+            // Find the first index position where char appears in target (-1 if not found)
+            const index = target.indexOf(char);
+
+            // If the character is not found anywhere in target
+            if (index === -1) {
+                // Missing required character: return false immediately
+                return false;
+            }
+
+            // Rebuild target by concatenating everything before 'index' and everything after 'index'
+            // This effectively deletes the single matched character at 'index'
+            target = target.slice(0, index) + target.slice(index + 1);
+        }
+
+        // If all letters in test were found and removed from target successfully
+        return true;
+    }
+
+    // Test cases
+    console.log(mutationWithCounts(["hello", "Hello"])); // true
+    console.log(mutationWithCounts(["hello", "lol"]));   // true
+    console.log(mutationWithCounts(["hello", "loo"]));   // false
+    console.log(mutationWithCounts(["Alien", "line"]));  // true
+    console.log(mutationWithCounts(["abbc", "bbba"]));   // false
+</script>
+
+</html>
