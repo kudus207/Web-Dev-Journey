@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missing Letter Detector</title>
+</head>
+
+<body>
+    <h1>Build a Missing Letter Detector</h1>
+</body>
+
+<script>
+    function fearNotLetter(str) {
+        // Start at index 0.
+        // Keep looping while i is before the last character.
+        // We use str.length - 1 because we are checking the
+        // character AFTER i.
+        for (let i = 0; i < str.length - 1; i++) {
+
+            // Check whether the next character is NOT
+            // the character that should come after the current character.
+            //
+            // str.charCodeAt(i + 1)
+            // → gets the code of the ACTUAL next character.
+            //
+            // str.charCodeAt(i) + 1
+            // → gets the code of the CURRENT character,
+            //   then adds 1 to find the EXPECTED next character.
+            //
+            // Example:
+            // Current = d → 100
+            // Expected next = 100 + 1 → 101 (e)
+            // Actual next = f → 102
+            //
+            // 102 !== 101 → true
+            // Therefore, e is missing.
+            if (str.charCodeAt(i + 1) !== str.charCodeAt(i) + 1) {
+
+                // Convert the expected character code back into a letter.
+                //
+                // If the current character is d:
+                // str.charCodeAt(i) → 100
+                // 100 + 1 → 101
+                //
+                // String.fromCharCode(101) → "e"
+                //
+                // So we return the missing letter.
+                return String.fromCharCode(str.charCodeAt(i) + 1);
+            }
+        }
+
+        // If the loop finishes without finding a gap,
+        // there is no missing letter.
+        return undefined;
+    }
+
+
+    // All letters are present.
+    // Nothing is missing, so the function returns undefined.
+    console.log(fearNotLetter("abcdefghijklmnopqrstuvwxyz"));
+
+
+    // b → c → d → f
+    // e is missing.
+    console.log(fearNotLetter("bcdf"));
+
+
+    // s → t → v
+    // u is missing.
+    console.log(fearNotLetter("stvwx"));
+
+</script>
+
+</html>

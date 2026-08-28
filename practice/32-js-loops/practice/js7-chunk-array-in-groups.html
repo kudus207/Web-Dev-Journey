@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHunk Array</title>
+</head>
+
+<body>
+    <h1>Chunk Array in Groups</h1>
+</body>
+
+<script>
+
+    function chunkArrayInGroups(arr, chunkSize) {
+
+        // Create an empty array.
+        // This will hold all our smaller chunks.
+        let chunk = [];
+
+        // Start at index 0.
+        // After each loop, move forward by chunkSize.
+        for (let i = 0; i < arr.length; i += chunkSize) {
+
+            // Take a section of the original array.
+            //
+            // slice(start, end)
+            //
+            // i = where we START taking elements
+            // i + chunkSize = where we STOP taking elements
+            //
+            // The end position is NOT included.
+            chunk.push(arr.slice(i, i + chunkSize));
+        }
+
+        // Return the array containing all the smaller arrays.
+        return chunk;
+    }
+
+    // chunkSize = 2
+    console.log(chunkArrayInGroups([0, 1, 2, 3, 4, 5], 2));
+    // chunkSize = 3
+    console.log(chunkArrayInGroups([0, 1, 2, 3, 4, 5], 3));
+    // chunkSize = 2
+    console.log(chunkArrayInGroups([0, 1, 2, 3, 4, 5], 2));
+    // chunkSize = 4
+    console.log(chunkArrayInGroups([0, 1, 2, 3, 4, 5], 4));
+    // chunkSize = 3
+    console.log(chunkArrayInGroups([0, 1, 2, 3, 4, 5, 6], 3));
+    // chunkSize = 4
+    console.log(chunkArrayInGroups([0, 1, 2, 3, 4, 5, 6, 7, 8], 4));
+    // chunkSize = 2
+    console.log(chunkArrayInGroups([0, 1, 2, 3, 4, 5, 6, 7, 8], 2));
+</script>
+
+</html>
