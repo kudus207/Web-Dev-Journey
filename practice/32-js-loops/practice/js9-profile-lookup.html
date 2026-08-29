@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Lookup</title>
+</head>
+
+<body>
+    <h1>Build a Profile Lookup</h1>
+</body>
+
+<script>
+    // Define the contacts array containing objects with profile information
+    let contacts = [
+        {
+            firstName: "Akira",
+            lastName: "Laine",
+            number: "0543236543",
+            likes: ["Pizza", "Coding", "Brownie Points"],
+        },
+        {
+            firstName: "Harry",
+            lastName: "Potter",
+            number: "0994372684",
+            likes: ["Hogwarts", "Magic", "Hagrid"],
+        },
+        {
+            firstName: "Sherlock",
+            lastName: "Holmes",
+            number: "0487345643",
+            likes: ["Intriguing Cases", "Violin"],
+        },
+        {
+            firstName: "Kristian",
+            lastName: "Vos",
+            number: "unknown",
+            likes: ["JavaScript", "Gaming", "Foxes"],
+        },
+    ];
+
+    // Define the lookUpProfile function accepting a name and property to search for
+    function lookUpProfile(name, property) {
+        // Loop through each element in the contacts array starting from index 0
+        for (let i = 0; i < contacts.length; i++) {
+
+            // Check if the current contact's firstName matches the requested name argument
+            if (contacts[i].firstName === name) {
+
+                // Check if the property key exists on this specific contact object
+                if (contacts[i].hasOwnProperty(property)) {
+
+                    // Return the property value using bracket notation and exit the function
+                    return contacts[i][property];
+
+                } else {
+                    // Return error message if the contact exists but lacks the requested property
+                    return "No such property";
+                }
+            }
+        }
+
+        // Return error message if the loop finishes without finding any matching name
+        return "No such contact";
+    }
+
+    // Console test logs:
+    console.log(lookUpProfile("Kristian", "lastName")); // Output: "Vos"
+    console.log(lookUpProfile("Sherlock", "likes"));    // Output: ["Intriguing Cases", "Violin"]
+    console.log(lookUpProfile("Harry", "likes"));       // Output: ["Hogwarts", "Magic", "Hagrid"]
+    console.log(lookUpProfile("Bob", "number"));        // Output: "No such contact"
+    console.log(lookUpProfile("Akira", "address"));      // Output: "No such property"
+</script>
+
+</html>
