@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Repeating Function</title>
+</head>
+
+<body>
+    <h1>Build a String Repeating Function</h1>
+</body>
+
+<script>
+    // Define a function that takes a string 'str' and a number 'num' as parameters
+    function repeatStringNumTimes(str, num) {
+        // Initialize an empty string variable to accumulate and store the repeated string
+        let result = "";
+
+        // Start a loop with counter 'i' set to 0; continue as long as 'i' is less than 'num'; increment 'i' by 1 each time
+        // Note: If 'num' is 0 or negative, '0 < num' is false immediately, so the loop won't execute
+        for (let i = 0; i < num; i++) {
+            // Append the original string 'str' to the 'result' accumulator during each iteration
+            result += str;
+        }
+
+        // Return the accumulated string (or an empty string if the loop never ran)
+        return result;
+    }
+
+    // Calls the function with "*" and 3; the loop runs 3 times; outputs: "***"
+    console.log(repeatStringNumTimes("*", 3));
+
+    // Calls the function with "abc" and 3; the loop runs 3 times; outputs: "abcabcabc"
+    console.log(repeatStringNumTimes("abc", 3));
+
+    // Calls the function with "*" and 8; the loop runs 8 times; outputs: "********"
+    console.log(repeatStringNumTimes("*", 8));
+</script>
+
+</html>
