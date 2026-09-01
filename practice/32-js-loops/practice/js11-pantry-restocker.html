@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Pantry Restocker</title>
+</head>
+
+<body>
+    <h1>Build a Smart Pantry Restocker</h1>
+</body>
+
+<script>
+    const pantry = [
+        { sku: "A10", name: "Tomatoes", qty: 4, expires: "2027-01-01", zone: "fridge" },
+        { sku: "D43", name: "Pineapples", qty: 2, expires: "2020-01-01", zone: "general" }
+    ];
+
+    const rawData = [
+        "A10|Tomatoes|5|2027-01-01",
+        "B21|Bananas|10|2027-01-01",
+        "C32|Eggs|3|2027-01-01|fridge",
+        "C32|Eggs|3|2027-01-01",
+        "D43|Pineapples|0|2027-01-01",
+        "E54|Peppers|-1|2027-01-01|fridge"
+    ];
+
+    function parseShipment(rawData) {
+        let newData = [];
+        let seenSkus = [];
+
+        for (let i = 0; i < rawData.length; i++) {
+            const splitRawData = rawData[i].split("|");
+
+            const sku = splitRawData[0];
+            const name = splitRawData[1];
+            const qty = splitRawData[2];
+            const expires = splitRawData[3];
+            const zone = splitRawData[4];
+
+            if (!seenSkus.includes(sku)) {
+                newData.push(
+                    {
+                        sku: sku,
+                        name: name,
+                        qty: Number(qty),
+                        expires: expires,
+                        zone: zone || "general"
+                    }
+                );
+                seenSkus.push(sku);
+            }
+
+        }
+
+        return newData;
+    }
+
+    // console.log(parseShipment(rawData));
+
+
+
+</script>
+
+</html>
