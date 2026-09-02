@@ -12,11 +12,15 @@
 </body>
 
 <script>
+    // An array containing the items that are already in the pantry.
+    // Each item is an object with information about that item.
     const pantry = [
         { sku: "A10", name: "Tomatoes", qty: 4, expires: "2027-01-01", zone: "fridge" },
         { sku: "D43", name: "Pineapples", qty: 2, expires: "2020-01-01", zone: "general" }
     ];
 
+    // An array containing the incoming shipment as pipe-separated strings.
+    // Each string follows: sku|name|qty|expires|zone
     const rawData = [
         "A10|Tomatoes|5|2027-01-01",
         "B21|Bananas|10|2027-01-01",
@@ -26,41 +30,188 @@
         "E54|Peppers|-1|2027-01-01|fridge"
     ];
 
+
+    // Takes the raw shipment data and converts each string into an object.
     function parseShipment(rawData) {
+
+        // Creates an empty array to store the converted shipment objects.
         let newData = [];
+
+        // Keeps track of SKUs that have already been added,
+        // so duplicate SKUs can be ignored.
         let seenSkus = [];
 
+        // Loops through every string in the rawData array.
         for (let i = 0; i < rawData.length; i++) {
+
+            // Splits the current string wherever "|" appears.
+            // Example: "A10|Tomatoes|5|2027-01-01"
+            // becomes ["A10", "Tomatoes", "5", "2027-01-01"]
             const splitRawData = rawData[i].split("|");
 
+            // Gets the SKU from the first position.
             const sku = splitRawData[0];
+
+            // Gets the item name from the second position.
             const name = splitRawData[1];
+
+            // Gets the quantity from the third position.
+            // It is still a string at this point.
             const qty = splitRawData[2];
+
+            // Gets the expiration date.
             const expires = splitRawData[3];
+
+            // Gets the zone.
+            // If no zone was provided, this will be undefined.
             const zone = splitRawData[4];
 
+            // Checks whether this SKU has already been added.
+            // If it has not been seen, the item can be added.
             if (!seenSkus.includes(sku)) {
-                newData.push(
-                    {
-                        sku: sku,
-                        name: name,
-                        qty: Number(qty),
-                        expires: expires,
-                        zone: zone || "general"
-                    }
-                );
+
+                // Creates an object from the extracted information
+                // and adds it to the newData array.
+                newData.push({
+                    sku: sku,
+                    name: name,
+
+                    // Converts the quantity from a string into a number.
+                    qty: Number(qty),
+
+                    expires: expires,
+
+                    // Uses the provided zone.
+                    // If there is no zone, it defaults to "general".
+                    zone: zone || "general"
+                });
+
+                // Records this SKU so a duplicate will be ignored later.
                 seenSkus.push(sku);
             }
-
         }
 
+        // Returns the completed array of shipment objects.
         return newData;
     }
 
-    // console.log(parseShipment(rawData));
+
+    // Decides what should happen to each shipment item:
+    // restock, discard, or donate.
+    function planRestock(pantry, shipment) {
+
+        // Creates an empty array to store the planned actions.
+        let actions = [];
+
+        // Loops through every item in the shipment.
+        for (let i = 0; i < shipment.length; i++) {
+
+            // If the quantity is 0 or less, the item must be discarded.
+            if (shipment[i].qty <= 0) {
+
+                // Adds a discard action containing the current shipment item.
+                actions.push({
+                    type: "discard",
+                    item: shipment[i]
+                });
+
+                // Checks whether the current shipment item's SKU
+                // already exists in the pantry.
+            } else if (pantry.some(pantryItem => pantryItem.sku === shipment[i].sku)) {
+
+                // If the SKU exists in the pantry, plan to restock it.
+                actions.push({
+                    type: "restock",
+                    item: shipment[i]
+                });
+
+                // If the quantity is positive and the SKU is not in the pantry...
+            } else {
+
+                // ...plan to donate the item.
+                actions.push({
+                    type: "donate",
+                    item: shipment[i]
+                });
+            }
+        }
+
+        // Returns the complete list of planned actions.
+        return actions;
+    }
 
 
+    // Groups the actions according to the item's zone.
+    function groupByZone(actions) {
 
+        // Creates an empty object.
+        // The zone names will become its properties.
+        let grouped = {};
+
+        // Loops through every action.
+        for (let i = 0; i < actions.length; i++) {
+
+            // Gets the zone from the current action's item.
+            // actions[i] -> current action
+            // .item -> the shipment item
+            // .zone -> that item's zone
+            const storeZone = actions[i].item.zone;
+
+            // Checks whether this zone does not already exist
+            // as a property in the grouped object.
+            if (!grouped.hasOwnProperty(storeZone)) {
+
+                // If the zone doesn't exist, create an empty array for it.
+                grouped[storeZone] = [];
+            }
+
+            // Adds the current action to the correct zone's array.
+            grouped[storeZone].push(actions[i]);
+        }
+
+        // Returns the object containing all the grouped actions.
+        return grouped;
+    }
+
+
+    // Creates a copy of the pantry.
+    function clonePantry(pantry) {
+
+        // Creates a new empty array for the copied pantry.
+        let duplicatePantry = [];
+
+        // Loops through every item in the original pantry.
+        for (let i = 0; i < pantry.length; i++) {
+
+            // Creates a NEW object containing the same properties
+            // and values as the current pantry item.
+            const newPantry = { ...pantry[i] };
+
+            // Adds the new object to the new pantry array.
+            duplicatePantry.push(newPantry);
+        }
+
+        // Returns the copied pantry.
+        return duplicatePantry;
+    }
+
+
+    // Converts the raw shipment strings into shipment objects.
+    const parsedShipment = parseShipment(rawData);
+
+    // Creates a separate copy of the original pantry.
+    const clonedPantry = clonePantry(pantry);
+
+    // Uses the copied pantry and parsed shipment
+    // to decide whether each item should be restocked,
+    // discarded, or donated.
+    const restockPlan = planRestock(clonedPantry, parsedShipment);
+
+    // Groups all the planned actions according to their zone.
+    const groupedResult = groupByZone(restockPlan);
+
+    // Displays the final grouped result in the console.
+    console.log(groupedResult);
 </script>
 
 </html>
