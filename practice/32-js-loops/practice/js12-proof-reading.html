@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Proofreading Tool</title>
+</head>
+
+<body>
+    <h1>Build a Proofreading Tool</h1>
+</body>
+
+<script>
+    function isPalindrome(word) {
+        let thisWord = word.toLowerCase();
+
+        if (thisWord.slice(0) !== thisWord.split("").reverse().join("")) {
+            return false;
+        }
+
+        return true;
+    }
+
+    function findPalindromeBreaks(words) {
+        const nonPalindrome = [];
+
+        for (let i = 0; i < words.length; i++) {
+            if (isPalindrome(words[i]) === false) {
+                nonPalindrome.push(i);
+            }
+        }
+        return nonPalindrome;
+    }
+
+    function findRepeatedPhrases(words, phraseLength) {
+        const phraseIndexs = [];
+    }
+
+    // console.log(isPalindrome("level"));
+    // console.log(findPalindromeBreaks(["racecar", "hello", "level", "world"]));
+
+
+</script>
+
+</html>
