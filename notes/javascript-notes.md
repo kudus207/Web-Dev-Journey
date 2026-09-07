@@ -1930,3 +1930,364 @@ do...while → Run once before checking the condition.
 break → Exit the loop.
 continue → Skip one iteration.
 Labels → Control outer loops in nested loops (rarely needed).
+
+# JavaScript Fundamentals — Quick Reference
+
+## 1. Strings
+
+```js
+const name = "Kudus";          // String primitive
+const name = new String("Kudus"); // String object — rarely needed
+```
+
+* Primitive = normal string → `typeof` is `"string"`
+* Object = wrapped string → `typeof` is `"object"`
+* JavaScript temporarily wraps primitives when using methods like `.toUpperCase()`.
+
+### `toString()`
+
+Converts a value to a string:
+
+```js
+(100).toString();       // "100"
+[1, 2, 3].toString();   // "1,2,3"
+```
+
+---
+
+## 2. Numbers & Conversion
+
+```js
+Number("100");    // 100
+Number("");       // 0
+Number("hello");  // NaN
+Number(true);     // 1
+Number(false);    // 0
+```
+
+* `Number()` converts a value to a number.
+* `new Number()` creates a Number object and is rarely needed.
+* `NaN` = Not a Number.
+
+---
+
+## 3. Naming
+
+Use **camelCase**:
+
+```js
+let firstName;
+let totalPrice;
+```
+
+* Boolean → `is`, `has`, `can`
+
+```js
+const isValid = true;
+const hasPermission = false;
+```
+
+* Functions → usually start with a verb:
+
+```js
+calculateTotal();
+validateInput();
+getUser();
+setName();
+```
+
+* Arrays → usually plural:
+
+```js
+const users = [];
+const products = [];
+```
+
+**Rule:** Name variables based on what they represent or do.
+
+---
+
+## 4. Arrays
+
+```js
+const fruits = ["apple", "banana", "orange"];
+
+fruits.length; // 3
+```
+
+`.length` gives the array's size/highest index + 1.
+
+```js
+new Array(3);          // 3 empty slots
+Array.from({length:3}); // [undefined, undefined, undefined]
+new Array(3).fill(0);  // [0, 0, 0]
+```
+
+**Array = ordered collection of values.**
+
+---
+
+## 5. Objects
+
+```js
+const user = {
+  name: "Kudus",
+  age: 25
+};
+```
+
+**Object = collection of related properties/data.**
+
+Arrays and objects can be combined:
+
+```js
+const users = [
+  { name: "John", age: 20 },
+  { name: "Jane", age: 25 }
+];
+```
+
+**Quick memory:**
+
+* Array → list of things
+* Object → describes one thing
+
+---
+
+## 6. Loops
+
+Use loops when you need to **repeat something**.
+
+```js
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+Common loops:
+
+* `for` → repeat a known number of times
+* `for...of` → loop through values
+* `for...in` → loop through object keys
+* `while` → repeat while condition is true
+* `do...while` → runs at least once
+
+`break` → stop loop
+`continue` → skip current iteration
+
+---
+
+## 7. Functions
+
+Functions are reusable blocks of code.
+
+```js
+function add(a, b) {
+  return a + b;
+}
+```
+
+* Parameters → variables defined in the function
+* Arguments → values passed into the function
+* `return` → sends a value back
+
+---
+
+## 8. `var`, `let`, `const`
+
+Prefer:
+
+```js
+let age = 25;
+const name = "Kudus";
+```
+
+* `let` → value can change
+* `const` → variable cannot be reassigned
+* `var` → older style; function-scoped and can be redeclared
+
+Modern JavaScript → **prefer `let` and `const`.**
+
+---
+
+## 9. Hoisting
+
+JavaScript processes declarations before running the code.
+
+```js
+console.log(x);
+var x = 10;
+```
+
+With `var`, `x` exists but is initially `undefined`.
+
+`let` and `const` cannot be accessed before their declaration because of the **Temporal Dead Zone (TDZ)**.
+
+**Best practice:** Declare variables before using them.
+
+---
+
+## 10. Closures
+
+A closure happens when an inner function **remembers variables from its outer function**.
+
+```js
+function counter() {
+  let count = 0;
+
+  return function () {
+    count++;
+    return count;
+  };
+}
+```
+
+```js
+const add = counter();
+
+add(); // 1
+add(); // 2
+add(); // 3
+```
+
+**Memory:** A closure = a function remembering the variables around where it was created.
+
+---
+
+## 11. Memory Management
+
+JavaScript automatically manages memory.
+
+* Creates memory when data is needed.
+* Garbage Collector removes data that is no longer reachable.
+* Keeping unnecessary references can cause **memory leaks**.
+* Closures can keep variables alive because they still reference them.
+
+---
+
+## 12. Modules
+
+Modules let you split JavaScript into separate files.
+
+```js
+// math.js
+export function add(a, b) {
+  return a + b;
+}
+```
+
+```js
+// app.js
+import { add } from "./math.js";
+```
+
+### Default export
+
+```js
+export default function add() {}
+```
+
+```js
+import add from "./math.js";
+```
+
+Only **one default export** per module.
+
+Browser:
+
+```html
+<script type="module" src="app.js"></script>
+```
+
+---
+
+## 13. `arguments`
+
+Regular functions automatically have an `arguments` object:
+
+```js
+function show() {
+  console.log(arguments);
+}
+```
+
+* Contains all arguments passed.
+* Has indexes and `.length`.
+* **Array-like, but not a real array.**
+* Does not directly have methods like `.map()` or `.includes()`.
+
+Convert it:
+
+```js
+const args = [...arguments];
+```
+
+---
+
+## 14. Rest Parameters `...`
+
+Rest collects multiple arguments into a **real array**.
+
+```js
+function show(...args) {
+  console.log(args);
+}
+
+show(1, 2, 3);
+// [1, 2, 3]
+```
+
+Because it's a real array:
+
+```js
+function hasCat(...args) {
+  return args.includes("cat");
+}
+```
+
+Rules:
+
+* Only one rest parameter.
+* Must be last.
+* No trailing comma.
+* No default value.
+
+### `arguments` vs Rest
+
+| `arguments`                                  | `...args`         |
+| -------------------------------------------- | ----------------- |
+| Array-like object                            | Real array        |
+| Older approach                               | Modern approach   |
+| No normal array methods                      | Has array methods |
+| Automatically available in regular functions | Must be declared  |
+
+**Memory:** `...args` = collect the remaining arguments into an array.
+
+---
+
+## 15. Linters & Formatters
+
+**ESLint** → finds code problems and suspicious patterns.
+
+**Prettier** → automatically formats code consistently.
+
+**Memory:**
+
+> ESLint catches problems.
+> Prettier cleans the appearance.
+
+---
+
+# 🧠 Overall Memory
+
+**Variables** → store data
+**Functions** → perform tasks
+**Arrays** → store lists
+**Objects** → describe things
+**Loops** → repeat tasks
+**Conditions** → make decisions
+**Closures** → remember surrounding variables
+**Modules** → organize code into files
+**Rest `...args`** → collect arguments into an array
+**ESLint** → check code
+**Prettier** → format code
