@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slice and Splice Algorithm</title>
+</head>
+
+<body>
+    <h1>Implement the Slice and Splice Algorithm</h1>
+</body>
+
+<script>
+    function frankenSplice(arr1, arr2, index) {
+        const arr2Copy = arr2.slice();
+
+        for (let i = 0; i < arr1.length; i++) {
+            const arr1Index = arr1[i];
+
+            arr2Copy.splice(index++, 0, arr1Index);
+        }
+
+        return arr2Copy;
+    }
+
+    console.log(frankenSplice([1, 2, 3], [4, 5], 1));
+    console.log(frankenSplice([1, 2], ["a", "b"], 1));
+    console.log(frankenSplice(["claw", "tentacle"], ["head", "shoulders", "knees", "toes"], 2));
+    console.log(frankenSplice([1, 2, 3, 4], [], 0));
+</script>
+
+</html>
