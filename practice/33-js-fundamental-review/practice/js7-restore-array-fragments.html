@@ -27,7 +27,8 @@
             text: "and to make the Tortoise feel very deeply how ridiculous it was for him to try a race with a Hare,"
         },
         {
-            id: 7, text: "but for the fun of the thing he agreed."
+            id: 7,
+            text: "but for the fun of the thing he agreed."
         },
         {
             id: 19,
@@ -96,48 +97,237 @@
         {
             id: 18,
             text: "the Tortoise was near the goal."
-        },
+        }
     ];
 
+
+    // --------------------------------------------------
+    // 1. COMPACT THE FRAGMENTS
+    // --------------------------------------------------
+
     function compactFragments(fragments) {
+
+        // Create a new empty array.
+        // We will put only real fragments into this array.
         const newFragments = [];
 
+        // Go through every position in the original array.
         for (let i = 0; i < fragments.length; i++) {
+
+            // If the current position contains a fragment,
+            // add that fragment to the new array.
             if (fragments[i] !== undefined) {
+
                 newFragments.push(fragments[i]);
+
             } else {
+
+                // If the position is empty, log that it was removed.
                 console.log(`[COMPACTED] ${fragments[i]} was removed`);
             }
         }
 
+        // Return the new array without empty slots.
         return newFragments;
     }
 
+
+    // Run compactFragments first.
     const compactedShuffledFragments = compactFragments(shuffledFragments);
 
+
+    // --------------------------------------------------
+    // 2. SORT THE FRAGMENTS BY ID
+    // --------------------------------------------------
+
     function sortFragments(fragments) {
+
+        // Make a copy of the array.
+        // This prevents us from changing the original array.
         const sortedFragments = [...fragments];
 
+        // Outer loop controls how many passes we make.
         for (let i = 0; i < sortedFragments.length; i++) {
+
+            // Inner loop compares neighboring fragments.
             for (let j = 0; j < sortedFragments.length - i - 1; j++) {
+
+                // Compare the IDs of the two neighboring fragments.
+                //
+                // If the left ID is bigger than the right ID,
+                // they are in the wrong order.
                 if (sortedFragments[j].id > sortedFragments[j + 1].id) {
+
+                    // Temporarily store the left fragment.
                     let temporary = sortedFragments[j];
+
+                    // Move the right fragment to the left position.
                     sortedFragments[j] = sortedFragments[j + 1];
+
+                    // Move the original left fragment to the right position.
                     sortedFragments[j + 1] = temporary;
                 }
             }
         }
+
+        // Return the sorted copy.
         return sortedFragments;
     }
 
+
+    // Sort the compacted fragments.
     const sortedFragments = sortFragments(compactedShuffledFragments);
 
 
+    // --------------------------------------------------
+    // 3. REMOVE DUPLICATE FRAGMENTS
+    // --------------------------------------------------
+
+    function dedupeFragments(fragments) {
+
+        // Create a new empty array.
+        // We will put only the first occurrence of each ID here.
+        const sortedFragmentsIds = [];
+
+        // Go through every fragment.
+        for (let i = 0; i < fragments.length; i++) {
+
+            // The first fragment is always kept because
+            // it has no previous fragment to compare with.
+            //
+            // For every other fragment, compare its ID
+            // with the ID of the previous fragment.
+            if (
+                i === 0 ||
+                fragments[i].id !== fragments[i - 1].id
+            ) {
+
+                // This is not a duplicate, so keep it.
+                sortedFragmentsIds.push(fragments[i]);
+
+            } else {
+
+                // The current ID is the same as the previous ID,
+                // so this fragment is a duplicate.
+                console.log(
+                    `[DEDUPED] Removed duplicate fragment with id ${fragments[i].id}`
+                );
+            }
+        }
+
+        // Return the new array without duplicates.
+        return sortedFragmentsIds;
+    }
+
+
+    // Remove duplicate fragments.
+    const dedupedFragments = dedupeFragments(sortedFragments);
+
+
+    // --------------------------------------------------
+    // 4. FILL MISSING FRAGMENT IDs
+    // --------------------------------------------------
+
+    function fillMissingFragments(fragments) {
+
+        // Create a new empty array.
+        // We will put the original fragments and
+        // any placeholder fragments into this array.
+        const filledFragments = [];
+
+        // Go through every fragment.
+        for (let i = 0; i < fragments.length; i++) {
+
+            // First, add the current real fragment.
+            filledFragments.push(fragments[i]);
+
+            // Make sure there is a NEXT fragment to compare with.
+            //
+            // We don't need to check after the last fragment
+            // because there is no ID after it.
+            if (i < fragments.length - 1) {
+
+                // Get the ID of the current fragment.
+                let currentId = fragments[i].id;
+
+                // Get the ID of the next fragment.
+                let nextId = fragments[i + 1].id;
+
+                // Keep going while there is an ID missing
+                // between currentId and nextId.
+                //
+                // Example:
+                // currentId = 2
+                // nextId = 5
+                //
+                // 3 and 4 are missing.
+                while (currentId + 1 < nextId) {
+
+                    // Move currentId up by one.
+                    currentId++;
+
+                    // Tell us that we created a placeholder.
+                    console.log(
+                        `[FILLED] added a placeholder fragment with id ${currentId}`
+                    );
+
+                    // Add the missing fragment to the new array.
+                    filledFragments.push({
+                        id: currentId,
+                        text: "[...]"
+                    });
+                }
+            }
+        }
+
+        // Return the new array containing
+        // real fragments + placeholder fragments.
+        return filledFragments;
+    }
+
+
+    // Fill all missing IDs.
+    const filledFragments = fillMissingFragments(dedupedFragments);
+
+
+    // --------------------------------------------------
+    // 5. ASSEMBLE THE FINAL STORY
+    // --------------------------------------------------
+
+    function assembleStory(fragments) {
+
+        // Create a new empty array for the text.
+        const newFragments = [];
+
+        // Go through every fragment.
+        for (let i = 0; i < fragments.length; i++) {
+
+            // Get only the text from the current fragment.
+            const fragmentText = fragments[i].text;
+
+            // Add the text to our new array.
+            newFragments.push(fragmentText);
+        }
+
+        // Join all the text together.
+        //
+        // "\n" means put each fragment on a new line.
+        return newFragments.join("\n");
+    }
+
+
+    // Print the completed story.
+    console.log(assembleStory(filledFragments));
 
     // console.log(compactFragments([{ id: 2, text: "Hello" },,]));
     // console.log(compactFragments([{ id: 1, text: "Hello" }, undefined, { id: 2, text: "World" },,])); 
     // console.log(compactFragments([{ id: 1, text: "Hello" }, { id: 2, text: "World" }]));
     // console.log(sortFragments([{ id: 30, text: "c" }, { id: 10, text: "a" }, { id: 10, text: "dup" }, { id: 20, text: "b" }])); 
+    // console.log(dedupeFragments([{ id: 1, text: "first" }, { id: 1, text: "dup" }, { id: 2, text: "second" }]));
+    // console.log(dedupeFragments([{ id: 1, text: "a" }, { id: 1, text: "dup" }, { id: 2, text: "b" }, { id: 2, text: "dup" }, { id: 3, text: "c" }]));
+    // console.log(dedupeFragments([{ id: 1, text: "a" }, { id: 2, text: "b" }, { id: 2, text: "dup" }]));
+    // console.log(fillMissingFragments([{ id: 1, text: "a" }, { id: 3, text: "c" }]));
+    // console.log(assembleStory([{ id: 1, text: "Hello" }, { id: 2, text: "World" }, { id: 3, text: "again" }]));
 
 </script>
 
