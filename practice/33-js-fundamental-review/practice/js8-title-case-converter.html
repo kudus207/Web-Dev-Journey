@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title Case Converter</title>
+</head>
+
+<body>
+    <h1>Build a Title Case Converter</h1>
+</body>
+
+<script>
+    function titleCase(sentence) {
+        let newSentence = sentence.toLowerCase();
+        let titledCase = "";
+
+        for (let i = 0; i < newSentence.length; i++) {
+            if (i === 0 || newSentence[i - 1] === " ") {
+                titledCase += newSentence[i].toUpperCase();
+            } else {
+                titledCase += newSentence[i];
+            }
+        }
+        return titledCase;
+    }
+
+    console.log(titleCase("i like to code"));
+    console.log(titleCase("javaScript is fun"));
+    console.log(titleCase("sHoRt AnD sToUt"));
+    console.log(titleCase("HERE IS MY HANDLE HERE IS MY SPOUT"));
+</script>
+
+</html>
