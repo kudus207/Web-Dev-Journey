@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management Program</title>
+</head>
+
+<body>
+    <h1>Build an Inventory Management Program</h1>
+</body>
+
+<script>
+    // An array containing the products in the inventory.
+    // Each product is an object with a name and quantity.
+    const inventory = [
+        {
+            name: "rice",
+            quantity: 20,
+        },
+        {
+            name: "beans",
+            quantity: "42",
+        },
+        {
+            name: "flour",
+            quantity: 10,
+        },
+    ];
+
+
+    // This function searches for a product and returns its index.
+    function findProductIndex(productName) {
+
+        // Start with -1, meaning "product not found".
+        let productIndex = -1;
+
+        // Loop through every product in the inventory.
+        for (let i = 0; i < inventory.length; i++) {
+
+            // Get the current product's name and convert it to lowercase.
+            const product = inventory[i].name.toLowerCase();
+
+            // Compare the current product's name with the name we're searching for.
+            // productName is also converted to lowercase so the search is case-insensitive.
+            if (product === productName.toLowerCase()) {
+
+                // If they match, i is the index of the matching product.
+                productIndex = i;
+            }
+        }
+
+        // Return the matching index, or -1 if no product was found.
+        return productIndex;
+    }
+
+
+    // This function adds a product to the inventory,
+    // or increases its quantity if it already exists.
+    function addProduct(productObject) {
+
+        // Start by assuming that the product has not been found.
+        let found = false;
+
+        // Get the product name from the object and convert it to lowercase.
+        const lowerCaseProductObject = productObject.name.toLowerCase();
+
+        // Loop through every product in the inventory.
+        for (let i = 0; i < inventory.length; i++) {
+
+            // Get the current inventory product's name and convert it to lowercase.
+            const lowerCaseInventory = inventory[i].name.toLowerCase();
+
+            // Check whether the current inventory product matches
+            // the product we are trying to add.
+            if (lowerCaseInventory === lowerCaseProductObject) {
+
+                // Add the new quantity to the existing product's quantity.
+                inventory[i].quantity += productObject.quantity;
+
+                // Remember that we found the product.
+                found = true;
+
+                // Tell us that the existing product's quantity was updated.
+                console.log(`${lowerCaseProductObject} quantity updated`);
+            }
+        }
+
+        // If we checked the inventory and never found the product...
+        if (found === false) {
+
+            // Add a new product object to the inventory.
+            // The name is stored in lowercase.
+            inventory.push({
+                name: lowerCaseProductObject,
+                quantity: productObject.quantity
+            });
+
+            // Tell us that a new product was added.
+            console.log(`${lowerCaseProductObject} added to inventory`);
+        }
+
+        // Return the updated inventory.
+        return inventory;
+    }
+
+
+    // This function removes a specified quantity from a product.
+    function removeProduct(product, quantity) {
+
+        // Convert the product name to lowercase
+        // so the search is case-insensitive.
+        const productName = product.toLowerCase();
+
+        // Start by assuming that the product has not been found.
+        let found = false;
+
+        // Loop through every product in the inventory.
+        for (let i = 0; i < inventory.length; i++) {
+
+            // Check whether the current inventory product
+            // matches the product we want to remove.
+            if (inventory[i].name.toLowerCase() === productName) {
+
+                // Remember that we found the product.
+                found = true;
+
+                // Check whether the inventory quantity is smaller
+                // than the quantity we are trying to remove.
+                if (inventory[i].quantity < quantity) {
+
+                    // There isn't enough of the product,
+                    // so don't subtract anything.
+                    console.log(
+                        `Not enough ${productName} available, remaining pieces: ${inventory[i].quantity}`
+                    );
+
+                } else {
+
+                    // There is enough quantity,
+                    // so subtract the requested quantity.
+                    inventory[i].quantity -= quantity;
+
+                    // Show how many pieces remain.
+                    console.log(
+                        `Remaining ${productName} pieces: ${inventory[i].quantity}`
+                    );
+
+                    // If the remaining quantity is exactly 0...
+                    if (inventory[i].quantity === 0) {
+
+                        // Remove that product object from the inventory.
+                        // i is the index of the product we found.
+                        inventory.splice(i, 1);
+                    }
+                }
+            }
+        }
+
+        // If we searched the entire inventory and never found the product...
+        if (found === false) {
+
+            // Tell us that the product doesn't exist in the inventory.
+            console.log(`${productName} not found`);
+        }
+
+        // Return the updated inventory.
+        return inventory;
+    }
+
+
+    // Search for "flour".
+    // Expected index: 2.
+    console.log(findProductIndex("flour"));
+
+    // Search for "FloUr".
+    // Because the search is case-insensitive, this also returns 2.
+    console.log(findProductIndex("FloUr"));
+
+    // Add 5 Flour.
+    // Flour already exists, so its quantity becomes 15.
+    console.log(addProduct({ name: "FLOUR", quantity: 5 }));
+
+    // Add 25 Sugar.
+    // Sugar doesn't exist, so a new product is added.
+    console.log(addProduct({ name: "SuGar", quantity: 25 }));
+
+    // Try to remove 5 Eggs.
+    // Eggs don't exist, so "egg not found" is logged.
+    console.log(removeProduct("egg", 5));
+
+    // Remove 8 Flour.
+    // Flour currently has 15, so 8 is removed and 7 remain.
+    console.log(removeProduct("FLOUR", 8));
+
+    // Try to remove 30 Rice.
+    // Rice only has 20, so nothing is removed.
+    console.log(removeProduct("RICE", 30));
+</script>
+
+</html>
