@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Element Skipper</title>
+</head>
+
+<body>
+    <h1>Implement an Element Skipper</h1>
+</body>
+
+<script>
+    // Create a function called dropElements.
+    // It receives two arguments:
+    // arr = the array we want to work with
+    // func = the test function that tells us when to stop dropping
+    function dropElements(arr, func) {
+
+        // Start at index 0 and move through the array one element at a time.
+        for (let i = 0; i < arr.length; i++) {
+
+            // Give the current array element to the test function.
+            // func(arr[i]) will return either true or false.
+            // If it returns true, we have found the first acceptable element.
+            if (func(arr[i])) {
+
+                // Return the array starting at the current index.
+                // slice(i) keeps the current element and everything after it.
+                return arr.slice(i);
+            }
+        }
+
+        // If the loop finishes without func ever returning true,
+        // return an empty array.
+        return [];
+    }
+
+
+    // Call dropElements with [1, 2, 3, 4].
+    // The test function checks whether a number is greater than or equal to 3.
+    console.log(
+        dropElements([1, 2, 3, 4], function (n) {
+            return n >= 3;
+        })
+    );
+
+
+    // Call dropElements with [1, 2, 3, 9, 2].
+    // The test function checks whether a number is greater than 2.
+    console.log(
+        dropElements([1, 2, 3, 9, 2], function (n) {
+            return n > 2;
+        })
+    );
+
+
+    // Call dropElements with [1, 2, 3, 7, 4].
+    // The test function checks whether a number is greater than 3.
+    console.log(
+        dropElements([1, 2, 3, 7, 4], function (n) {
+            return n > 3;
+        })
+    );
+
+
+    // Call dropElements with [1, 2, 3, 4].
+    // No number is greater than 5, so the result will be [].
+    console.log(
+        dropElements([1, 2, 3, 4], function (n) {
+            return n > 5;
+        })
+    );
+
+
+    // The very first element already passes the test because 1 > 0.
+    // Therefore, nothing is dropped.
+    console.log(
+        dropElements([1, 2, 3], function (n) {
+            return n > 0;
+        })
+    );
+
+
+    // The first 0 fails the test.
+    // The next element, 1, passes the test.
+    // So everything from that 1 onward is returned.
+    console.log(
+        dropElements([0, 1, 0, 1], function (n) {
+            return n === 1;
+        })
+    );
+</script>
+
+</html>
