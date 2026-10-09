@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist Remix Engine</title>
+</head>
+
+<body>
+    <h1>Build a Playlist Remix Engine</h1>
+</body>
+
+<script>
+    // Store two playlists inside one array.
+    const playlists = [
+        [
+            {
+                trackId: "trk101",        // Unique ID of this track.
+                artist: "Velvet Comet",   // Name of the artist.
+                title: "Crimson Afterglow", // Track title.
+                votes: 5,                 // Number of votes received.
+                bpm: 122                  // Beats per minute.
+            },
+            {
+                trackId: "trk102",
+                artist: "Neon Harbor",
+                title: "Static Horizon",
+                votes: 2,
+                bpm: 108
+            },
+            {
+                trackId: "trk103",
+                artist: "Lunar Arcade",
+                title: "Midnight Frequency",
+                votes: 4,
+                bpm: 128
+            }
+        ],
+        [
+            {
+                trackId: "trk201",
+                artist: "Solar Echo",
+                title: "Glass Skyline",
+                votes: 3,
+                bpm: 115
+            },
+            {
+                trackId: "trk202",
+                artist: "Velvet Comet",
+                title: "Satellite Hearts",
+                votes: 6,
+                bpm: 124
+            }
+        ]
+    ];
+
+    function flattenPlaylists(playlists) {
+
+        // Check whether the supplied value is an array.
+        // If it isn't, return an empty array instead.
+        if (!Array.isArray(playlists)) {
+            return [];
+        }
+
+        // Create an empty array to store the flattened tracks.
+        const result = [];
+
+        // Loop through each playlist.
+        for (let i = 0; i < playlists.length; i++) {
+
+            // Loop through each track in the current playlist.
+            for (let j = 0; j < playlists[i].length; j++) {
+
+                // Copy the current track into result.
+                result.push({
+
+                    // Copy all existing properties of the track.
+                    ...playlists[i][j],
+
+                    // Add the source property.
+                    // i identifies the playlist; j identifies the track's position.
+                    source: [i, j]
+
+                });
+            }
+        }
+
+        // Return one array containing all the tracks.
+        return result;
+    }
+
+    function scoreTracks(tracks) {
+
+        // Create an empty array to store the scored tracks.
+        const result = [];
+
+        // Loop through every track.
+        for (let i = 0; i < tracks.length; i++) {
+
+            // Copy the current track and add a calculated score.
+            result.push({
+
+                // Preserve the track's existing properties.
+                ...tracks[i],
+
+                // Calculate the score using votes and BPM.
+                // Each vote contributes 10 points.
+                // Subtract the absolute difference between BPM and 120.
+                score: tracks[i].votes * 10 -
+                    Math.abs(tracks[i].bpm - 120)
+
+            });
+        }
+
+        // Return the new array containing scored tracks.
+        return result;
+    }
+
+    function dedupeTracks(tracks) {
+
+        // Store the tracks we decide to keep.
+        const result = [];
+
+        // Store track IDs that we have already encountered.
+        const seenIds = [];
+
+        // Loop through every track.
+        for (let i = 0; i < tracks.length; i++) {
+
+            // Check whether this track's ID has NOT been seen before.
+            if (!seenIds.includes(tracks[i].trackId)) {
+
+                // If the ID is new, keep the track.
+                result.push(tracks[i]);
+
+                // Record the ID so we can recognize it later.
+                seenIds.push(tracks[i].trackId);
+            }
+        }
+
+        // Return the tracks without duplicate IDs.
+        return result;
+    }
+
+    function enforceArtistQuota(tracks, maxPerArtist) {
+
+        // Store the tracks that pass the quota.
+        const result = [];
+
+        // Track how many times each artist has been included.
+        const artistCounts = {};
+
+        // Loop through the tracks in their existing order.
+        for (let i = 0; i < tracks.length; i++) {
+
+            // Get the current artist's count.
+            // If the artist isn't in artistCounts yet, use 0.
+            // Keep the track only if the count is below the maximum.
+            if ((artistCounts[tracks[i].artist] || 0) < maxPerArtist) {
+
+                // Add the track because the artist hasn't reached the limit.
+                result.push(tracks[i]);
+
+                // Increase this artist's count by 1.
+                // If there is no count yet, start from 0.
+                artistCounts[tracks[i].artist] =
+                    (artistCounts[tracks[i].artist] || 0) + 1;
+            }
+        }
+
+        // Return only the tracks that passed the quota.
+        return result;
+    }
+
+    function buildSchedule(tracks) {
+
+        // Create an empty array to store the final schedule.
+        const result = [];
+
+        // Loop through every track that passed the previous steps.
+        for (let i = 0; i < tracks.length; i++) {
+
+            // Create a new object containing the slot and track ID.
+            result.push({
+
+                // Number the slots starting from 1, not 0.
+                slot: i + 1,
+
+                // Retrieve the current track's ID.
+                trackId: tracks[i].trackId
+
+            });
+        }
+
+        // Return the completed schedule.
+        return result;
+    }
+
+    function remixPlaylist(playlists, maxPerArtist) {
+
+        // Step 1: Flatten the nested playlists into one array.
+        const flattened = flattenPlaylists(playlists);
+
+        // Step 2: Calculate a score for every track.
+        const scored = scoreTracks(flattened);
+
+        // Step 3: Remove tracks with duplicate IDs.
+        const deduped = dedupeTracks(scored);
+
+        // Step 4: Enforce the maximum number of tracks per artist.
+        const limited = enforceArtistQuota(deduped, maxPerArtist);
+
+        // Step 5: Create the final schedule.
+        const schedule = buildSchedule(limited);
+
+        // Return the schedule to whoever called the function.
+        return schedule;
+    }
+
+    // Run the complete process with a maximum of one track per artist.
+    console.log(remixPlaylist(playlists, 1));
+</script>
+
+</html>
