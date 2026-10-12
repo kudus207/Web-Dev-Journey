@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device Loan Ledger</title>
+</head>
+
+<body>
+    <h1>Build a Device Loan Ledger</h1>
+</body>
+
+<script>
+    // Store the company's devices in an object.
+    // Each device is identified by its asset tag.
+    const equipmentLedger = {
+        "1": {
+            type: "PC",
+            status: "CheckedOut",
+            borrower: {
+                name: "John Smith",
+                email: "john@acme.org"
+            },
+            dueDate: "11/30/2025"
+        },
+        "2": {
+            type: "Laptop",
+            status: "CheckedIn",
+            borrower: {
+                name: "",
+                email: ""
+            },
+            dueDate: ""
+        },
+        "3": {
+            type: "Laptop",
+            status: "CheckedOut",
+            borrower: {
+                name: "Jane Doe",
+                email: "jane@acme.org"
+            },
+            dueDate: "10/31/2025"
+        },
+        "4": {
+            type: "iPad",
+            status: "CheckedIn",
+            borrower: {
+                name: "",
+                email: ""
+            },
+            dueDate: ""
+        }
+    };
+
+
+    // ========================================
+    // FUNCTION 1: serializeLedger()
+    // ========================================
+
+    // Accept a ledger object as an argument.
+    function serializeLedger(ledger) {
+
+        // Convert the ledger object into a JSON string.
+        // Return the resulting string.
+        return JSON.stringify(ledger);
+    }
+
+
+    // ========================================
+    // FUNCTION 2: loadLedger()
+    // ========================================
+
+    // Accept a JSON string as an argument.
+    function loadLedger(json) {
+
+        // Convert the JSON string back into a JavaScript object.
+        // Return the resulting object.
+        return JSON.parse(json);
+    }
+
+
+    // ========================================
+    // FUNCTION 3: checkoutDevice()
+    // ========================================
+
+    // Accept three arguments:
+    // ledger: the company's device register.
+    // assetTag: the ID of the device to borrow.
+    // borrower: an object containing the borrower's name and email.
+    function checkoutDevice(ledger, assetTag, borrower) {
+
+        // Convert the ledger into a JSON string,
+        // then convert that string back into an object.
+        // This creates a separate copy of the ledger.
+        const updatedLedger = loadLedger(serializeLedger(ledger));
+
+        // Check whether the requested asset tag exists.
+        // If it does not exist, return the original ledger.
+        if (!updatedLedger[assetTag]) {
+            return {
+                ledger: ledger,
+                message: `Device ${assetTag} was not found.`
+            };
+        }
+
+        // Check whether the device is already checked out.
+        // If it is, do not replace the current borrower's details.
+        if (updatedLedger[assetTag].status === "CheckedOut") {
+            return {
+                ledger: ledger,
+                message: `Device ${assetTag} is already checked out.`
+            };
+        }
+
+        // Save the new borrower's name in the copied ledger.
+        updatedLedger[assetTag].borrower.name = borrower.name;
+
+        // Save the new borrower's email in the copied ledger.
+        updatedLedger[assetTag].borrower.email = borrower.email;
+
+        // Change the device's status to CheckedOut.
+        updatedLedger[assetTag].status = "CheckedOut";
+
+        // Return the updated ledger and a confirmation message.
+        // The message includes the asset tag and the borrower's name.
+        return {
+            ledger: updatedLedger,
+            message: `Device ${assetTag} has been checked out to ${borrower.name}.`
+        };
+    }
+
+
+    // ========================================
+    // FUNCTION 4: checkinDevice()
+    // ========================================
+
+    // Accept the ledger and the asset tag of the returned device.
+    function checkinDevice(ledger, assetTag) {
+
+        // Create a separate copy of the ledger.
+        const updatedLedger = loadLedger(serializeLedger(ledger));
+
+        // Check whether the requested asset tag exists.
+        // If it does not exist, return the original ledger.
+        if (!updatedLedger[assetTag]) {
+            return {
+                ledger: ledger,
+                message: `Device ${assetTag} was not found.`
+            };
+        }
+
+        // Clear the borrower's name.
+        updatedLedger[assetTag].borrower.name = "";
+
+        // Clear the borrower's email.
+        updatedLedger[assetTag].borrower.email = "";
+
+        // Reset the due date to an empty string.
+        updatedLedger[assetTag].dueDate = "";
+
+        // Change the device's status to CheckedIn.
+        updatedLedger[assetTag].status = "CheckedIn";
+
+        // Return the updated ledger and a confirmation message.
+        return {
+            ledger: updatedLedger,
+            message: `Device ${assetTag} has been checked in successfully.`
+        };
+    }
+
+
+    // ========================================
+    // FUNCTION 5: listOverdueDevices()
+    // ========================================
+
+    // Accept the ledger and today's date.
+    function listOverdueDevices(ledger, today) {
+
+        // Create a helper function to convert a date string into a number.
+        // For example, "9/5/2025" becomes 20250905.
+        // This allows us to compare dates without using the Date object.
+        function convertDate(dateString) {
+
+            // Split the date string at each slash.
+            // "9/5/2025" becomes ["9", "5", "2025"].
+            const dateParts = dateString.split("/");
+
+            // Convert the month string into a number.
+            const month = Number(dateParts[0]);
+
+            // Convert the day string into a number.
+            const day = Number(dateParts[1]);
+
+            // Convert the year string into a number.
+            const year = Number(dateParts[2]);
+
+            // Arrange the date as year, month, and day.
+            // The result is a number that can be compared correctly.
+            return year * 10000 + month * 100 + day;
+        }
+
+        // Convert today's date into a comparable number.
+        const todayNumber = convertDate(today);
+
+        // Create an empty array to hold overdue devices.
+        const overdueDevices = [];
+
+        // Loop through each asset tag in the ledger.
+        for (const assetTag in ledger) {
+
+            // Get the device associated with the current asset tag.
+            const device = ledger[assetTag];
+
+            // Check whether the device is currently checked out.
+            if (device.status === "CheckedOut") {
+
+                // Convert its due date and compare it with today's date.
+                // Only dates strictly before today qualify as overdue.
+                if (convertDate(device.dueDate) < todayNumber) {
+
+                    // Add the overdue device object to the array.
+                    overdueDevices.push(device);
+                }
+            }
+        }
+
+        // Sort overdue devices by due date in ascending order.
+        // The earliest due date comes first.
+        overdueDevices.sort(function (deviceA, deviceB) {
+
+            // Subtract the second device's date from the first device's date.
+            // A negative result places deviceA before deviceB.
+            return convertDate(deviceA.dueDate) - convertDate(deviceB.dueDate);
+        });
+
+        // Return the array containing the overdue devices.
+        return overdueDevices;
+    }
+</script>
+
+</html>
