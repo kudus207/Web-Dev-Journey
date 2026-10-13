@@ -2291,3 +2291,182 @@ Rules:
 **Rest `...args`** → collect arguments into an array
 **ESLint** → check code
 **Prettier** → format code
+
+
+# JavaScript Quick Notes: 8 Concepts
+
+## 1. Callback Functions and `forEach()`
+
+A **callback** is a function passed as an argument to another function.
+
+`forEach()` runs a callback once for each array element.
+
+```js
+const numbers = [1, 2, 3];
+
+numbers.forEach((num) => console.log(num));
+
+// Output: 1 2 3
+```
+
+**Remember:** `forEach()` is for doing something with each element. It returns `undefined`.
+
+## 2. Higher-Order Functions
+
+A **higher-order function** accepts another function as an argument, returns a function, or both.
+
+```js
+function calculate(num, operation) {
+  return operation(num);
+}
+
+function double(num) {
+  return num * 2;
+}
+
+console.log(calculate(5, double)); // 10
+```
+
+**Remember:** A callback is passed into a function; a higher-order function receives or returns a function.
+
+## 3. `map()`
+
+`map()` creates a **new array** by transforming every element.
+
+```js
+const numbers = [1, 2, 3];
+
+const doubled = numbers.map((num) => num * 2);
+
+console.log(doubled); // [2, 4, 6]
+```
+
+**Remember:** Use `map()` when you want to transform every element.
+
+## 4. `filter()`
+
+`filter()` creates a **new array** containing elements that pass a condition.
+
+```js
+const numbers = [1, 2, 3, 4];
+
+const evenNumbers = numbers.filter((num) => num % 2 === 0);
+
+console.log(evenNumbers); // [2, 4]
+```
+
+**Remember:** Use `filter()` when you want to select certain elements.
+
+## 5. `reduce()`
+
+`reduce()` processes array elements to produce one final result, such as a number, string, or object.
+
+```js
+const numbers = [1, 2, 3, 4];
+
+const total = numbers.reduce((sum, num) => sum + num, 0);
+
+console.log(total); // 10
+```
+
+* `sum` is the accumulator that holds the running result.
+* `num` is the current element.
+* `0` is the initial accumulator value.
+
+**Remember:** Use `reduce()` to calculate a total or build one final result.
+
+## 6. Method Chaining
+
+**Method chaining** means calling multiple methods one after another.
+
+```js
+const numbers = [1, 2, 3, 4, 5];
+
+const result = numbers
+  .filter((num) => num > 2)
+  .map((num) => num * 2);
+
+console.log(result); // [6, 8, 10]
+```
+
+How it works:
+
+1. `filter()` keeps numbers greater than `2`: `[3, 4, 5]`.
+2. `map()` doubles them: `[6, 8, 10]`.
+
+**Remember:** Each method works with the result returned by the previous method.
+
+## 7. `sort()`
+
+`sort()` arranges array elements and **changes the original array**.
+
+```js
+const numbers = [10, 3, 20, 1];
+
+numbers.sort((a, b) => a - b);
+
+console.log(numbers); // [1, 3, 10, 20]
+```
+
+```js
+numbers.sort((a, b) => b - a);
+
+console.log(numbers); // [20, 10, 3, 1]
+```
+
+* `a - b`: smallest to largest.
+* `b - a`: largest to smallest.
+
+**Remember:** Use a compare function to sort numbers correctly.
+
+## 8. `every()` and `some()`
+
+`every()` checks whether **all elements** pass a condition.
+
+`some()` checks whether **at least one element** passes a condition.
+
+```js
+const numbers = [2, 4, 5, 8];
+
+console.log(numbers.every((num) => num % 2 === 0));
+// false: not all numbers are even.
+
+console.log(numbers.some((num) => num % 2 === 0));
+// true: at least one number is even.
+```
+
+**Remember:**
+
+* `every()` = ALL.
+* `some()` = AT LEAST ONE.
+* Both return `true` or `false`.
+
+---
+
+## Quick Revision Table
+
+| Method / Concept      | Main Purpose                               | Returns                       |
+| --------------------- | ------------------------------------------ | ----------------------------- |
+| Callback              | A function passed to another function      | Depends on the function       |
+| Higher-order function | Receives or returns a function             | Depends on the function       |
+| `forEach()`           | Performs an action for each element        | `undefined`                   |
+| `map()`               | Transforms every element                   | New array                     |
+| `filter()`            | Selects matching elements                  | New array                     |
+| `reduce()`            | Combines elements into a final result      | One final value               |
+| Method chaining       | Connects multiple method calls             | Depends on the final method   |
+| `sort()`              | Arranges elements                          | Reference to the sorted array |
+| `every()`             | Checks whether all elements pass           | Boolean                       |
+| `some()`              | Checks whether at least one element passes | Boolean                       |
+
+### The Easiest Way to Remember
+
+* **`forEach()`** — Do something with each item.
+* **`map()`** — Transform each item.
+* **`filter()`** — Keep selected items.
+* **`reduce()`** — Combine items into one result.
+* **`sort()`** — Arrange items.
+* **`every()`** — Check all items.
+* **`some()`** — Check whether at least one item passes.
+* **Method chaining** — Connect methods together.
+* **Callback** — A function passed to another function.
+* **Higher-order function** — A function that receives or returns another function.
