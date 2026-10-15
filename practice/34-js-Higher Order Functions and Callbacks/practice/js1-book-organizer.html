@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Organizer</title>
+</head>
+
+<body>
+    <h1>Build a Book Organizer</h1>
+</body>
+
+<script>
+// Create an array named books to store book objects.
+const books = [
+  {
+    title: "A Game of Thrones",       // The title of the book (string).
+    authorName: "George R. R. Martin", // The author's name (string).
+    releaseYear: 1996                 // The year the book was released (number).
+  },
+
+  {
+    title: "The Lord of the Rings",
+    authorName: "J.R.R. Tolkien",
+    releaseYear: 1955
+  },
+
+  {
+    title: "The Wheel of Time",
+    authorName: "Robert Jordan",
+    releaseYear: 1910
+  },
+
+  {
+    title: "The Witcher",
+    authorName: "Andrzej Sapkowski",
+    releaseYear: 1904
+  },
+
+  {
+    title: "Frankenstein",
+    authorName: "Mary Shelley",
+    releaseYear: 1818
+  }
+];
+
+// Create a callback function that accepts two book objects.
+function sortByYear(book1, book2) {
+
+  // Check whether the first book was released before the second book.
+  if (book1.releaseYear < book2.releaseYear) {
+
+    // Tell sort() that the first book should come before the second.
+    return -1;
+
+  // Otherwise, check whether the first book was released after the second.
+  } else if (book1.releaseYear > book2.releaseYear) {
+
+    // Tell sort() that the first book should come after the second.
+    return 1;
+  }
+
+  // If neither condition is true, both books have the same release year.
+  return 0;
+}
+
+// Store 1950 as the cutoff year for filtering books.
+const year = 1950;
+
+// Create a new array containing only books released on or before 1950.
+const filteredBooks = books.filter(cat => cat.releaseYear <= year);
+
+// Sort filteredBooks from the oldest book to the newest.
+filteredBooks.sort(sortByYear);
+
+// Manually call sortByYear with two book objects to test the function.
+// Frankenstein (1818) is older than The Witcher (1904), so the result is -1.
+console.log(
+  sortByYear(
+    { title: "Frankenstein", authorName: "Mary Shelley", releaseYear: 1818 },
+    { title: "The Witcher", authorName: "Andrzej Sapkowski", releaseYear: 1904 }
+  )
+);
+
+// Display the filtered books after sorting.
+console.log(filteredBooks);
+
+</script>
+
+</html>
