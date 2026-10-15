@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorted Index Finder</title>
+</head>
+
+<body>
+    <h1>Implement a Sorted Index Finder</h1>
+</body>
+
+<script>
+    function getIndexToIns(arr, number) {
+        // Sort the array in ascending order (smallest to largest).
+        arr.sort((a, b) => a - b);
+
+        // Find the index of the first element greater than or equal to number.
+        const index = arr.findIndex(num => num >= number);
+
+        // Check whether findIndex() failed to find a matching element.
+        if (index === -1) {
+            // If no element matches, insert at the end of the array.
+            // arr.length gives the index immediately after the last element.
+            return arr.length;
+        } else {
+            // If a matching element is found, return its index.
+            return index;
+        }
+    }
+
+    // Expected output: 3
+    console.log(getIndexToIns([10, 20, 30, 40, 50], 35));
+
+    // Expected output: 2
+    console.log(getIndexToIns([10, 20, 30, 40, 50], 30));
+
+    // Expected output: 3
+    console.log(getIndexToIns([3, 10, 5], 11));
+
+    // Expected output: 0
+    console.log(getIndexToIns([], 5));
+
+</script>
+
+</html>
