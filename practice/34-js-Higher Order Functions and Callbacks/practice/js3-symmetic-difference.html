@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symmetric Difference Function</title>
+</head>
+
+<body>
+    <h1>Build a Symmetric Difference Function</h1>
+</body>
+
+<script>
+
+    function diffArray(arr1, arr2) {
+
+        // Filter arr1 to keep items that do NOT exist in arr2.
+        // The ! reverses includes(): if the item exists, exclude it.
+        // If the item does not exist, keep it.
+        return [
+
+            ...arr1.filter(item => !arr2.includes(item)),
+
+            // Filter arr2 to keep items that do NOT exist in arr1.
+            // This finds the items that are unique to the second array.
+            ...arr2.filter(item => !arr1.includes(item))
+
+            // The spread operator (...) places the items from both
+            // filtered arrays into one new array.
+        ];
+    }
+
+    // Test 1: Only "pink wool" exists in the first array.
+    console.log(diffArray(
+        ["diorite", "andesite", "grass", "dirt", "pink wool", "dead shrub"],
+        ["diorite", "andesite", "grass", "dirt", "dead shrub"]
+    ));
+
+    // Test 2: Only "pink wool" exists in the first array.
+    console.log(diffArray(
+        ["diorite", "andesite", "grass", "dirt", "pink wool", "dead shrub"],
+        ["andesite", "grass", "dirt", "dead shrub"]
+    ));
+
+    // Test 3: Both arrays contain the same items.
+    console.log(diffArray(
+        ["andesite", "grass", "dirt", "dead shrub"],
+        ["andesite", "grass", "dirt", "dead shrub"]
+    ));
+
+    // Test 4: The second array is empty.
+    console.log(diffArray(["apple", "banana"], []));
+
+    // Test 5: Both arrays are empty.
+    console.log(diffArray([], []));
+
+</script>
+
+</html>
