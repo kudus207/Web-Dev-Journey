@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Value Remover Function</title>
+</head>
+
+<body>
+    <h1>Implement a Value Remover Function</h1>
+</body>
+
+<script>
+    function destroyer(arr, ...rest) {
+        // arr holds the first argument (the original array).
+        // ...rest collects all remaining arguments into a new array.
+
+        return arr.filter(item => !rest.includes(item));
+        // filter() checks each item in the original array.
+        // rest.includes(item) checks whether that item exists in rest.
+        // ! reverses the result: we keep items that do NOT exist in rest.
+        // filter() returns a new array containing only those items.
+    }
+
+    console.log(destroyer([1, 2, 3, 1, 2, 3], 2, 3));
+
+    console.log(destroyer(
+        ["possum", "trollo", 12, "safari", "hotdog", 92, 65, "grandma", "bugati", "trojan", "yacht"],
+        "yacht", "possum", "trollo", "safari", "hotdog", "grandma", "bugati", "trojan"
+    ));
+
+</script>
+
+</html>
