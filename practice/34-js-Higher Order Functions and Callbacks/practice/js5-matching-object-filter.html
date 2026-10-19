@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching Object Filter</title>
+</head>
+
+<body>
+    <h1>Implement a Matching Object Filter</h1>
+</body>
+
+<script>
+    function whatIsInAName(arr, source) {
+
+        // filter() checks each object in the arr array one at a time.
+        // item represents the current object being checked.
+        return arr.filter(item => {
+
+            // Object.keys() gets all the property names from the source object.
+            // For example, { apple: 1, bat: 2 } becomes ["apple", "bat"].
+            const keys = Object.keys(source);
+
+            // every() checks whether ALL keys have matching values in item.
+            // key represents one property name at a time.
+            // item[key] gets the value of that property from the current object.
+            // source[key] gets the expected value from the source object.
+            // If every comparison is true, filter() keeps the current object.
+            return keys.every(key => item[key] === source[key]);
+
+        });
+    }
+
+    // Test 1: Only the object with last: "Capulet" should be returned.
+    console.log(
+        whatIsInAName(
+            [
+                { first: "Romeo", last: "Montague" },
+                { first: "Mercutio", last: null },
+                { first: "Tybalt", last: "Capulet" }
+            ],
+            { last: "Capulet" }
+        )
+    );
+
+    // Test 2: Keep objects whose apple property equals 1.
+    // The third object also has bat: 2, but extra properties are allowed.
+    console.log(
+        whatIsInAName(
+            [
+                { apple: 1 },
+                { apple: 1 },
+                { apple: 1, bat: 2 }
+            ],
+            { apple: 1 }
+        )
+    );
+
+    // Test 3: Both apple: 1 AND bat: 2 must match.
+    // The second object is missing apple, so it will be excluded.
+    // The third object matches both properties; its extra cookie property is allowed.
+    console.log(
+        whatIsInAName(
+            [
+                { apple: 1, bat: 2 },
+                { bat: 2 },
+                { apple: 1, bat: 2, cookie: 2 }
+            ],
+            { apple: 1, bat: 2 }
+        )
+    );
+
+    // Test 4: The value of b must equal 9999.
+    // Since the object has b: 2, it does not match.
+    // No objects satisfy all the conditions, so an empty array is returned.
+    console.log(
+        whatIsInAName(
+            [{ a: 1, b: 2, c: 3 }],
+            { a: 1, b: 9999, c: 3 }
+        )
+    );
+
+</script>
+
+</html>
