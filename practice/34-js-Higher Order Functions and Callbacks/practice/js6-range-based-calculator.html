@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Range-Based LCM Calculator</title>
+</head>
+
+<body>
+    <h1>Implement a Range-Based LCM Calculator</h1>
+</body>
+
+<script>
+
+    function smallestCommons(arr) {
+        // Define a function named smallestCommons.
+        // It receives an array containing two numbers.
+        // Example: arr = [1, 5]
+
+        const min = Math.min(arr[0], arr[1]);
+        // arr[0] gets the first number in the array.
+        // arr[1] gets the second number in the array.
+        // Math.min() compares both numbers and returns the smaller one.
+        // For [1, 5], min becomes 1.
+        // For [5, 1], min also becomes 1.
+        // This ensures we know where the range should begin.
+
+        const max = Math.max(arr[0], arr[1]);
+        // Math.max() compares both numbers and returns the larger one.
+        // For [1, 5], max becomes 5.
+        // For [5, 1], max also becomes 5.
+        // This ensures we know where the range should end.
+
+        const numbers = [];
+        // Create an empty array named numbers.
+        // We will use it to store every number between min and max.
+        // At this point, numbers is [].
+
+        for (let i = min; i <= max; i++) {
+            // Start the loop with i equal to min.
+            // Continue while i is less than or equal to max.
+            // Increase i by 1 after each iteration.
+            // For [1, 5], i will take the values 1, 2, 3, 4, and 5.
+
+            numbers.push(i);
+            // Add the current value of i to the end of numbers.
+            // When i is 1, numbers becomes [1].
+            // When i is 2, numbers becomes [1, 2].
+            // When i is 3, numbers becomes [1, 2, 3].
+            // When i is 4, numbers becomes [1, 2, 3, 4].
+            // When i is 5, numbers becomes [1, 2, 3, 4, 5].
+        }
+        // The first loop ends when i becomes 6 because 6 <= 5 is false.
+        // The completed array is [1, 2, 3, 4, 5].
+        // The i declared in this loop is no longer accessible here.
+
+        let multiple = max;
+        // Create a variable named multiple.
+        // Set it to the largest number in the range.
+        // For [1, 5], multiple starts at 5.
+        // This is our first candidate to test.
+        // It is not necessarily the answer, so we must check it.
+
+        while (true) {
+            // Start a while loop that continues until we return an answer.
+            // "true" means the condition never becomes false on its own.
+            // The return statement below will end the function when we
+            // find a candidate that works for every number in the range.
+
+            let isCommonMultiple = true;
+            // Assume the current candidate is a common multiple.
+            // We will test this assumption in the next loop.
+            // If any number does not divide multiple evenly,
+            // we will change this variable to false.
+
+            for (let i = 0; i < numbers.length; i++) {
+                // Start a NEW loop to check every number in the array.
+                // This loop has its own i variable, separate from the first loop.
+                // Start at index 0, the first position in the array.
+                // Continue while i is less than numbers.length.
+                // Increase i by 1 to move to the next array position.
+                // For [1, 2, 3, 4, 5], the indexes are 0, 1, 2, 3, and 4.
+
+                if (multiple % numbers[i] !== 0) {
+                    // Get the number at the current index.
+                    // Use % to calculate the remainder after division.
+                    // If the remainder is not 0, the division is not even.
+                    // For example, 5 % 2 is 1, so 5 is not divisible by 2.
+                    // If the candidate fails this test, it is not a common
+                    // multiple of every number in the range.
+
+                    isCommonMultiple = false;
+                    // Change our assumption because the candidate has failed.
+                    // We now know this candidate cannot be the answer.
+
+                    break;
+                    // Stop the inner for loop immediately.
+                    // There is no need to check the remaining numbers because
+                    // we already know the candidate does not work.
+                }
+                // If the condition is false, the current number divides
+                // multiple evenly, so the for loop checks the next number.
+            }
+            // The inner loop ends when every number has been checked,
+            // or when break stops it because a number did not divide evenly.
+
+            if (isCommonMultiple) {
+                // Check whether the candidate passed every divisibility test.
+                // If the variable is still true, no number caused a failure.
+
+                return multiple;
+                // Return the current candidate as the answer.
+                // return also ends the entire smallestCommons function.
+                // We return it because the candidate divides evenly by
+                // every number in the range.
+            }
+            // If isCommonMultiple is false, the return statement is skipped.
+            // The program continues to the next line.
+
+            multiple += max;
+            // Increase the candidate by the largest number in the range.
+            // This is the same as writing multiple = multiple + max.
+            // For [1, 5], the candidates will be 5, 10, 15, 20, and so on.
+            // We increase by 5 because the answer must be divisible by 5.
+            // The next candidate is tested when the while loop repeats.
+        }
+    }
+
+    // Call the function with the numbers 1 and 5.
+    console.log(smallestCommons([1, 5]));
+    // The function finds the smallest common multiple of 1, 2, 3, 4, and 5.
+    // console.log() displays the returned answer in the console.
+    // Expected output: 60
+    console.log(smallestCommons([5, 1])); // Expected output: 60
+    console.log(smallestCommons([2, 10])); // Expected output: 2520
+    console.log(smallestCommons([1, 13])); // Expected output: 360360
+    console.log(smallestCommons([23, 18])); // Expected output: 6056820
+
+</script>
+</html>
