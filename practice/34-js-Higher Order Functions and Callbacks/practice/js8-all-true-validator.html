@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All-True Property Validator</title>
+</head>
+
+<body>
+    <h1>Build an All-True Property Validator</h1>
+</body>
+
+<script>
+    function truthCheck(collection, pre) {
+        // collection is the array of objects we want to check.
+        // pre is the name of the property we want to test.
+        // For example, pre could be "name", "role", or "isBot".
+
+        return collection.every(function (obj) {
+            // The every() method checks each object in the collection.
+            // It returns true only if the callback returns a truthy value
+            // for EVERY object in the array.
+            //
+            // obj represents the current object being checked.
+            // For example, it could be:
+            // { name: "Quincy", role: "Founder", isBot: false }
+
+            return Boolean(obj[pre]);
+            // obj[pre] accesses the value of the property whose name
+            // is stored in the pre variable.
+            //
+            // If pre is "name", this becomes obj["name"].
+            // If pre is "role", this becomes obj["role"].
+            //
+            // Boolean() converts the property's value to true or false.
+            // A truthy value becomes true.
+            // A falsy value becomes false.
+            //
+            // The return sends this true or false result back to every().
+        });
+        // If every object has a truthy value for the requested property,
+        // every() returns true.
+        //
+        // If even one object has a falsy value for that property,
+        // every() returns false.
+    }
+
+    // Test 1: isBot
+    console.log(
+        truthCheck([
+            { name: "Quincy", role: "Founder", isBot: false },
+            { name: "Naomi", role: "", isBot: false },
+            { name: "Camperbot", role: "Bot", isBot: true }
+        ], "isBot")
+    );
+    // Output: false
+    // The first two objects have isBot: false.
+    // Therefore, not every object has a truthy isBot value.
+
+    // Test 2: name
+    console.log(
+        truthCheck([
+            { name: "Quincy", role: "Founder", isBot: false },
+            { name: "Naomi", role: "", isBot: false },
+            { name: "Camperbot", role: "Bot", isBot: true }
+        ], "name")
+    );
+    // Output: true
+    // All three name values are non-empty strings.
+    // Therefore, every name value is truthy.
+
+    // Test 3: role
+    console.log(
+        truthCheck([
+            { name: "Quincy", role: "Founder", isBot: false },
+            { name: "Naomi", role: "", isBot: false },
+            { name: "Camperbot", role: "Bot", isBot: true }
+        ], "role")
+    );
+    // Output: false
+    // Naomi's role is an empty string ("").
+    // An empty string is falsy, so the test fails.
+
+    // Test 4: number
+    console.log(
+        truthCheck([
+            { name: "Pikachu", number: 25, caught: 3 },
+            { name: "Togepi", number: 175, caught: 1 }
+        ], "number")
+    );
+    // Output: true
+    // Both number values are positive numbers, which are truthy.
+
+    // Test 5: caught
+    console.log(
+        truthCheck([
+            { name: "Pikachu", number: 25, caught: 3 },
+            { name: "Togepi", number: 175, caught: 1 },
+            { name: "MissingNo", number: NaN, caught: 0 }
+        ], "caught")
+    );
+    // Output: false
+    // MissingNo has caught: 0.
+    // Zero is falsy, so every() returns false.
+
+    // Test 6: number
+    console.log(
+        truthCheck([
+            { name: "Pikachu", number: 25, caught: 3 },
+            { name: "Togepi", number: 175, caught: 1 },
+            { name: "MissingNo", number: NaN, caught: 0 }
+        ], "number")
+    );
+    // Output: false
+    // MissingNo has number: NaN.
+    // NaN is falsy, so the test fails.
+
+    // Test 7: username
+    console.log(
+        truthCheck([
+            { name: "Quincy", username: "QuincyLarson" },
+            { name: "Naomi", username: "nhcarrigan" },
+            { name: "Camperbot" }
+        ], "username")
+    );
+    // Output: false
+    // Camperbot does not have a username property.
+    // obj["username"] therefore evaluates to undefined.
+    // undefined is falsy, so every() returns false.
+
+    // Test 8: users
+    console.log(
+        truthCheck([
+            { name: "freeCodeCamp", users: [{ name: "Quincy" }, { name: "Naomi" }] },
+            { name: "Code Radio", users: [{ name: "Camperbot" }] },
+            { name: "", users: [] }
+        ], "users")
+    );
+    // Output: true
+    // Arrays are truthy, even when they are empty.
+    // Therefore, [], as well as the two non-empty arrays, is truthy.
+
+    // Test 9: data
+    console.log(
+        truthCheck([
+            { id: 1, data: { url: "https://freecodecamp.org", name: "freeCodeCamp" } },
+            { id: 2, data: { url: "https://coderadio.freecodecamp.org/", name: "CodeRadio" } },
+            { id: null, data: {} }
+        ], "data")
+    );
+    // Output: true
+    // All three data properties contain objects.
+    // Even an empty object ({}) is truthy.
+
+    // Test 10: id
+    console.log(
+        truthCheck([
+            { id: 1, data: { url: "https://freecodecamp.org", name: "freeCodeCamp" } },
+            { id: 2, data: { url: "https://coderadio.freecodecamp.org/", name: "CodeRadio" } },
+            { id: null, data: {} }
+        ], "id")
+    );
+    // Output: false
+    // The third object has id: null.
+    // null is falsy, so every() returns false.
+
+</script>
+
+</html>
