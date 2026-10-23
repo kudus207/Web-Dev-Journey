@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Directory Normalizer</title>
+</head>
+
+<body>
+    <h1>Build a Campus Directory Normalizer</h1>
+</body>
+
+<script>
+    // This object stores the original campus directory data.
+    // It contains departments, the programs offered by each department,
+    // and the instructors assigned to each program.
+
+    const rawData = {
+        // "Computer Science" is the name of the first department.
+        // Inside it, we store the department code and its programs.
+        "Computer Science": {
+            // A short code used to identify this department.
+            Dept_code: "CSE",
+
+            // An array containing all programs offered by this department.
+            programs: [
+                {
+                    // The unique ID used to identify this program.
+                    id: "CSE101",
+
+                    // The full name of the program.
+                    name: "Database Management System",
+
+                    // The classroom where the program is held.
+                    room: "405",
+
+                    // An array containing the instructors assigned to this program.
+                    instructors: [
+                        {
+                            id: "INS001",
+                            name: "Alejandro",
+                            email: "alejandro@example.com",
+                            officeHours: "Sun-Tue 10AM-12PM"
+                        },
+                        {
+                            id: "INS002",
+                            name: "Kenji",
+
+                            // null means the office hours are currently missing.
+                            officeHours: null
+                        },
+                    ],
+                },
+
+                {
+                    id: "CSE102",
+                    name: "Data Structures",
+
+                    // This program does not have a room assigned.
+                    room: null,
+
+                    instructors: [
+                        {
+                            id: "INS003",
+                            name: "Fatima",
+                            email: "fatima@example.com",
+                            officeHours: "Mon-Wed 10AM-2PM"
+                        },
+                    ],
+                },
+
+                {
+                    id: "CSE103",
+                    name: "Operating Systems",
+                    room: "401",
+
+                    instructors: [
+                        {
+                            id: "INS005",
+                            name: "Wei",
+                            email: "wei@example.com",
+                            officeHours: "Thu 1PM-3PM"
+                        },
+                    ],
+                },
+            ],
+        },
+
+        // The second department is Business Administration.
+        "Business Administration": {
+            Dept_code: "BBA",
+
+            // These are the programs offered by Business Administration.
+            programs: [
+                {
+                    id: "BBA101",
+                    name: "Financial Accounting",
+                    room: "201",
+
+                    instructors: [
+                        {
+                            id: "INS004",
+                            name: "Sofia",
+                            email: "sofia@example.com"
+
+                            // Sofia has no officeHours property.
+                            // Notice that this differs from officeHours: null.
+                        }
+                    ],
+                },
+
+                {
+                    id: "BBA102",
+                    name: "Marketing Management",
+                    room: "204",
+
+                    instructors: [
+                        {
+                            id: "INS006",
+                            name: "Robin",
+                            email: "robin@example.com",
+                            officeHours: "Tue-Thu 9AM-11AM"
+                        },
+                    ],
+                },
+
+                {
+                    id: "BBA103",
+                    name: "Business Law",
+                    room: "203",
+
+                    instructors: [
+                        {
+                            id: "INS007",
+                            name: "Priya",
+                            email: "priya@example.com",
+                            officeHours: "Mon 2PM-4PM"
+                        },
+                    ],
+                },
+            ],
+        },
+    };
+
+    function normalizeDirectory(rawData) {
+
+        // Create an empty object that will store departments.
+        // Each department will be identified by its department ID.
+        const departmentsById = {};
+
+        // Create an empty object that will store programs.
+        // Each program will be identified by its program ID.
+        const programsById = {};
+
+        // Create an empty object that will store instructors.
+        // Each instructor will be identified by their instructor ID.
+        const instructorsById = {};
+
+        // Create an empty object that will connect email addresses
+        // to instructor IDs.
+        const instructorsByEmail = {};
+
+
+        // Object.entries() converts the rawData object into an array.
+        // Each array element contains two items:
+        // 1. The department name (key).
+        // 2. The department information (value).
+        //
+        // Example:
+        // [
+        //   ["Computer Science", { Dept_code: "CSE", programs: [...] }],
+        //   ["Business Administration", { Dept_code: "BBA", programs: [...] }]
+        // ]
+        const departmentEntries = Object.entries(rawData);
+
+
+        // Start a loop to visit every department in departmentEntries.
+        //
+        // i = 0 means the loop starts at the first department.
+        // i < departmentEntries.length keeps the loop running
+        // while there are departments left to process.
+        // i++ increases i by 1 after each iteration.
+        for (let i = 0; i < departmentEntries.length; i++) {
+
+            // Get the current department entry.
+            //
+            // departmentEntries[i] contains an array with two items.
+            //
+            // The first item is assigned to departmentName.
+            // The second item is assigned to departmentData.
+            //
+            // This is called array destructuring.
+            const [departmentName, departmentData] = departmentEntries[i];
+
+
+            // Use the department's code as its ID.
+            //
+            // The || operator provides a fallback:
+            // If departmentData.Dept_code is falsy, use `dept-${i + 1}`.
+            //
+            // For example, if i is 0 and the code is missing,
+            // the fallback ID becomes "dept-1".
+            const departmentId = departmentData.Dept_code || `dept-${i + 1}`;
+
+
+            // Create a new department entry in departmentsById.
+            //
+            // The departmentId becomes the object's key.
+            // The object stores the department's information.
+            departmentsById[departmentId] = {
+
+                // Store the department ID inside the department object.
+                id: departmentId,
+
+                // Store the original department code.
+                code: departmentData.Dept_code,
+
+                // Store the department's full name.
+                name: departmentName,
+
+                // Start with an empty array.
+                // We will add the IDs of this department's programs later.
+                programIds: [],
+            };
+
+
+            // Start another loop to visit every program
+            // belonging to the current department.
+            //
+            // j starts at 0 and increases until all programs are processed.
+            for (let j = 0; j < departmentData.programs.length; j++) {
+
+                // Get the current program from the department's programs array.
+                const program = departmentData.programs[j];
+
+
+                // Create a new entry for this program in programsById.
+                //
+                // program.id becomes the key.
+                //
+                // The spread operator (...program) copies the program's
+                // existing properties into a new object.
+                //
+                // departmentId adds the ID of the department
+                // to which this program belongs.
+                programsById[program.id] = {
+                    ...program,
+                    departmentId,
+                };
+
+
+                // Add the current program's ID to the programIds array
+                // belonging to its department.
+                //
+                // For example:
+                // departmentsById["CSE"].programIds
+                // becomes ["CSE101", "CSE102", "CSE103"].
+                departmentsById[departmentId].programIds.push(program.id);
+
+
+                // Start a third loop to visit every instructor
+                // assigned to the current program.
+                for (let k = 0; k < program.instructors.length; k++) {
+
+                    // Get the current instructor from the instructors array.
+                    const instructor = program.instructors[k];
+
+
+                    // Create a new instructor entry in instructorsById.
+                    //
+                    // instructor.id becomes the key.
+                    //
+                    // The spread operator copies the instructor's
+                    // existing information into a new object.
+                    //
+                    // programId records the program this instructor belongs to.
+                    //
+                    // departmentId records the instructor's department.
+                    instructorsById[instructor.id] = {
+                        ...instructor,
+                        programId: program.id,
+                        departmentId,
+                    };
+
+
+                    // Check whether the instructor has an email address.
+                    //
+                    // If instructor.email is truthy, save a connection
+                    // between that email and the instructor's ID.
+                    //
+                    // For example:
+                    // instructorsByEmail["alejandro@example.com"] = "INS001".
+                    //
+                    // This makes it easier to find an instructor by email.
+                    if (instructor.email) {
+                        instructorsByEmail[instructor.email] = instructor.id;
+                    }
+                }
+            }
+        }
+
+
+        // Return all four collections together in one object.
+        //
+        // The calling code can access each collection
+        // using its property name.
+        return {
+            departmentsById,
+            programsById,
+            instructorsById,
+            instructorsByEmail,
+        };
+    }
+
+    // Call normalizeDirectory() and give it the original data.
+    //
+    // The function reorganizes the data and returns four collections.
+    //
+    // Store the returned object inside normalizedData so that
+    // other functions can access the reorganized information.
+    const normalizedData = normalizeDirectory(rawData);
+
+    function getInstructorByEmail(email, normalizedData) {
+
+        // Use the supplied email address to look up the instructor's ID.
+        //
+        // For example:
+        // If email is "alejandro@example.com",
+        // instructorId becomes "INS001".
+        //
+        // This works because instructorsByEmail stores email addresses
+        // as keys and instructor IDs as values.
+        const instructorId = normalizedData.instructorsByEmail[email];
+
+
+        // Check whether an instructor ID was found.
+        //
+        // If the email does not exist in instructorsByEmail,
+        // instructorId will be undefined.
+        //
+        // !instructorId checks whether the value is falsy.
+        //
+        // If no instructor ID exists, stop the function here
+        // and return the message.
+        if (!instructorId) {
+            return "Instructor not found";
+        }
+
+
+        // Use the instructor ID to retrieve the instructor's full record.
+        //
+        // For example:
+        // normalizedData.instructorsById["INS001"]
+        //
+        // This gives us Alejandro's instructor object.
+        const instructor = normalizedData.instructorsById[instructorId];
+
+
+        // Use the instructor's departmentId to find their department.
+        //
+        // For example:
+        // instructor.departmentId is "CSE".
+        //
+        // We use "CSE" to retrieve the Computer Science department.
+        const department =
+            normalizedData.departmentsById[instructor.departmentId];
+
+
+        // Return a new object containing only the information
+        // we want to display about the instructor.
+        return {
+
+            // Return the instructor's name.
+            //
+            // The ?? operator checks whether the value is null
+            // or undefined.
+            //
+            // If the name is null or undefined, use "Unknown Instructor".
+            // Otherwise, use the actual name.
+            name: instructor.name ?? "Unknown Instructor",
+
+
+            // Return the instructor's office hours.
+            //
+            // If officeHours is null or undefined,
+            // return "Not Available" instead.
+            //
+            // This handles both Kenji's null value and Sofia's
+            // missing officeHours property.
+            officeHours: instructor.officeHours ?? "Not Available",
+
+
+            // Return the department's name.
+            //
+            // If department.name is null or undefined,
+            // use "Unknown Department".
+            department: department.name ?? "Unknown Department",
+        };
+    }
+
+    function listRoomsByBuilding(buildingCode, normalizedData) {
+
+        // Get an array containing all the program objects.
+        //
+        // Object.values() returns the values of an object,
+        // without including its keys.
+        //
+        // The result contains programs such as CSE101, CSE102,
+        // CSE103, BBA101, BBA102, and BBA103.
+        const programValues = Object.values(normalizedData.programsById);
+
+
+        // Create an empty array to store the rooms we find.
+        const rooms = [];
+
+
+        // Loop through every program in programValues.
+        //
+        // i starts at 0 and increases by 1 until
+        // every program has been checked.
+        for (let i = 0; i < programValues.length; i++) {
+
+            // Get the current program.
+            const program = programValues[i];
+
+
+            // Use the program's departmentId to find its department.
+            //
+            // For example, if program.departmentId is "CSE",
+            // department will refer to the Computer Science department.
+            const department =
+                normalizedData.departmentsById[program.departmentId];
+
+
+            // Check two conditions.
+            //
+            // Condition 1:
+            // department.code === buildingCode
+            //
+            // The program must belong to the department
+            // whose code matches the supplied code.
+            //
+            // Condition 2:
+            // program.room != null
+            //
+            // The program must have a room that is neither null
+            // nor undefined.
+            //
+            // The != comparison is intentional here:
+            // null != null is false, and undefined != null is also false.
+            //
+            // Both conditions must be true because we use &&.
+            if (
+                department.code === buildingCode &&
+                program.room != null
+            ) {
+
+                // Add the program's room to the rooms array.
+                rooms.push(program.room);
+            }
+        }
+
+
+        // Sort the collected room values before returning them.
+        //
+        // Because the room values are strings, the default sort()
+        // sorts them lexicographically, not numerically.
+        //
+        // For example, "201", "204", "203" becomes
+        // "201", "203", "204".
+        rooms.sort();
+
+
+        // Return the array containing the matching room values.
+        return rooms;
+    }
+
+    function renderDirectorySummary(normalizedData) {
+
+        // Count the departments.
+        //
+        // Object.keys() returns an array of department IDs.
+        //
+        // For this data, the IDs are "CSE" and "BBA".
+        //
+        // .length tells us how many IDs are in the array.
+        const departments =
+            Object.keys(normalizedData.departmentsById).length;
+
+
+        // Count the programs.
+        //
+        // Object.keys() returns all program IDs.
+        //
+        // There are six programs in total.
+        const programs =
+            Object.keys(normalizedData.programsById).length;
+
+
+        // Count the instructors.
+        //
+        // Object.keys() returns all instructor IDs.
+        //
+        // There are seven unique instructor IDs in this dataset.
+        const instructors =
+            Object.keys(normalizedData.instructorsById).length;
+
+
+        // Get an array containing all the instructor objects.
+        //
+        // We need the actual instructor records so we can
+        // examine their officeHours properties.
+        const instructorValues =
+            Object.values(normalizedData.instructorsById);
+
+
+        // Initialize the missing office-hours counter to zero.
+        //
+        // No instructors have been checked yet.
+        let missingOfficeHours = 0;
+
+
+        // Loop through every instructor.
+        for (let i = 0; i < instructorValues.length; i++) {
+
+            // Check whether the current instructor's officeHours
+            // property is either null or undefined.
+            //
+            // Kenji has officeHours: null.
+            //
+            // Sofia has no officeHours property, so her value
+            // is undefined.
+            //
+            // The comparison == null matches both null
+            // and undefined.
+            if (instructorValues[i].officeHours == null) {
+
+                // Increase the counter by one whenever office hours
+                // are missing.
+                //
+                // missingOfficeHours++ is shorthand for:
+                // missingOfficeHours = missingOfficeHours + 1.
+                missingOfficeHours++;
+            }
+        }
+
+
+        // Get an array containing all the program objects.
+        //
+        // We need to examine each program's room property.
+        const programValues =
+            Object.values(normalizedData.programsById);
+
+
+        // Initialize the counter for programs without rooms.
+        let programsWithoutRooms = 0;
+
+
+        // Loop through every program.
+        for (let i = 0; i < programValues.length; i++) {
+
+            // Check whether the current program's room is exactly null.
+            //
+            // Data Structures has room: null.
+            //
+            // The strict comparison === null checks specifically
+            // for the null value.
+            if (programValues[i].room === null) {
+
+                // Increase the counter by one when a program's room
+                // is explicitly set to null.
+                programsWithoutRooms++;
+            }
+        }
+
+
+        // Return a template literal containing the summary.
+        //
+        // Backticks (`) allow us to write a string across
+        // multiple lines.
+        //
+        // ${...} inserts the value of a variable into the string.
+        //
+        // The function returns the report as a string;
+        // it does not print it directly.
+        return `
+Campus Directory Summary
+------------------------
+Departments: ${departments}
+Programs: ${programs}
+Instructors: ${instructors}
+Missing Office Hours: ${missingOfficeHours}
+Programs Without Rooms: ${programsWithoutRooms}
+`;
+    }
+
+    // Call renderDirectorySummary() and pass in the normalized data.
+    //
+    // The function calculates the counts and returns a formatted string.
+    //
+    // console.log() prints that string to the console.
+    console.log(renderDirectorySummary(normalizedData));
+
+    // Campus Directory Summary
+    // ------------------------
+    // Departments: 2
+    // Programs: 6
+    // Instructors: 7
+    // Missing Office Hours: 2
+    // Programs Without Rooms: 1
+
+</script>
+
+</html>
