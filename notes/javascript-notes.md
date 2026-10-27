@@ -2470,3 +2470,145 @@ console.log(numbers.some((num) => num % 2 === 0));
 * **Method chaining** — Connect methods together.
 * **Callback** — A function passed to another function.
 * **Higher-order function** — A function that receives or returns another function.
+
+
+JavaScript DOM Events 
+1. setAttribute()
+
+Adds or updates an HTML attribute.
+
+element.setAttribute("class", "highlight");
+2. Event Object
+
+Contains information about an event.
+
+event.type — type of event.
+event.target — element that triggered the event.
+event.currentTarget — element whose listener is running.
+event.preventDefault() — prevents the default action.
+event.stopPropagation() — stops further propagation.
+3. addEventListener()
+
+Listens for an event and runs a function when it occurs.
+
+button.addEventListener("click", handleClick);
+
+Common events: click, input, change, submit, keydown, mouseover.
+
+4. removeEventListener()
+
+Removes a previously registered event listener. Use the same event type and function reference.
+
+button.removeEventListener("click", handleClick);
+5. Inline Events vs addEventListener()
+Inline: <button onclick="sayHello()">Click</button>
+Recommended: button.addEventListener("click", sayHello);
+
+addEventListener() keeps JavaScript separate from HTML and allows multiple listeners.
+
+6. style vs classList
+element.style.color = "red" — changes an individual CSS property.
+element.classList.add("active") — adds a class.
+.remove("active") — removes a class.
+.toggle("active") — adds or removes a class.
+.contains("active") — checks whether a class exists.
+7. DOMContentLoaded
+
+Fires when the HTML has been parsed and the DOM is ready.
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Access HTML elements here
+});
+DOMContentLoaded — HTML parsed.
+load — page resources, such as images, have loaded too.
+8. setTimeout() vs setInterval()
+setTimeout(fn, 1000) — runs once after approximately 1 second.
+setInterval(fn, 1000) — repeats approximately every second.
+clearTimeout(id) — cancels a pending timeout.
+clearInterval(id) — stops an interval.
+
+1000 milliseconds = 1 second.
+
+9. requestAnimationFrame()
+
+Schedules a function to run before the browser's next repaint. Useful for smooth animations.
+
+function animate() {
+  // Update animation
+  requestAnimationFrame(animate);
+}
+
+requestAnimationFrame(animate);
+10. Web Animations API (WAAPI)
+
+Creates and controls animations using JavaScript.
+
+element.animate(
+  [{ transform: "translateX(0)" },
+   { transform: "translateX(100px)" }],
+  { duration: 1000 }
+);
+
+Methods: .play(), .pause(), .reverse(), .finish(), .cancel().
+
+11. Canvas API
+
+Draws graphics using JavaScript.
+
+const canvas = document.querySelector("canvas");
+const ctx = canvas.getContext("2d");
+
+ctx.fillStyle = "red";
+ctx.fillRect(10, 10, 100, 50);
+
+fillRect(x, y, width, height) draws a filled rectangle.
+
+12. HTML <dialog>
+
+Creates dialog boxes and modal windows.
+
+dialog.showModal() — opens a modal dialog.
+dialog.show() — opens a non-modal dialog.
+dialog.close() — closes the dialog.
+13. change vs input
+input — fires as the user edits a value, such as typing.
+change — fires when a value change is committed.
+select.addEventListener("change", (event) => {
+  console.log(event.target.value);
+});
+14. Event Bubbling
+
+An event travels from the element that triggered it up through its parent elements.
+
+For example, clicking a <span> inside a <p> can trigger listeners on both elements.
+
+15. Event Delegation
+
+Uses one parent event listener to handle events from child elements.
+
+paragraph.addEventListener("click", (event) => {
+  if (event.target.tagName === "SPAN") {
+    event.target.style.color = "red";
+  }
+});
+event.target — original element clicked.
+event.currentTarget — element handling the event.
+event.stopPropagation() — stops the event from travelling further along the propagation path.
+🧠 Quick Memory Guide
+Feature	Main purpose
+setAttribute()	Add or update an HTML attribute
+addEventListener()	Listen for events
+removeEventListener()	Remove an event listener
+classList	Add, remove, toggle, or check CSS classes
+DOMContentLoaded	Run code when HTML parsing is complete
+setTimeout()	Run once later
+setInterval()	Repeat after a delay
+requestAnimationFrame()	Animate with the browser's repaint cycle
+Canvas API	Draw graphics
+<dialog>	Display dialog boxes
+input	Respond while a value is being edited
+change	Respond when a value change is committed
+Event bubbling	Events travel up to parent elements
+Event delegation	A parent handles events from child elements
+
+The big picture: DOM events allow JavaScript to respond to user actions, change page content and styles, control animations, and handle interactions efficiently.
