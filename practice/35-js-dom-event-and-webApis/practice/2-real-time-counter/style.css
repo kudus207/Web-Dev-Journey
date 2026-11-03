@@ -1,0 +1,25 @@
+body {
+    background-color: #bfe9f0;
+    margin: 10px auto;
+    text-align: center;
+}
+
+h1 {
+    background-color: #f3f37a;
+}
+
+textarea {
+    width: 20rem;
+    height: 10rem;
+    resize: none;
+}
+
+textarea::placeholder {
+    font-size: 18px;
+    padding: 10px;
+}
+
+p {
+    font-weight: bold;
+    color: #363535;
+}
