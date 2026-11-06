@@ -9,18 +9,18 @@
 
 <body>
     <h1>Build a String Inverter</h1>
+
+    <script>
+        function reverseString(word) {
+            let reverseWord = word.split("").reverse().join("");
+
+            return reverseWord;
+        }
+
+        console.log(reverseString("hello"));
+        console.log(reverseString("howdy"));
+        console.log(reverseString("Greetings from Earth"));
+    </script>
 </body>
-
-<script>
-    function reverseString(word) {
-        let reverseWord = word.split("").reverse().join("");
-
-        return reverseWord;
-    }
-
-    console.log(reverseString("hello"));
-    console.log(reverseString("howdy"));
-    console.log(reverseString("Greetings from Earth"));
-</script>
 
 </html>

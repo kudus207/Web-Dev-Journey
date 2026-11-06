@@ -8,35 +8,36 @@
 </head>
 
 <body>
-    <h1>Implement the Mutations Algorithm</h1> 
-</body>
+    <h1>Implement the Mutations Algorithm</h1>
 
-<script>
-    // option 1
-    function mutation(arr) {
-        const firstWord = arr[0].toLowerCase();
-        const secondWord = arr[1].toLowerCase();
+    <script>
+        // option 1
+        function mutation(arr) {
+            const firstWord = arr[0].toLowerCase();
+            const secondWord = arr[1].toLowerCase();
 
-        for (let i = 0; i < secondWord.length; i++) {
-            if (!firstWord.includes(secondWord[i])) {
-                return false;
+            for (let i = 0; i < secondWord.length; i++) {
+                if (!firstWord.includes(secondWord[i])) {
+                    return false;
+                }
             }
+            return true;
         }
-        return true;
-    }
-    console.log(mutation(["floor", "for"]));
+        console.log(mutation(["floor", "for"]));
 
 
-    // option 2
-    // function mutation(arr) {
-    //   for (let i = 0; i < arr[1].length; i++) {
-    //     if (!arr[0].toLowerCase().includes(arr[1].toLowerCase()[i])) {
-    //       return false;
-    //     }
-    //   }
-    //   return true;
-    // }
-    // console.log(mutation(["voodoo", "no"]));
-</script>
+        // option 2
+        // function mutation(arr) {
+        //   for (let i = 0; i < arr[1].length; i++) {
+        //     if (!arr[0].toLowerCase().includes(arr[1].toLowerCase()[i])) {
+        //       return false;
+        //     }
+        //   }
+        //   return true;
+        // }
+        // console.log(mutation(["voodoo", "no"]));
+    </script>
+
+</body>
 
 </html>

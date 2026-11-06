@@ -9,27 +9,27 @@
 
 <body>
     <h1>Limit a Username</h1>
-</body>
 
-<script>
-    function limitUsername(str, num) {
-        // Check if the username is longer than the allowed length
-        if (str.length > num) {
+    <script>
+        function limitUsername(str, num) {
+            // Check if the username is longer than the allowed length
+            if (str.length > num) {
 
-            // Take only the first 'num' characters
-            let username = str.slice(0, num);
+                // Take only the first 'num' characters
+                let username = str.slice(0, num);
 
-            // Add * to the end and return the result
-            return username + "*";
+                // Add * to the end and return the result
+                return username + "*";
 
-        } else {
+            } else {
 
-            // If the username is already short enough, return it unchanged
-            return str;
+                // If the username is already short enough, return it unchanged
+                return str;
+            }
         }
-    }
 
-    console.log(limitUsername("javascriptMaster", 10));
-</script>
+        console.log(limitUsername("javascriptMaster", 10));
+    </script>
+</body>
 
 </html>

@@ -9,75 +9,75 @@
 
 <body>
     <h1>Implement an HTML Entity Converter</h1>
-</body>
 
-<script>
-    function convertHTML(string) {
-        // Create an empty string where we will build the converted result.
+    <script>
+        function convertHTML(string) {
+            // Create an empty string where we will build the converted result.
 
-        let convertedSymbol = "";
+            let convertedSymbol = "";
 
-        // Start a loop at index 0.
-        // The loop continues as long as i is less than the length of the string.
-        // i increases by 1 after each loop.
+            // Start a loop at index 0.
+            // The loop continues as long as i is less than the length of the string.
+            // i increases by 1 after each loop.
 
-        for (let i = 0; i < string.length; i++) {
+            for (let i = 0; i < string.length; i++) {
 
-            // Check if the current character is an ampersand (&).
+                // Check if the current character is an ampersand (&).
 
-            if (string[i] === "&") {
+                if (string[i] === "&") {
 
-                // If it is &, add the HTML entity &amp; to the result.
+                    // If it is &, add the HTML entity &amp; to the result.
 
-                convertedSymbol += "&amp;";
+                    convertedSymbol += "&amp;";
 
-                // Otherwise, check if the current character is less than (<).
+                    // Otherwise, check if the current character is less than (<).
 
-            } else if (string[i] === "<") {
+                } else if (string[i] === "<") {
 
-                // If it is <, add the HTML entity &lt; to the result.
+                    // If it is <, add the HTML entity &lt; to the result.
 
-                convertedSymbol += "&lt;";
+                    convertedSymbol += "&lt;";
 
-                // Otherwise, check if the current character is greater than (>).
+                    // Otherwise, check if the current character is greater than (>).
 
-            } else if (string[i] === ">") {
+                } else if (string[i] === ">") {
 
-                // If it is >, add the HTML entity &gt; to the result.
+                    // If it is >, add the HTML entity &gt; to the result.
 
-                convertedSymbol += "&gt;";
+                    convertedSymbol += "&gt;";
 
-                // Otherwise, check if the current character is a double quotation mark (").
+                    // Otherwise, check if the current character is a double quotation mark (").
 
-            } else if (string[i] === '"') {
+                } else if (string[i] === '"') {
 
-                // If it is ", add the HTML entity &quot; to the result.
+                    // If it is ", add the HTML entity &quot; to the result.
 
-                convertedSymbol += "&quot;";
+                    convertedSymbol += "&quot;";
 
-                // Otherwise, check if the current character is a single quotation mark (').
+                    // Otherwise, check if the current character is a single quotation mark (').
 
-            } else if (string[i] === "'") {
+                } else if (string[i] === "'") {
 
-                // If it is ', add the HTML entity &apos; to the result.
+                    // If it is ', add the HTML entity &apos; to the result.
 
-                convertedSymbol += "&apos;";
+                    convertedSymbol += "&apos;";
 
-                // If the character is none of the special characters above...
+                    // If the character is none of the special characters above...
 
-            } else {
+                } else {
 
-                // Add the original character to the result without changing it.
+                    // Add the original character to the result without changing it.
 
-                convertedSymbol += string[i];
+                    convertedSymbol += string[i];
+                }
             }
+
+            // After the loop has checked every character,
+            // return the completed converted string.
+
+            return convertedSymbol;
         }
-
-        // After the loop has checked every character,
-        // return the completed converted string.
-
-        return convertedSymbol;
-    }
-</script>
+    </script>
+</body>
 
 </html>

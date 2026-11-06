@@ -9,28 +9,28 @@
 
 <body>
     <h1>Implement a Falsy Remover</h1>
-</body>
 
-<script>
-    function bouncer(bounce) {
-        const truthy = [];
+    <script>
+        function bouncer(bounce) {
+            const truthy = [];
 
-        for (let i = 0; i < bounce.length; i++) {
-            const isTruthy = Boolean(bounce[i]);
+            for (let i = 0; i < bounce.length; i++) {
+                const isTruthy = Boolean(bounce[i]);
 
-            if (isTruthy === true) {
-                truthy.push(bounce[i]);
+                if (isTruthy === true) {
+                    truthy.push(bounce[i]);
+                }
             }
+
+            return truthy;
         }
 
-        return truthy;
-    }
-
-    console.log(bouncer([7, "ate", "", false, 9]));
-    console.log(bouncer(["a", "b", "c"]));
-    console.log(bouncer([false, null, 0, NaN, undefined, ""]));
-    console.log(bouncer([null, NaN, 1, 2, undefined]));
-    console.log(bouncer([]));
-</script>
+        console.log(bouncer([7, "ate", "", false, 9]));
+        console.log(bouncer(["a", "b", "c"]));
+        console.log(bouncer([false, null, 0, NaN, undefined, ""]));
+        console.log(bouncer([null, NaN, 1, 2, undefined]));
+        console.log(bouncer([]));
+    </script>
+</body>
 
 </html>

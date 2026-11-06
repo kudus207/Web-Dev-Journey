@@ -9,66 +9,66 @@
 
 <body>
     <h1>Build a Student Pass Checker</h1>
-</body>
 
-<script>
-    function checkPassStatus(score, allAssignmentsSubmitted, isHonorStudent) {
-        if ((score >= 50 && allAssignmentsSubmitted) || (isHonorStudent)) {
-            return "Student passes."
-        } else {
-            return "Student does not pass."
+    <script>
+        function checkPassStatus(score, allAssignmentsSubmitted, isHonorStudent) {
+            if ((score >= 50 && allAssignmentsSubmitted) || (isHonorStudent)) {
+                return "Student passes."
+            } else {
+                return "Student does not pass."
+            }
         }
-    }
 
-    let score = 30;
-    let allAssignmentsSubmitted = true;
-    let isHonorStudent = true;
+        let score = 30;
+        let allAssignmentsSubmitted = true;
+        let isHonorStudent = true;
 
-    let result = checkPassStatus(score, allAssignmentsSubmitted, isHonorStudent);
+        let result = checkPassStatus(score, allAssignmentsSubmitted, isHonorStudent);
 
-    console.log(result);
+        console.log(result);
 
 
-    // Function that checks whether a student passes or not
-   // function checkPassStatus(score, allAssignmentsSubmitted, isHonorStudent) {
+        // Function that checks whether a student passes or not
+        // function checkPassStatus(score, allAssignmentsSubmitted, isHonorStudent) {
 
         // Check if:
         // (the student scored 50 or more AND submitted all assignments)
         // OR
         // the student is an honor student
-    //    if ((score >= 50 && allAssignmentsSubmitted) || isHonorStudent) {
+        //    if ((score >= 50 && allAssignmentsSubmitted) || isHonorStudent) {
 
-            // If the condition above is true, return this message
-       //     return "Student passes.";
+        // If the condition above is true, return this message
+        //     return "Student passes.";
 
-      //  } else {
+        //  } else {
 
-            // If the condition above is false, return this message
-       //     return "Student does not pass.";
-      //  }
-  //  }
+        // If the condition above is false, return this message
+        //     return "Student does not pass.";
+        //  }
+        //  }
 
-    // Student's score
-    //let score = 30;
+        // Student's score
+        //let score = 30;
 
-    // Whether the student submitted all assignments
-    // true = yes, false = no
-    // let allAssignmentsSubmitted = true;
+        // Whether the student submitted all assignments
+        // true = yes, false = no
+        // let allAssignmentsSubmitted = true;
 
-    // Whether the student is an honor student
-    // true = yes, false = no
-   // let isHonorStudent = true;
+        // Whether the student is an honor student
+        // true = yes, false = no
+        // let isHonorStudent = true;
 
-    // Call the function and store the returned value in result
-   // let result = checkPassStatus(
-    //    score,
-    //    allAssignmentsSubmitted,
-    //    isHonorStudent
-    //);
+        // Call the function and store the returned value in result
+        // let result = checkPassStatus(
+        //    score,
+        //    allAssignmentsSubmitted,
+        //    isHonorStudent
+        //);
 
-    // Display the result in the console
-   // console.log(result);
+        // Display the result in the console
+        // console.log(result);
 
-</script>
+    </script>
+</body>
 
 </html>

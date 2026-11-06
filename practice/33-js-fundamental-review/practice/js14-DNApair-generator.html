@@ -8,31 +8,32 @@
 </head>
 
 <body>
-    <h1>Implement a DNA Pair Generator</h1> 
-</body>
+    <h1>Implement a DNA Pair Generator</h1>
 
-<script>
-    function pairElement(string) {
-        const result = [];
+    <script>
+        function pairElement(string) {
+            const result = [];
 
-        for (let i = 0; i < string.length; i++) {
-            if (string[i] === "A") {
-                result.push(["A", "T"]);
-            } else if (string[i] === "T") {
-                result.push(["T", "A"]);
-            } else if (string[i] === "C") {
-                result.push(["C", "G"]);
-            } else if (string[i] === "G") {
-                result.push(["G", "C"]);
+            for (let i = 0; i < string.length; i++) {
+                if (string[i] === "A") {
+                    result.push(["A", "T"]);
+                } else if (string[i] === "T") {
+                    result.push(["T", "A"]);
+                } else if (string[i] === "C") {
+                    result.push(["C", "G"]);
+                } else if (string[i] === "G") {
+                    result.push(["G", "C"]);
+                }
             }
+
+            return result;
         }
 
-        return result;
-    }
+        console.log(pairElement("ATCGA"));
+        console.log(pairElement("TTGAG"));
+        console.log(pairElement("CTCTA"));
+    </script>
 
-    console.log(pairElement("ATCGA"));
-    console.log(pairElement("TTGAG"));
-    console.log(pairElement("CTCTA"));
-</script>
+</body>
 
 </html>

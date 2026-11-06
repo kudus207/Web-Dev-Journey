@@ -9,32 +9,31 @@
 
 <body>
     <h1>Build an Email Masker</h1>
-</body>
 
-<script>
-    function maskEmail(email) {
-        let emailAddress = email;
+    <script>
+        function maskEmail(email) {
+            let emailAddress = email;
 
-        let atIndex = emailAddress.indexOf("@");
+            let atIndex = emailAddress.indexOf("@");
 
-        let username = emailAddress.slice(0, atIndex);
+            let username = emailAddress.slice(0, atIndex);
 
-        let domain = emailAddress.slice(atIndex);
+            let domain = emailAddress.slice(atIndex);
 
-        let firstLetter = username.slice(0, 1);
+            let firstLetter = username.slice(0, 1);
 
-        let lastLetter = username.slice(-1);
+            let lastLetter = username.slice(-1);
 
-        let stars = "*".repeat(username.length - 2);
+            let stars = "*".repeat(username.length - 2);
 
-        return firstLetter + stars + lastLetter + domain;
-    }
+            return firstLetter + stars + lastLetter + domain;
+        }
 
-    let email = "apple.pie@example.com";
+        let email = "apple.pie@example.com";
 
-    console.log(maskEmail(email));
+        console.log(maskEmail(email));
 
-    //function maskEmail(email) {
+        //function maskEmail(email) {
         // Creates a function named maskEmail
         // The parameter "email" stores the value passed into the function
 
@@ -42,13 +41,13 @@
         // "apple.pie@example.com"
 
 
-       // let emailAddress = email;
+        // let emailAddress = email;
         // Stores the email parameter in another variable
 
         // emailAddress = "apple.pie@example.com"
 
 
-       // let atIndex = emailAddress.indexOf("@");
+        // let atIndex = emailAddress.indexOf("@");
         // indexOf("@") finds the position of "@"
 
         // Positions:
@@ -131,25 +130,26 @@
         // stars = "*******"
 
 
-       // return firstLetter + stars + lastLetter + domain;
+        // return firstLetter + stars + lastLetter + domain;
         // Combines all parts together
 
         // "a" + "*******" + "e" + "@example.com"
 
         // Final result:
         // "a*******e@example.com"
-    //}
+        //}
 
 
-    //let email = "apple.pie@example.com";
-    // Creates the variable storing the email address
+        //let email = "apple.pie@example.com";
+        // Creates the variable storing the email address
 
 
-    //console.log(maskEmail(email));
-    // Calls the function and prints the result
+        //console.log(maskEmail(email));
+        // Calls the function and prints the result
 
-    // Output:
-    // "a*******e@example.com"
-</script>
+        // Output:
+        // "a*******e@example.com"
+    </script>
+</body>
 
 </html>

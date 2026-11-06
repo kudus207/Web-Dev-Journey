@@ -9,29 +9,28 @@
 
 <body>
     <h1>Build a Name Initial Generator</h1>
-</body>
 
-<script>
-    function getInitials(fullName) {
-        let initials = fullName;
+    <script>
+        function getInitials(fullName) {
+            let initials = fullName;
 
-        let firstCapitalized = initials.charAt(0).toUpperCase();
-        let space = initials.indexOf(" ");
-        let secondCapitalized = initials.charAt(space + 1).toUpperCase();
-        let joining = ".";
+            let firstCapitalized = initials.charAt(0).toUpperCase();
+            let space = initials.indexOf(" ");
+            let secondCapitalized = initials.charAt(space + 1).toUpperCase();
+            let joining = ".";
 
-        return firstCapitalized + joining + secondCapitalized;
-    }
+            return firstCapitalized + joining + secondCapitalized;
+        }
 
-    let fullName = "olaniyi kudus";
+        let fullName = "olaniyi kudus";
 
-    console.log(getInitials(fullName));
+        console.log(getInitials(fullName));
 
-    // "john doe"
-    // "J.D"
+        // "john doe"
+        // "J.D"
 
 
-    //function getInitials(fullName) {
+        //function getInitials(fullName) {
         // Creates a function named getInitials
         // The parameter "fullName" stores the value passed into the function
 
@@ -39,13 +38,13 @@
         // "olaniyi kudus"
 
 
-       // let initials = fullName;
+        // let initials = fullName;
         // Stores the fullName value in another variable
 
         // initials = "olaniyi kudus"
 
 
-       // let firstCapitalized = initials.charAt(0).toUpperCase();
+        // let firstCapitalized = initials.charAt(0).toUpperCase();
         // charAt(0) gets the first character of the string
 
         // From:
@@ -89,7 +88,7 @@
         // secondCapitalized = "K"
 
 
-       // let joining = ".";
+        // let joining = ".";
         // Stores a dot that will separate the initials
 
         // joining = "."
@@ -102,18 +101,19 @@
 
         // Final result:
         // "O.K"
-   // }
+        // }
 
 
-    //let fullName = "olaniyi kudus";
-    // Creates the variable storing the full name
+        //let fullName = "olaniyi kudus";
+        // Creates the variable storing the full name
 
 
-    //console.log(getInitials(fullName));
-    // Calls the function and prints the result
+        //console.log(getInitials(fullName));
+        // Calls the function and prints the result
 
-    // Output:
-    // "O.K"
-</script>
+        // Output:
+        // "O.K"
+    </script>
+</body>
 
 </html>
