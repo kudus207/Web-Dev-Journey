@@ -2612,3 +2612,113 @@ Event bubbling	Events travel up to parent elements
 Event delegation	A parent handles events from child elements
 
 The big picture: DOM events allow JavaScript to respond to user actions, change page content and styles, control animations, and handle interactions efficiently.
+
+JavaScript & HTML Accessibility (ARIA) 
+1. Making Dynamic Content Accessible
+When JavaScript changes an element's content, visibility, or state, you should also update the relevant ARIA attributes.
+
+This ensures screen readers receive accurate information about changes on the page.
+
+Key takeaway: Always keep HTML accessibility information synchronized with changes made by JavaScript.
+2. aria-expanded
+Indicates whether a collapsible element (such as a dropdown menu or accordion) is open or closed.
+- true – Content is expanded/open.
+- false – Content is collapsed/closed.
+It is placed on the interactive element that controls the content, usually a button.
+<button aria-expanded="false" aria-controls="menu">
+  Menu
+</button>
+
+<ul id="menu" hidden>
+  <li>Home</li>
+  <li>About</li>
+</ul>
+
+
+Important:
+- Always set it to true or false.
+- Its initial value must match the content's visibility.
+- Update it dynamically with JavaScript.
+- Prefer placing expandable content immediately after its controlling element in the DOM.
+3. aria-live
+Tells screen readers to automatically announce dynamic content changes without requiring users to move their focus to the updated content.
+
+Common uses include notifications, error messages, success messages, and status updates.
+
+Three possible values:
+- assertive – Announces updates immediately, interrupting the screen reader's current announcement. Use only for urgent messages.
+- polite – Announces updates when the screen reader finishes its current announcement. Recommended for most situations.
+- off – Does not announce updates unless the user is interacting with the updated element. Rarely used.
+Example:
+<div aria-live="polite" id="notification">
+  File successfully uploaded!
+</div>
+
+
+Important: ARIA roles such as alert and status already have built-in live-region behavior.
+4. Common ARIA States for Custom Controls
+Native HTML elements like button, input, and select have built-in accessibility states.
+
+However, custom controls may need ARIA attributes to communicate their states to screen readers.
+
+Five common ARIA states:
+Attribute	Purpose
+aria-selected	Indicates whether an element is selected. Commonly used for tabs and listboxes.
+aria-disabled	Indicates that an element is disabled to assistive technologies. Does not actually disable it.
+aria-haspopup	Indicates that activating an element will open a popup, such as a menu or dialog.
+aria-required	Indicates that a custom form field is required.
+aria-checked	Indicates whether a custom checkbox, radio button, or switch is checked.
+
+Important:
+- aria-selected="true" means selected; false means not selected.
+- aria-checked="true" means checked; false means unchecked.
+- aria-disabled requires additional CSS and JavaScript to control appearance and behavior.
+- JavaScript must update ARIA states when users interact with custom controls.
+- Prefer native HTML controls whenever possible because they already have built-in accessibility features.
+5. aria-controls
+Establishes a relationship between an interactive element (the controller) and another element it controls.
+
+It helps screen reader users understand which content a button or other control is associated with.
+
+Common uses:
+- Tabs controlling different content sections.
+- Buttons controlling dropdown menus.
+- Accordions controlling expandable sections.
+- Buttons controlling modals.
+Example:
+<button aria-controls="section1">
+  Tab 1
+</button>
+
+<div id="section1">
+  Section 1 content
+</div>
+
+
+Important:
+- The value of aria-controls must match the id of the element being controlled.
+- It establishes a relationship but does not show, hide, or control content by itself.
+- JavaScript handles the actual interaction.
+- It can work alongside aria-selected and aria-expanded.
+6. aria-owns
+Creates a virtual relationship between a controlling element and another element in the accessibility tree.
+
+It is useful when the controlled content cannot be placed immediately after its controlling element in the DOM.
+
+Important:
+- Prefer normal DOM placement and aria-controls.
+- Use aria-owns only when necessary.
+- It does not change the actual keyboard tab order.
+- It can create navigation difficulties for screen reader and keyboard users.
+
+Final Things to Remember
+1. aria-expanded – Is the content open or closed?
+2. aria-live – Should screen readers announce content changes?
+3. aria-selected – Is an item selected?
+4. aria-disabled – Is an element indicated as disabled?
+5. aria-haspopup – Does an element open a popup?
+6. aria-required – Is a form field required?
+7. aria-checked – Is a checkbox or similar control checked?
+8. aria-controls – Which element does this control?
+9. aria-owns – Which element should be treated as belonging to this control in the accessibility tree?
+Golden rule: ARIA attributes communicate information about your interface to assistive technologies. They do not automatically create functionality. Use semantic HTML first, add ARIA when necessary, and use JavaScript to keep accessibility states synchronized with the actual behavior of your interface.
