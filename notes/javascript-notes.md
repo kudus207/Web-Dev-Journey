@@ -2722,3 +2722,214 @@ Final Things to Remember
 8. aria-controls – Which element does this control?
 9. aria-owns – Which element should be treated as belonging to this control in the accessibility tree?
 Golden rule: ARIA attributes communicate information about your interface to assistive technologies. They do not automatically create functionality. Use semantic HTML first, add ARIA when necessary, and use JavaScript to keep accessibility states synchronized with the actual behavior of your interface.
+
+JavaScript Debugging Cheatsheet
+Debugging is the process of finding, understanding, and fixing errors in your JavaScript code. JavaScript provides different tools and techniques to help identify problems and understand how your program executes.
+1. Common JavaScript Errors
+There are four common types of JavaScript errors:
+
+1. SyntaxError
+- Occurs when JavaScript syntax is written incorrectly.
+- Examples: Missing commas, brackets, or parentheses.
+const arr = ["Beau", "Quincy" "Tom"]; // Missing comma
+
+
+2. ReferenceError
+
+- Occurs when you use a variable that hasn't been declared or try to access a let or const variable before initialization.
+console.log(price); // price is not defined
+
+
+3. TypeError
+
+- Occurs when you perform an operation that a value's data type doesn't support.
+const obj = { name: "Jessica" };
+
+obj.map(); // map is not a function
+
+
+4. RangeError
+
+- Occurs when a value is outside the allowed range.
+const arr = [];
+arr.length = -1; // Invalid array length
+
+
+Error	Meaning
+SyntaxError	Incorrect syntax
+ReferenceError	Variable cannot be found or accessed
+TypeError	Operation not supported by the value's type
+RangeError	Value outside the allowed range
+
+2. The throw Statement
+The throw statement is used to create and throw a custom error (exception) when something unexpected happens.
+
+Syntax:
+throw expression;
+
+
+Example:
+function validateNumber(input) {
+  if (typeof input !== "number") {
+    throw new TypeError("Expected a number");
+  }
+
+  return input * 2;
+}
+
+
+- Checks whether input is a number.
+- If it's not a number, throw raises a TypeError.
+- Otherwise, it returns the input multiplied by 2.
+You can also throw a general error using Error:
+function divide(numerator, denominator) {
+  if (denominator === 0) {
+    throw new Error("Cannot divide by zero");
+  }
+
+  return numerator / denominator;
+}
+
+
+Remember:
+- throw raises an error.
+- Error creates a general error.
+- TypeError indicates an inappropriate data type operation.
+- RangeError indicates a value outside an allowed range.
+3. try...catch...finally
+try...catch...finally is used to handle errors so your program can deal with unexpected situations gracefully.
+
+try block
+- Contains code that might produce an error.
+- JavaScript executes this code first.
+catch block
+- Catches and handles errors thrown inside try.
+- Receives an error object containing information about what went wrong.
+- error.message displays the error message.
+- console.error() is used to display errors in the console.
+finally block
+- Executes after try and catch, whether an error occurs or not.
+- Commonly used for cleanup tasks, such as closing files or releasing resources.
+Syntax:
+try {
+  // Code that might throw an error
+} catch (error) {
+  // Handle the error
+  console.error(error.message);
+} finally {
+  // Always executes
+}
+
+
+Example:
+function processInput(input) {
+  if (typeof input !== "string") {
+    throw new Error("Input must be a string.");
+  }
+
+  return input.toUpperCase();
+}
+
+try {
+  console.log(processInput(123));
+} catch (error) {
+  console.error(error.message);
+} finally {
+  console.log("Processing completed.");
+}
+
+
+Remember:
+- try = Attempt to execute code.
+- catch = Handle the error.
+- finally = Runs regardless of whether an error occurs.
+If an error occurs inside try, JavaScript skips the remaining code in that block and moves to catch. The finally block then executes.
+4. The debugger Statement
+The debugger statement pauses JavaScript code execution at a specific line so you can inspect variables, functions, and the flow of your program.
+
+How it works:
+- JavaScript executes code from top to bottom.
+- When it encounters debugger, execution pauses.
+- You can inspect variable values and identify problems.
+- Use the Resume/Play button in Developer Tools to continue execution.
+- It only works when Developer Tools are open; otherwise, it is ignored.
+Example:
+let firstNumber = 5;
+let secondNumber = 10;
+
+debugger; // Execution pauses here
+
+let sum = firstNumber + secondNumber;
+
+console.log(sum); // 15
+
+
+Remember: debugger = Pause your code so you can investigate what's happening.
+5. Advanced JavaScript Debugging Techniques
+These techniques help you find errors, inspect code, and improve performance beyond using console.log().
+A. Breakpoints
+- Allow you to pause code execution at a specific line.
+- Help inspect variables, evaluate expressions, and examine the call stack.
+- Set them in Chrome DevTools → Sources by clicking a line number.
+- Conditional breakpoints pause execution only when a specified condition is true.
+B. Watch Expressions
+- Allow you to monitor the values of variables or expressions while debugging.
+- Useful for tracking how values change during execution.
+- Add them through DevTools → Sources → Watch.
+C. Performance Profiling
+- Helps identify slow or inefficient parts of your code.
+- Records CPU usage, function calls, and execution time.
+- Found in DevTools → Performance.
+- Useful when an application is slow or lagging.
+D. Inspecting Network Requests
+- Helps debug problems with API requests and server communication.
+- Found in DevTools → Network.
+- Allows you to inspect request URLs, headers, responses, payloads, and status codes.
+E. console.table()
+- Displays arrays or objects in a readable table format.
+- Useful when inspecting structured data.
+const users = [
+  { name: "John", age: 25 },
+  { name: "Jane", age: 30 }
+];
+
+console.table(users);
+
+
+F. console.dir()
+- Displays an interactive, expandable list of an object's properties.
+- Useful for inspecting objects and nested properties.
+const user = {
+  name: "John",
+  address: {
+    city: "Lagos"
+  }
+};
+
+console.dir(user);
+
+
+6. Quick Debugging Reference
+Tool / Technique	Main Purpose
+console.log()	Display values in the console
+console.error()	Display error messages
+console.table()	Display data as a table
+console.dir()	Inspect object properties
+throw	Raise a custom error
+try...catch	Handle errors
+finally	Run cleanup code
+debugger	Pause code execution
+Breakpoints	Pause at selected lines
+Watch Expressions	Monitor variable values
+Performance	Find performance bottlenecks
+Network	Inspect API requests and responses
+
+7. Important Debugging Tips
+1. Read error messages carefully.
+2. Check the line number where the error occurred.
+3. Inspect variable values before changing your code.
+4. Use breakpoints and debugger to understand execution flow.
+5. Use console.table() when working with arrays of objects.
+6. Use try...catch when you need to handle expected errors.
+7. Understand why an error happened before fixing it.
+Final reminder: Debugging isn't just about finding and fixing errors. It's about understanding how your code works, how values change, and how JavaScript executes your instructions.
