@@ -2933,3 +2933,20 @@ Network	Inspect API requests and responses
 6. Use try...catch when you need to handle expected errors.
 7. Understand why an error happened before fixing it.
 Final reminder: Debugging isn't just about finding and fixing errors. It's about understanding how your code works, how values change, and how JavaScript executes your instructions.
+
+JavaScript Regular Expressions (Regex) 
+1. Regex Basics: Regular expressions are patterns used to search, match, and manipulate strings. Create them with /pattern/ or new RegExp(). Common methods: .test(), .match(), and .replace().
+
+2. Regex Flags: Flags change how a regex behaves: i (ignore case), g (all matches), m (multiline), s (dot matches line breaks), u (Unicode), y (sticky), d (match indices), and v (Unicode sets).
+
+3. Matching and Replacing All: match() and replace() normally handle the first match. Use the g flag for all matches. matchAll() returns an iterator of matches, while replaceAll() replaces all occurrences.
+
+4. Character Classes: Character classes define which characters can match: . (any character except line breaks by default), \d (digit), \D (non-digit), \w (word character), \W (non-word), \s (whitespace), \S (non-whitespace), and [abc] (any listed character).
+
+5. Lookarounds: Lookarounds check what comes before or after a match without including those characters in the match: (?=...) positive lookahead, (?!...) negative lookahead, (?<=...) positive lookbehind, and (?<!...) negative lookbehind.
+
+6. Quantifiers: Quantifiers specify how many times a pattern can occur: ? (zero or one), * (zero or more), + (one or more), {n} (exactly n), {n,} (at least n), and {n,m} (between n and m). Use ^ for the start and $ for the end of a string.
+
+7. Capturing Groups and Backreferences: () captures part of a match; (?:...) groups without capturing. Use $1 or $2 in replace() and \1 or \2 inside regexes to reuse captured groups. Named groups use (?<name>...), with \k<name> inside regexes and $<name> in replacements.
+
+Remember: Regex is a way to describe a pattern so JavaScript can find, check, capture, or replace matching text.
